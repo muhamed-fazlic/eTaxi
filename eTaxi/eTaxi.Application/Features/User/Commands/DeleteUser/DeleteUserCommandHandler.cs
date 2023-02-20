@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
+using eTaxi.Application.Exceptions;
 using MediatR;
 
 namespace eTaxi.Application.Features.User.Commands.DeleteUser
@@ -16,7 +17,8 @@ namespace eTaxi.Application.Features.User.Commands.DeleteUser
         }
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            var userToDelete = await _userRepository.GetByIdAsync(request.Id);
+            var userToDelete = await _userRepository.GetByIdAsync(request.Id) ?? throw new
+                NotFoundException(nameof(User), request.Id);
 
             await _userRepository.DeleteAsync(userToDelete);
 

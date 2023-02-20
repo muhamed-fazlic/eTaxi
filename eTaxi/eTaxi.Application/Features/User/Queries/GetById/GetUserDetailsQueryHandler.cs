@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.User;
+using eTaxi.Application.Exceptions;
 using MediatR;
 
 namespace eTaxi.Application.Features.User.Queries.GetById
@@ -18,7 +19,9 @@ namespace eTaxi.Application.Features.User.Queries.GetById
 
         public async Task<UserDto> Handle(GetUserDetailsQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetByIdAsync(request.UserId);
+            var user = await _userRepository.GetByIdAsync(request.Id) ?? throw new
+                NotFoundException(nameof(User), request.Id);
+
             return _mapper.Map<UserDto>(user);
         }
     }
