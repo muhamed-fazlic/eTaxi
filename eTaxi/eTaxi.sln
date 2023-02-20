@@ -15,9 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{CB30D9FE-C654-4675-AF69-B15CD557A6CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.Domain", "eTaxi.Domain\eTaxi.Domain.csproj", "{7596D973-B76A-46ED-B1EF-3ECAED72BCFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Domain", "eTaxi.Domain\eTaxi.Domain.csproj", "{7596D973-B76A-46ED-B1EF-3ECAED72BCFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.Application", "eTaxi.Application\eTaxi.Application.csproj", "{000A3292-194B-4841-8FE8-6FC2DF283E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Application", "eTaxi.Application\eTaxi.Application.csproj", "{000A3292-194B-4841-8FE8-6FC2DF283E87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{0E5A0316-C4D7-4955-9B70-CFE9D991128B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{000A3292-194B-4841-8FE8-6FC2DF283E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{000A3292-194B-4841-8FE8-6FC2DF283E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{000A3292-194B-4841-8FE8-6FC2DF283E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E5A0316-C4D7-4955-9B70-CFE9D991128B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E5A0316-C4D7-4955-9B70-CFE9D991128B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E5A0316-C4D7-4955-9B70-CFE9D991128B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E5A0316-C4D7-4955-9B70-CFE9D991128B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{CB30D9FE-C654-4675-AF69-B15CD557A6CF} = {7B14D849-B1A6-4588-8FC3-500119B74407}
 		{7596D973-B76A-46ED-B1EF-3ECAED72BCFD} = {3FFA5346-F9F7-47E4-93E0-70919FFF65E1}
 		{000A3292-194B-4841-8FE8-6FC2DF283E87} = {3FFA5346-F9F7-47E4-93E0-70919FFF65E1}
+		{0E5A0316-C4D7-4955-9B70-CFE9D991128B} = {ED850116-63A7-466B-89AF-55DEE64D26E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {473F0E6E-ECCE-4BF6-9015-CA1085C3126E}
