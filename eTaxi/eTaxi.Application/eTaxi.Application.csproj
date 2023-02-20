@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MappingProfiles\" />
+    <ProjectReference Include="..\eTaxi.Domain\eTaxi.Domain.csproj" />
   </ItemGroup>
 
 </Project>
