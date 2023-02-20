@@ -1,10 +1,12 @@
 ﻿using eTaxi.Domain;
 using eTaxi.Domain.Common;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.DatabaseContext.TaxiDatabaseContext
 {
-    public class TaxiDatabaseContext : DbContext
+    public class TaxiDatabaseContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public TaxiDatabaseContext(DbContextOptions<TaxiDatabaseContext> options) : base(options)
         {
@@ -16,14 +18,27 @@ namespace Persistence.DatabaseContext.TaxiDatabaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-     
+
             Seed.OnModelCreating(modelBuilder);
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             //Added automatically time updater (DateCreated, DateModified)
-            foreach (var item in base.ChangeTracker.Entries<BaseEntity>()
-                .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified))
+            var users = base.ChangeTracker.Entries<User>()
+                .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
+
+            var entites = base.ChangeTracker.Entries<BaseEntity>()
+                .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
+
+            foreach (var item in users)
+            {
+                item.Entity.DateModified = DateTime.Now;
+
+                if (item.State == EntityState.Added)
+                    item.Entity.DateCreated = DateTime.Now;
+            }
+
+            foreach (var item in entites)
             {
                 item.Entity.DateModified = DateTime.Now;
 
