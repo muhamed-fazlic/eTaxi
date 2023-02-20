@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31613.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7B14D849-B1A6-4588-8FC3-500119B74407}"
 EndProject
@@ -15,7 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{CB30D9FE-C654-4675-AF69-B15CD557A6CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.Domain", "eTaxi.Domain\eTaxi.Domain.csproj", "{7596D973-B76A-46ED-B1EF-3ECAED72BCFD}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7596D973-B76A-46ED-B1EF-3ECAED72BCFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7596D973-B76A-46ED-B1EF-3ECAED72BCFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7596D973-B76A-46ED-B1EF-3ECAED72BCFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7596D973-B76A-46ED-B1EF-3ECAED72BCFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
@@ -24,6 +36,7 @@ Global
 		{3FFA5346-F9F7-47E4-93E0-70919FFF65E1} = {7B14D849-B1A6-4588-8FC3-500119B74407}
 		{ED850116-63A7-466B-89AF-55DEE64D26E0} = {7B14D849-B1A6-4588-8FC3-500119B74407}
 		{CB30D9FE-C654-4675-AF69-B15CD557A6CF} = {7B14D849-B1A6-4588-8FC3-500119B74407}
+		{7596D973-B76A-46ED-B1EF-3ECAED72BCFD} = {3FFA5346-F9F7-47E4-93E0-70919FFF65E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {473F0E6E-ECCE-4BF6-9015-CA1085C3126E}
