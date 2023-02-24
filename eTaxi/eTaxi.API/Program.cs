@@ -1,3 +1,4 @@
+using eTaxi.API.Middleware;
 using eTaxi.Application;
 using eTaxi.Infrastructure;
 using eTaxi.Persistence;
@@ -23,6 +24,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
