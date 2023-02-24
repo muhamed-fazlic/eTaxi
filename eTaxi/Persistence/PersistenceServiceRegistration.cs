@@ -1,15 +1,15 @@
 ﻿using eTaxi.Application.Contracts.Persistence;
+using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
+using eTaxi.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Persistence.DatabaseContext.TaxiDatabaseContext;
-using Persistence.Repositories;
 
-namespace Persistence
+namespace eTaxi.Persistence
 {
     public static class PersistenceServiceRegistration
     {
-        public static IServiceCollection AddPersistenceServoce(this IServiceCollection services,
+        public static IServiceCollection AddPersistenceService(this IServiceCollection services,
             IConfiguration configuration)
         {
             services.AddDbContext<TaxiDatabaseContext>(options =>

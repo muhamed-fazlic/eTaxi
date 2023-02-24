@@ -2,10 +2,10 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.User;
 using eTaxi.Domain;
+using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 using Microsoft.EntityFrameworkCore;
-using Persistence.DatabaseContext.TaxiDatabaseContext;
 
-namespace Persistence.Repositories
+namespace eTaxi.Persistence.Repositories
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {

@@ -1,8 +1,8 @@
 ﻿using eTaxi.Application.Contracts.Persistence;
+using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 using Microsoft.EntityFrameworkCore;
-using Persistence.DatabaseContext.TaxiDatabaseContext;
 
-namespace Persistence.Repositories
+namespace eTaxi.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {

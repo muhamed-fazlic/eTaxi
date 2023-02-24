@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Persistence.DatabaseContext.TaxiDatabaseContext
+namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
 {
     public class TaxiDatabaseContext : IdentityDbContext<User, IdentityRole<int>, int>
     {

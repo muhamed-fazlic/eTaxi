@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Persistence.DatabaseContext.TaxiDatabaseContext
+namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
 {
     public static class Seed
     {
