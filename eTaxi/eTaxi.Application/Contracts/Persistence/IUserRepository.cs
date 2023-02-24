@@ -5,6 +5,6 @@ namespace eTaxi.Application.Contracts.Persistence
 {
     public interface IUserRepository : IGenericRepository<User>
     {
-        Task<UserDto> GetUserByEmail(string emailAddress);
+        Task<User> GetUserByEmail(string emailAddress);
     }
 }

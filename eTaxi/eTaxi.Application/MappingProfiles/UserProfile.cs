@@ -6,7 +6,7 @@ using eTaxi.Domain;
 
 namespace eTaxi.Application.MappingProfiles
 {
-    internal class UserProfile : Profile
+    public class UserProfile : Profile
     {
         public UserProfile()
         {
