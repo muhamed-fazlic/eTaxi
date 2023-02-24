@@ -27,7 +27,7 @@ namespace eTaxi.Application.Features.User.Commands.CreateUser
 
         private async Task<bool> UserEmailUnique(CreateUserCommand command, CancellationToken token)
         {
-            return await _userRepository.GetUserByEmail(command.Email) != null;
+            return await _userRepository.GetUserByEmail(command.Email) == null;
         }
     }
 }

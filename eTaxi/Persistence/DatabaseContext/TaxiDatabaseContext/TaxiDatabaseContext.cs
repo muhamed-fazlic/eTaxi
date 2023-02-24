@@ -13,12 +13,11 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
 
         }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<User> ApplicationUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             Seed.OnModelCreating(modelBuilder);
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

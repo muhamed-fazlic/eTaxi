@@ -19,7 +19,7 @@ namespace eTaxi.Persistence.Repositories
 
         public async Task<UserDto> GetUserByEmail(string emailAddress)
         {
-            var user = await _context.User.Where(x => x.Email == emailAddress).FirstOrDefaultAsync();
+            var user = await _context.ApplicationUser.Where(x => x.Email == emailAddress).FirstOrDefaultAsync();
             if (user == null)
                 return null;
 

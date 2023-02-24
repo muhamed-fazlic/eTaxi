@@ -16,6 +16,8 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
             {
                 Id = 1,
                 UserName = "admin",
+                FirstName = "Admin",
+                LastName = "eTaxi",
                 NormalizedUserName = "ADMIN".ToUpper(),
                 Email = "admin@admin.com",
                 NormalizedEmail = "ADMIN@ADMIN.COM".ToUpper(),
@@ -28,6 +30,8 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
             {
                 Id = 2,
                 UserName = "fazla",
+                FirstName="Muhamed",
+                LastName="Fazlic",
                 NormalizedUserName = "FAZLA".ToUpper(),
                 Email = "fazla@admin.com",
                 NormalizedEmail = "FAZLA@ADMIN.COM".ToUpper(),
@@ -40,6 +44,8 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
             {
                 Id = 3,
                 UserName = "billy",
+                FirstName = "Bilal",
+                LastName = "Hodzic",
                 NormalizedUserName = "BILLY".ToUpper(),
                 Email = "billy@admin.com",
                 NormalizedEmail = "BILLY@ADMIN.COM".ToUpper(),
@@ -50,8 +56,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
 
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 1, RoleId = 1 });
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 2, RoleId = 2 });
-            modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 3, RoleId = 4 });
-
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 3, RoleId = 2 });
         }
     }
 }

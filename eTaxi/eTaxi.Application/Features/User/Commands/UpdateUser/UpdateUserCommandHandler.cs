@@ -16,7 +16,9 @@ namespace eTaxi.Application.Features.User.Commands.UpdateUser
         }
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var userToUpdate = _mapper.Map<Domain.User>(request);
+            var userToUpdate = await _userRepository.GetByIdAsync(request.Id);
+
+            _mapper.Map(request, userToUpdate);
 
             await _userRepository.UpdateAsync(userToUpdate);
 
