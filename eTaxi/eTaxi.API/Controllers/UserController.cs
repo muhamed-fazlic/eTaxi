@@ -4,6 +4,7 @@ using eTaxi.Application.Features.User.Commands.DeleteUser;
 using eTaxi.Application.Features.User.Commands.UpdateUser;
 using eTaxi.Application.Features.User.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,6 +23,7 @@ namespace eTaxi.API.Controllers
         }
 
         // GET api/<UserController>/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<UserDto> Get(int id)
         {

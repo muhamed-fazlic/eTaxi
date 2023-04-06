@@ -1,5 +1,4 @@
-﻿using eTaxi.Application.DTOs.User;
-using eTaxi.Domain;
+﻿using eTaxi.Domain;
 
 namespace eTaxi.Application.Contracts.Persistence
 {

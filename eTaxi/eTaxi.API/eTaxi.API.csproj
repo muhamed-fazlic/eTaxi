@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\eTaxi.Application\eTaxi.Application.csproj" />
+    <ProjectReference Include="..\eTaxi.Identity\eTaxi.Identity.csproj" />
     <ProjectReference Include="..\Infrastructure\eTaxi.Infrastructure.csproj" />
     <ProjectReference Include="..\Persistence\eTaxi.Persistence.csproj" />
   </ItemGroup>
