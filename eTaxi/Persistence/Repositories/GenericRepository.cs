@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTaxi.Persistence.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T, TSearch> : IGenericRepository<T, TSearch> where T : class where TSearch : class
     {
         protected readonly TaxiDatabaseContext _context;
         public GenericRepository(TaxiDatabaseContext context)
@@ -23,6 +23,11 @@ namespace eTaxi.Persistence.Repositories
         }
 
         public async Task<IReadOnlyList<T>> GetAsync()
+        {
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<T>> GetAsync(TSearch search=null)
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }

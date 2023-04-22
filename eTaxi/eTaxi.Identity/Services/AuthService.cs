@@ -1,7 +1,10 @@
-﻿using eTaxi.Application.Contracts.Identity;
+﻿using eTaxi.Application.Contracts.Email;
+using eTaxi.Application.Contracts.Identity;
 using eTaxi.Application.Exceptions;
+using eTaxi.Application.Models.Email;
 using eTaxi.Application.Models.Identity;
 using eTaxi.Domain;
+using eTaxi.Infrastructure.EmailService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -16,13 +19,16 @@ namespace eTaxi.Identity.Services
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly JwtSettings _jwtSettings;
+        private readonly IEmailSender _emailSender;
         public AuthService(UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IOptions<JwtSettings> jwtSettings)
+            IOptions<JwtSettings> jwtSettings,
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtSettings = jwtSettings.Value;
+            _emailSender = emailSender;
         }
         public async Task<AuthResponse> Login(AuthRequest request)
         {
@@ -99,6 +105,39 @@ namespace eTaxi.Identity.Services
             }
             else
                 throw new BadRequestException($"{result.Errors}");
+        }
+
+        public async Task<HttpResponseMessage> ForgotPassword(ForgotPasswordRequest request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user == null)
+                throw new NotFoundException($"User with {request.Email} not found", request.Email);
+
+            Random rnd=new Random();
+            int pin = rnd.Next(1000, 9999);
+            user.Pin = pin;
+            await _userManager.UpdateAsync(user);
+        var htmlMessage=GenerateForgotPasswordMessage(pin.ToString());
+            var message = new EmailMessage(new string[] { request.Email }, "Ponistavanje lozike", htmlMessage);
+            await _emailSender.SendEmailAsync(message);
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+        }
+
+        private string GenerateForgotPasswordMessage(string pin)
+        {
+            StringBuilder email = new StringBuilder();
+            email.Append("<div style=\"font-family: Bahnschrift Light;max-width: 500px;margin: 20px auto auto auto;overflow: hidden;\">");
+            email.Append("<div style=\"padding: 10px 0; text-align: center; background-color: #2bdea8; \">");
+            email.Append("</div>");
+            email.Append("<div style=\"padding: 30px 40px\">");
+            email.Append("<h2>Poštovani,</h2>");
+            email.Append("<p>Zaboravili ste lozinku? Nema problema!</p>");
+            email.Append($"<h3 style=\"text-align: center; margin: 30px 0\">{pin}</h3>");
+            email.Append("<p>Pomoću ovog PIN-a možete resetirati svoju lozinku.</p>");
+            email.Append("<p>Srdačan pozdrav.</p>");
+            email.Append("</div>");
+            email.Append("</div>");
+            return email.ToString();
         }
     }
 }

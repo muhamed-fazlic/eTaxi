@@ -19,8 +19,9 @@ namespace eTaxi.Persistence
                 options.UseSqlServer(configuration.GetConnectionString("eTaxiConnectionString"));
             });
 
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+          //  services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<TaxiDatabaseContext>()
                 .AddDefaultTokenProviders();

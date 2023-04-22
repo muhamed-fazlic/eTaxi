@@ -14,6 +14,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
         }
 
         public DbSet<User> ApplicationUser { get; set; }
+        public DbSet<VehicleType> VehicleType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

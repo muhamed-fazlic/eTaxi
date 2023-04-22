@@ -26,5 +26,12 @@ namespace eTaxi.API.Controllers
         {
             return Ok(await _authService.Register(request));
         }
+
+        [HttpPost("forgot-password")]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordRequest request)
+        {
+            await _authService.ForgotPassword(request);
+            return Ok();
+        }
     }
 }

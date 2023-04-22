@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 
@@ -11,9 +12,11 @@ using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 namespace eTaxi.Persistence.Migrations
 {
     [DbContext(typeof(TaxiDatabaseContext))]
-    partial class TaxiDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230420142430_vehicleType")]
+    partial class vehicleType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,7 +276,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "963ae747-6256-43ce-9ef1-c0ad8ba49d25",
+                            ConcurrencyStamp = "88f812a9-1d1b-40c3-a3ba-e391214b65ac",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -281,7 +284,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ5OBA0gXmE5+CuzOvotRaapevPsmV/fSyh4d/mjB+h9y2WML7KRDWo6zHkTh6mpHg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENhymgBRMZ8CH+KgLEVHPRufjvn3ujXi0CzSONVw+qT5S1uPHSXWfGxIq5Qaelodzw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -291,7 +294,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2bfdc7e0-db2d-446e-8df3-b7bd3cc7651a",
+                            ConcurrencyStamp = "8b07d52f-e485-42eb-a672-e61f9c97fa44",
                             Email = "fazla@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Muhamed",
@@ -299,7 +302,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FAZLA@ADMIN.COM",
                             NormalizedUserName = "FAZLA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKsqNwKSJAeB+ICPL4EbFlF4gJbgTxDB9qE54fkhdUKfKvQzzuJpNz7OYjaGgtuBEA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGpkDLVbeEf5luOwdmt41SG6uuWOQIvMMAPUYgp4Z+6r+gLd0tiZ9ttBYVMN0S2ghQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -309,7 +312,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ee1be750-0ee6-46e9-b150-0c1053255c26",
+                            ConcurrencyStamp = "44310c5c-8677-43d1-9c0b-203fbf604b4d",
                             Email = "billy@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Bilal",
@@ -317,7 +320,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BILLY@ADMIN.COM",
                             NormalizedUserName = "BILLY",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKSK1NlEMPXrQnxI72Q1mC9kK/YJtaq1Pg0vUO/6rJKhHwfidDZM7y+9ohuYzkDX6w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPmWiOG5qPMsCYsqLsCaJ6b2CanVxL3X38FG0F00k28aAeZlhO3jb3kNPDL8iEJgNQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -327,11 +330,11 @@ namespace eTaxi.Persistence.Migrations
 
             modelBuilder.Entity("eTaxi.Domain.VehicleType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("VehicleTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleTypeId"));
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -342,7 +345,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("VehicleTypeId");
 
                     b.ToTable("VehicleType");
                 });

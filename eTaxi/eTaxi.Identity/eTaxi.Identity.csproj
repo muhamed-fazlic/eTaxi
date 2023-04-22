@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\eTaxi.Application\eTaxi.Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\eTaxi.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

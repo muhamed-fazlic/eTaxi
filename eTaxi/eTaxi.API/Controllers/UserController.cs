@@ -23,7 +23,6 @@ namespace eTaxi.API.Controllers
         }
 
         // GET api/<UserController>/5
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<UserDto> Get(int id)
         {
