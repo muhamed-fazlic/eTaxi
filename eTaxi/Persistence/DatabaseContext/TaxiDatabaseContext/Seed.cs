@@ -57,6 +57,27 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 1, RoleId = 1 });
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 2, RoleId = 2 });
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 3, RoleId = 2 });
+
+            modelBuilder.Entity<VehicleType>().HasData(new VehicleType {
+                Id= 1,
+                Type="malo auto",
+                NumberOfSeats= 4,
+               ImageUrl= "https://res.cloudinary.com/doswamdah/image/upload/v1656661697/rs2/car_l5aypi.png"
+            });
+            modelBuilder.Entity<VehicleType>().HasData(new VehicleType
+            {
+                Id = 2,
+                Type = "limuzina",
+                NumberOfSeats = 5,
+                ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656661697/rs2/sedan_j0oo9s.png"
+            });
+            modelBuilder.Entity<VehicleType>().HasData(new VehicleType
+            {
+                Id = 3,
+                Type = "SUV",
+                NumberOfSeats = 5,
+                ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656661697/rs2/SUV_hjqwbi.png"
+            });
         }
     }
 }
