@@ -1,4 +1,5 @@
-﻿using eTaxi.Application.Features.Vehicle.Commands;
+﻿using eTaxi.Application.DTOs.Vehicle;
+using eTaxi.Application.Features.Vehicle.Commands;
 using eTaxi.Application.Features.Vehicle.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,9 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet]
-        public async Task <IActionResult> Get()
+        public async Task <IActionResult> Get([FromQuery] VehicleSearchDto Search)
         {
-            var result = await _mediator.Send(new GetVehicleListQuery());
+            var result = await _mediator.Send(new GetVehicleListQuery() { Search=Search});
             return Ok(result);
         }
 

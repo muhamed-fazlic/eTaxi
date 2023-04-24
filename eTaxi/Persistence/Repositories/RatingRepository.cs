@@ -17,7 +17,7 @@ namespace eTaxi.Persistence.Repositories
         {
         }
 
-        public async Task<IReadOnlyList<Rating>> GetAsync(RatingSearchDto search = null)
+        public async override Task<IReadOnlyList<Rating>> GetAsync(RatingSearchDto search = null)
         {
             var entity =_context.Rating.AsQueryable();
 

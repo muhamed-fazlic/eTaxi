@@ -27,12 +27,12 @@ namespace eTaxi.Persistence.Repositories
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<IReadOnlyList<T>> GetAsync(TSearch search=null)
+        public virtual async Task<IReadOnlyList<T>> GetAsync(TSearch search=null)
         {
             return await _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public  async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

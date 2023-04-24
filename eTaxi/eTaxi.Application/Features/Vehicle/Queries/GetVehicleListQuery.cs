@@ -12,7 +12,7 @@ namespace eTaxi.Application.Features.Vehicle.Queries
 {
     public class GetVehicleListQuery: IRequest<List<VehicleDto>>
     {
-
+        public VehicleSearchDto Search { get; set; }
     }
 
     public class GetVehicleListQueryHandler : IRequestHandler<GetVehicleListQuery, List<VehicleDto>>
@@ -28,7 +28,7 @@ namespace eTaxi.Application.Features.Vehicle.Queries
 
         public async Task<List<VehicleDto>> Handle(GetVehicleListQuery request, CancellationToken cancellationToken)
         {
-            var vehicleList = await _vehicleRepository.GetAsync();
+            var vehicleList = await _vehicleRepository.GetAsync(request.Search);
             return _mapper.Map<List<VehicleDto>>(vehicleList);
         }
     }
