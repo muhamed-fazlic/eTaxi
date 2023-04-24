@@ -21,6 +21,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
         public DbSet<Favorite> Favorite { get; set; }
 
         public DbSet<Rating> Rating { get; set; }
+        public DbSet<HubStation> HubStation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
