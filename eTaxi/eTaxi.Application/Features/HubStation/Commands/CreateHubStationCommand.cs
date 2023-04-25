@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.HubStation.Commands
 {
-    public  class CreateHubStationCommand: IRequest<int>
+    public class CreateHubStationCommand : IRequest<int>
     {
         public string Name { get; set; }
         public int LocationId { get; set; }

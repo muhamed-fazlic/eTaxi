@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Vehicle.Commands
 {
-    public  class CreateVehicleCommand :IRequest<int>
+    public class CreateVehicleCommand : IRequest<int>
     {
         public string Name { get; set; }
         public double KmTraveled { get; set; }
@@ -27,7 +22,7 @@ namespace eTaxi.Application.Features.Vehicle.Commands
         public int TypeId { get; set; }
     }
 
-    public class CreateVehicleCommandHandler: IRequestHandler<CreateVehicleCommand, int>
+    public class CreateVehicleCommandHandler : IRequestHandler<CreateVehicleCommand, int>
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IMapper _mapper;

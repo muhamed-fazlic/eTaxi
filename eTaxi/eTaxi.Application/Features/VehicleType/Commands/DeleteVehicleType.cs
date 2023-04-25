@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
-using eTaxi.Application.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.VehicleType.Commands
 {
@@ -20,7 +14,7 @@ namespace eTaxi.Application.Features.VehicleType.Commands
         }
     }
 
-    public class DeleteVehicleTypeCommandHandler: IRequestHandler<DeleteVehicleTypeCommand, bool>
+    public class DeleteVehicleTypeCommandHandler : IRequestHandler<DeleteVehicleTypeCommand, bool>
     {
         private readonly IVehicleTypeRepository _vehicleTypeRepository;
         private readonly IMapper _mapper;

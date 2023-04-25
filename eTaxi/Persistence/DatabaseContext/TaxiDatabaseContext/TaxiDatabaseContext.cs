@@ -22,6 +22,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
 
         public DbSet<Rating> Rating { get; set; }
         public DbSet<HubStation> HubStation { get; set; }
+        public DbSet<Domain.File> File { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

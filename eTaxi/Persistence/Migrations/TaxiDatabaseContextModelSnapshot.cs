@@ -213,6 +213,42 @@ namespace eTaxi.Persistence.Migrations
                     b.ToTable("Favorite");
                 });
 
+            modelBuilder.Entity("eTaxi.Domain.File", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OriginalName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("File");
+                });
+
             modelBuilder.Entity("eTaxi.Domain.HubStation", b =>
                 {
                     b.Property<int>("Id")
@@ -466,7 +502,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b0f01e13-b388-4460-b3b0-a2478df8cfc2",
+                            ConcurrencyStamp = "3f26dd45-6422-43a7-86c8-664537f786f5",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -474,7 +510,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAENxrSurOrPtFAZ6NAN+4jzPwDp1ghkE9oTIhIaGSrkR9+g3Adu3HE9cV+8ldQS3p9g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENY7zolm/KEf6Udau8Q94Wc4vzwBR0YqAdlDwLW1sR3dM/JxLtV1uJH8BWuoej+66w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -484,7 +520,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c0939c84-60cb-4a13-a5c6-7360df5c3dbf",
+                            ConcurrencyStamp = "ace73cef-5c10-45a2-8612-f734ca3fc6b5",
                             Email = "fazla@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Muhamed",
@@ -492,7 +528,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FAZLA@ADMIN.COM",
                             NormalizedUserName = "FAZLA",
-                            PasswordHash = "AQAAAAIAAYagAAAAECTZPw/P+3IMwjW/0bQZUYLFTYnYTCsL30263xMRpHi/YLoAXp+OITRQbJo9HFGltw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI6V73mzX0OPhnG7F0ZyYKmBi3Mj2Z1zCRCtuy6I1g5HlRJDzBk9asUP7O+IkhNAXw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -502,7 +538,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "752743da-24b7-42a5-8077-314fc7ab7c9a",
+                            ConcurrencyStamp = "fa94c257-ad4f-4718-a1a5-f5aef13e48ad",
                             Email = "billy@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Bilal",
@@ -510,7 +546,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BILLY@ADMIN.COM",
                             NormalizedUserName = "BILLY",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBNONddWPL1bi7NS4zn+fayXM4Yu8oUFSKOvIuR5VHTE7O+hEZQMzzaMt9eL07ptUg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENwGis8ZHiNqNWZ8UgJL9C7HgCIqtIrOiVvINH6T+XZiQ0TcvKX+k4BUqnm79o/2+g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -682,6 +718,17 @@ namespace eTaxi.Persistence.Migrations
                 });
 
             modelBuilder.Entity("eTaxi.Domain.Favorite", b =>
+                {
+                    b.HasOne("eTaxi.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("eTaxi.Domain.File", b =>
                 {
                     b.HasOne("eTaxi.Domain.User", "User")
                         .WithMany()

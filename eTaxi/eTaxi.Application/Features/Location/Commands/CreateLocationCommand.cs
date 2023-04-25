@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Location.Commands
 {
-    public  class CreateLocationCommand: IRequest<int>
+    public class CreateLocationCommand : IRequest<int>
     {
         public string StreetNumber { get; set; } = string.Empty;
         public string StreetName { get; set; } = string.Empty;

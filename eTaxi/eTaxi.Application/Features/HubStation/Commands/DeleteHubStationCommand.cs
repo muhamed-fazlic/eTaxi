@@ -1,14 +1,9 @@
 ﻿using eTaxi.Application.Contracts.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.HubStation.Commands
 {
-    public  record DeleteHubStationCommand(int Id): IRequest<Unit>
+    public record DeleteHubStationCommand(int Id) : IRequest<Unit>
     {
     }
 

@@ -2,11 +2,6 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Order.Commands
 {
@@ -33,9 +28,9 @@ namespace eTaxi.Application.Features.Order.Commands
         }
         public async Task<Unit> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            var orderToUpdate =await _orderRepository.GetByIdAsync(request.Id);
+            var orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
             if (orderToUpdate == null) throw new NotFoundException(nameof(Domain.Order), request.Id);
-                
+
             _mapper.Map(request, orderToUpdate);
             await _orderRepository.UpdateAsync(orderToUpdate);
             return Unit.Value;

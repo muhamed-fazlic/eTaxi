@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace eTaxi.Application.DTOs.VehicleType
+﻿namespace eTaxi.Application.DTOs.VehicleType
 {
     public partial class VehicleTypeDto
     {

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace eTaxi.Application.DTOs.Rating
+﻿namespace eTaxi.Application.DTOs.Rating
 {
-    public  class RatingSearchDto
+    public class RatingSearchDto
     {
         public int? UserId { get; set; }
         public int? UserDriverId { get; set; }

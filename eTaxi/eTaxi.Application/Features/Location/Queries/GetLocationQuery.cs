@@ -2,15 +2,10 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Location;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Location.Queries
 {
-    public  record GetLocationQuery(int Id) : IRequest<LocationDto>
+    public record GetLocationQuery(int Id) : IRequest<LocationDto>
     {
     }
 

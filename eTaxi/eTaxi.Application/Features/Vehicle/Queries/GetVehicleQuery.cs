@@ -3,15 +3,10 @@ using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Vehicle;
 using eTaxi.Application.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Vehicle.Queries
 {
-    public record GetVehicleQuery(int Id): IRequest<VehicleDto>
+    public record GetVehicleQuery(int Id) : IRequest<VehicleDto>
     {
     }
 
@@ -26,7 +21,7 @@ namespace eTaxi.Application.Features.Vehicle.Queries
         }
         public async Task<VehicleDto> Handle(GetVehicleQuery request, CancellationToken cancellationToken)
         {
-            var vehicle= await _vehicleRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException(nameof(Vehicle), request.Id);
+            var vehicle = await _vehicleRepository.GetByIdAsync(request.Id) ?? throw new NotFoundException(nameof(Vehicle), request.Id);
             return _mapper.Map<VehicleDto>(vehicle);
         }
     }

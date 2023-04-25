@@ -2,15 +2,10 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Rating.Commands
 {
-    public class UpdateRatingCommand: IRequest<Unit>
+    public class UpdateRatingCommand : IRequest<Unit>
     {
         public int Id { get; set; }
         public int Grade { get; set; }

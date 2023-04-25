@@ -1,5 +1,4 @@
-﻿using eTaxi.Application.DTOs.VehicleType;
-using eTaxi.Application.Features.VehicleType.Commands;
+﻿using eTaxi.Application.Features.VehicleType.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

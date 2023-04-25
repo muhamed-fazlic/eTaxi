@@ -2,11 +2,6 @@
 using eTaxi.Application.DTOs.Location;
 using eTaxi.Application.Features.Location.Commands;
 using eTaxi.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.MappingProfiles
 {
@@ -18,6 +13,6 @@ namespace eTaxi.Application.MappingProfiles
             CreateMap<UpdateLocationCommand, Location>().ReverseMap();
             CreateMap<CreateLocationCommand, Location>().ReverseMap();
         }
-       
+
     }
 }

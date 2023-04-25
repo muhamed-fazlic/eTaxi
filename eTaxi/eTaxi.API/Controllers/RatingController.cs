@@ -8,7 +8,7 @@ namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RatingController: ControllerBase
+    public class RatingController : ControllerBase
     {
 
         private readonly IMediator _mediator;
@@ -21,7 +21,7 @@ namespace eTaxi.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] RatingSearchDto Search)
         {
-            var result = await _mediator.Send(new GetRatingListQuery() { Search=Search});
+            var result = await _mediator.Send(new GetRatingListQuery() { Search = Search });
             return Ok(result);
         }
 

@@ -1,19 +1,14 @@
 ﻿using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Vehicle.Commands
 {
-    public record DeleteVehicleCommand(int Id): IRequest<Unit>
+    public record DeleteVehicleCommand(int Id) : IRequest<Unit>
     {
     }
 
-    public class DeleteVehicleCommandHandler: IRequestHandler<DeleteVehicleCommand, Unit>
+    public class DeleteVehicleCommandHandler : IRequestHandler<DeleteVehicleCommand, Unit>
     {
         private readonly IVehicleRepository _context;
         public DeleteVehicleCommandHandler(IVehicleRepository context)

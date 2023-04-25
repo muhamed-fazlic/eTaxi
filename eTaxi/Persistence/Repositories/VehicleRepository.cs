@@ -3,23 +3,18 @@ using eTaxi.Application.DTOs.Vehicle;
 using eTaxi.Domain;
 using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Persistence.Repositories
 {
-    public  class VehicleRepository: GenericRepository<Vehicle, VehicleSearchDto>, IVehicleRepository
+    public class VehicleRepository : GenericRepository<Vehicle, VehicleSearchDto>, IVehicleRepository
     {
         public VehicleRepository(TaxiDatabaseContext context) : base(context)
         {
         }
 
-        public async override Task<IReadOnlyList<Vehicle>> GetAsync(VehicleSearchDto search=null)
+        public async override Task<IReadOnlyList<Vehicle>> GetAsync(VehicleSearchDto search = null)
         {
-            var vehicles =  _context.Vehicle.AsQueryable();
+            var vehicles = _context.Vehicle.AsQueryable();
             if (search != null)
             {
                 if (!string.IsNullOrEmpty(search.Type))
@@ -42,5 +37,5 @@ namespace eTaxi.Persistence.Repositories
             return await vehicles.ToListAsync();
         }
     }
-   
+
 }

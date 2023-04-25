@@ -2,15 +2,10 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Vehicle;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Vehicle.Queries
 {
-    public class GetVehicleListQuery: IRequest<List<VehicleDto>>
+    public class GetVehicleListQuery : IRequest<List<VehicleDto>>
     {
         public VehicleSearchDto Search { get; set; }
     }

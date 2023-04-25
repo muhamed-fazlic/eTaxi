@@ -7,7 +7,7 @@ namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class HubStationController: ControllerBase
+    public class HubStationController : ControllerBase
     {
         private readonly IMediator _mediator;
 

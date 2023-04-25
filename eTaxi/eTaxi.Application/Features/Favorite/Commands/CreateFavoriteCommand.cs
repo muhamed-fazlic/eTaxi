@@ -1,21 +1,16 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Favorite.Commands
 {
-    public class CreateFavoriteCommand: IRequest<int>
+    public class CreateFavoriteCommand : IRequest<int>
     {
         public int UserId { get; set; }
         public int CompanyId { get; set; }
     }
 
-    public class CreateFavoriteCommandHandler: IRequestHandler<CreateFavoriteCommand, int>
+    public class CreateFavoriteCommandHandler : IRequestHandler<CreateFavoriteCommand, int>
     {
         private readonly IFavoriteRepository _context;
         private readonly IMapper _mapper;

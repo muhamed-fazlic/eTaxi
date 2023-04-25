@@ -1,16 +1,8 @@
 ﻿using AutoMapper;
-using eTaxi.Application.Contracts.Logging;
 using eTaxi.Application.Contracts.Persistence;
-using eTaxi.Application.DTOs.User;
 using eTaxi.Application.DTOs.VehicleType;
 using eTaxi.Application.Exceptions;
-using eTaxi.Application.Features.User.Commands.CreateUser;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.VehicleType.Commands
 {
@@ -28,8 +20,8 @@ namespace eTaxi.Application.Features.VehicleType.Commands
         }
         public async Task<VehicleTypeDto> Handle(GetVehicleTypeQuery request, CancellationToken cancellationToken)
         {
-        
-            var vehicleType=await _vehicleTypeRepository.GetByIdAsync(request.Id) ?? throw new
+
+            var vehicleType = await _vehicleTypeRepository.GetByIdAsync(request.Id) ?? throw new
                 NotFoundException(nameof(VehicleType), request.Id);
             return _mapper.Map<VehicleTypeDto>(vehicleType);
 

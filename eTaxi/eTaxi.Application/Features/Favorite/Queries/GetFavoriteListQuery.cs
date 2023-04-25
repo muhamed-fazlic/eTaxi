@@ -2,15 +2,10 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Favorite;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Favorite.Queries
 {
-    public class GetFavoriteListQuery: IRequest<List<FavoriteDto>>
+    public class GetFavoriteListQuery : IRequest<List<FavoriteDto>>
     {
         public int? UserId { get; set; }
     }

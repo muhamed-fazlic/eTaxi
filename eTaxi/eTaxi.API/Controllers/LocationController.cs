@@ -1,6 +1,5 @@
 ﻿using eTaxi.Application.Features.Location.Commands;
 using eTaxi.Application.Features.Location.Queries;
-using eTaxi.Application.Features.VehicleType.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

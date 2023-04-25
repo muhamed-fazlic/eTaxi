@@ -2,15 +2,10 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.HubStation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.HubStation.Queries
 {
-    public class GetHubStationListQuery: IRequest<List<HubStationDto>>
+    public class GetHubStationListQuery : IRequest<List<HubStationDto>>
     {
     }
 

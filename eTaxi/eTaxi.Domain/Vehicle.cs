@@ -1,17 +1,12 @@
 ﻿using eTaxi.Domain.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Domain
 {
-    public  class Vehicle: BaseEntity
+    public class Vehicle : BaseEntity
     {
         public Vehicle()
         {
-           // Files = new HashSet<File>();
+            // Files = new HashSet<File>();
             DateCreated = DateTime.Now;
         }
         public string Name { get; set; }

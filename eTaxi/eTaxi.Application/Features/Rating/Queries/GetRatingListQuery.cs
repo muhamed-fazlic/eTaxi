@@ -2,20 +2,15 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Rating;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Rating.Queries
 {
-    public class GetRatingListQuery: IRequest<List<RatingDto>>
+    public class GetRatingListQuery : IRequest<List<RatingDto>>
     {
         public RatingSearchDto Search { get; set; }
     }
 
-    public class GetRatingListQueryHandler: IRequestHandler<GetRatingListQuery, List<RatingDto>>
+    public class GetRatingListQueryHandler : IRequestHandler<GetRatingListQuery, List<RatingDto>>
     {
         private readonly IRatingRepository _context;
         private readonly IMapper _mapper;

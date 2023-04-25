@@ -7,7 +7,7 @@ namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FavoriteController: ControllerBase
+    public class FavoriteController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -19,7 +19,7 @@ namespace eTaxi.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] int UserId)
         {
-            var result = await _mediator.Send(new GetFavoriteListQuery() { UserId=UserId});
+            var result = await _mediator.Send(new GetFavoriteListQuery() { UserId = UserId });
             return Ok(result);
         }
 

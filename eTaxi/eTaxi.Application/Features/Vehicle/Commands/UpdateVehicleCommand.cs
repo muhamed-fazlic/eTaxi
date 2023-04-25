@@ -2,11 +2,6 @@
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eTaxi.Application.Features.Vehicle.Commands
 {
@@ -47,7 +42,7 @@ namespace eTaxi.Application.Features.Vehicle.Commands
             {
                 throw new NotFoundException(nameof(Domain.Vehicle), request.Id);
             }
-                _mapper.Map(request, vehicleToUpdate);
+            _mapper.Map(request, vehicleToUpdate);
 
             await _vehicleRepository.UpdateAsync(vehicleToUpdate);
             return Unit.Value;
