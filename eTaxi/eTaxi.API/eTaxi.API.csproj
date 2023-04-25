@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Persistence\eTaxi.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
 </Project>

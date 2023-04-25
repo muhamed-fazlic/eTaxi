@@ -1,8 +1,10 @@
 ﻿using eTaxi.Application.Contracts.Email;
 using eTaxi.Application.Contracts.Identity;
+using eTaxi.Application.Contracts.Photo;
 using eTaxi.Application.Models.Identity;
 using eTaxi.Identity.Services;
 using eTaxi.Infrastructure.EmailService;
+using eTaxi.Infrastructure.ImageService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +21,8 @@ namespace eTaxi.Identity
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IEmailSender, EmailSender>();
-            
+            services.AddTransient<IPhotoServer, PhotoServer>();
+
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
