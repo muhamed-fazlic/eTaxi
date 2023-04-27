@@ -9,6 +9,7 @@
         public int StartLocationId { get; set; }
         public int EndLocationId { get; set; }
         public int VehicleId { get; set; }
+        public double Price { get; set; }
         public bool IsSelfDrive { get; set; }
         public DateTime? StartTime { get; set; }
     }

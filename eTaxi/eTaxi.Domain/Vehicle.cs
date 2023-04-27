@@ -6,7 +6,6 @@ namespace eTaxi.Domain
     {
         public Vehicle()
         {
-            // Files = new HashSet<File>();
             DateCreated = DateTime.Now;
         }
         public string Name { get; set; }
@@ -23,8 +22,7 @@ namespace eTaxi.Domain
         public int PricePerKm { get; set; }
         public int? UserDriverId { get; set; }
         public int TypeId { get; set; }
-
-        //public virtual ICollection<File> Files { get; set; }
+        public string ImageUrl { get; set; }
 
         public virtual VehicleType Type { get; set; }
         public virtual Location CurrentLocation { get; set; }

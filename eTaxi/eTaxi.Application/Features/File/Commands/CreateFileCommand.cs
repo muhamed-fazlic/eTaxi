@@ -12,6 +12,7 @@ namespace eTaxi.Application.Features.File.Commands
         public IFormFile File { get; set; }
         public int UserId { get; set; }
         public string Type { get; set; } = string.Empty;
+        public int? FeedbackId { get; set; }
     }
 
     public class CreateFileCommandHandler : IRequestHandler<CreateFileCommand, int>
@@ -32,6 +33,7 @@ namespace eTaxi.Application.Features.File.Commands
             file = _mapper.Map<Domain.File>(photo);
             file.Type = request.Type;
             file.UserId = request.UserId;
+            file.FeedbackId=request.FeedbackId;
             await _fileRepository.CreateAsync(file);
             return file.Id;
         }

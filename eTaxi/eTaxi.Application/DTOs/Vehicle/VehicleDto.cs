@@ -17,6 +17,8 @@
         public int PricePerKm { get; set; }
         public int? UserDriverId { get; set; }
         public int TypeId { get; set; }
+        public string ImageUrl { get; set; }
+
 
     }
 }

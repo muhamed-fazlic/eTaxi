@@ -17,6 +17,7 @@ namespace eTaxi.Domain
         public int EndLocationId { get; set; }
         public int VehicleId { get; set; }
         public bool IsSelfDrive { get; set; }
+        public double Price { get; set; }
         public DateTime? StartTime { get; set; }
 
 

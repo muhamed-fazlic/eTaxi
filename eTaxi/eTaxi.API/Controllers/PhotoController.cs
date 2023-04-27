@@ -17,9 +17,9 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int Id)
+        public async Task<IActionResult> Get(int id)
         {
-            var files = await _mediator.Send(new GetFileQuery(Id));
+            var files = await _mediator.Send(new GetFileQuery(id));
             return Ok(files);
         }
 

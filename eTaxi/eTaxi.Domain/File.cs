@@ -1,4 +1,5 @@
 ﻿using eTaxi.Domain.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eTaxi.Domain
 {
@@ -10,6 +11,8 @@ namespace eTaxi.Domain
         public string OriginalName { get; set; }
         public string Type { get; set; } = string.Empty;
 
+        public int? FeedbackId { get; set; }
+        public virtual Feedback Feedback { get; set; }
         public virtual User User { get; set; }
     }
 }

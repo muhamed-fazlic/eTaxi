@@ -13,6 +13,8 @@ namespace eTaxi.Application.Features.Order.Commands
         public int VehicleId { get; set; }
         public bool IsSelfDrive { get; set; }
         public DateTime? StartTime { get; set; }
+        public double Price { get; set; }
+
     }
 
     public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int>

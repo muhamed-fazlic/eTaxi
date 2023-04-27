@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 
@@ -11,9 +12,11 @@ using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 namespace eTaxi.Persistence.Migrations
 {
     [DbContext(typeof(TaxiDatabaseContext))]
-    partial class TaxiDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230427195414_addFeedbackWithFiles")]
+    partial class addFeedbackWithFiles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

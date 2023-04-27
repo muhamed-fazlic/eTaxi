@@ -4,6 +4,7 @@ using eTaxi.Identity;
 using eTaxi.Infrastructure;
 using eTaxi.Persistence;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,10 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddPersistenceService(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+
 
 builder.Services.AddCors(opt =>
 {

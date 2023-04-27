@@ -8,5 +8,6 @@
         public string FileName { get; set; }
         public string OriginalName { get; set; }
         public string Type { get; set; } = string.Empty;
+        public int? FeedbackId { get; set; }
     }
 }
