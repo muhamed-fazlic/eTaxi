@@ -7,5 +7,6 @@ namespace eTaxi.Application.Contracts.Identity
         Task<AuthResponse> Login(AuthRequest request);
         Task<RegistrationResponse> Register(RegistrationRequest request);
         Task<HttpResponseMessage> ForgotPassword(ForgotPasswordRequest request);
+        Task<HttpResponseMessage> ResetPassword(ResetPassword request);
     }
 }

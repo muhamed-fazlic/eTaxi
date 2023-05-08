@@ -6,6 +6,7 @@ using eTaxi.Identity.Services;
 using eTaxi.Infrastructure.EmailService;
 using eTaxi.Infrastructure.ImageService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -22,6 +23,13 @@ namespace eTaxi.Identity
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IPhotoServer, PhotoServer>();
+
+            
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
 
             services.AddAuthentication(opt =>
             {

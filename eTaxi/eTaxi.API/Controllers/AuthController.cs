@@ -33,5 +33,11 @@ namespace eTaxi.API.Controllers
             await _authService.ForgotPassword(request);
             return Ok();
         }
+        [HttpPost("reset-password")]
+        public async Task<ActionResult> ResetPassword(ResetPassword request)
+        {
+            await _authService.ResetPassword(request);
+            return Ok();
+        }
     }
 }

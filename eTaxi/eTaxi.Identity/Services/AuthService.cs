@@ -4,7 +4,6 @@ using eTaxi.Application.Exceptions;
 using eTaxi.Application.Models.Email;
 using eTaxi.Application.Models.Identity;
 using eTaxi.Domain;
-using eTaxi.Infrastructure.EmailService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -93,7 +92,8 @@ namespace eTaxi.Identity.Services
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.UserName,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                PhoneNumber = request.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -113,11 +113,11 @@ namespace eTaxi.Identity.Services
             if (user == null)
                 throw new NotFoundException($"User with {request.Email} not found", request.Email);
 
-            Random rnd=new Random();
+            Random rnd = new Random();
             int pin = rnd.Next(1000, 9999);
             user.Pin = pin;
             await _userManager.UpdateAsync(user);
-        var htmlMessage=GenerateForgotPasswordMessage(pin.ToString());
+            var htmlMessage = GenerateForgotPasswordMessage(pin.ToString());
             var message = new EmailMessage(new string[] { request.Email }, "Ponistavanje lozike", htmlMessage);
             await _emailSender.SendEmailAsync(message);
             return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
@@ -139,5 +139,43 @@ namespace eTaxi.Identity.Services
             email.Append("</div>");
             return email.ToString();
         }
+        public async Task<HttpResponseMessage> ResetPassword(ResetPassword model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+                throw new NotFoundException($"User with {model.Email} not found", model.Email);
+
+            if (model.Password != model.ConfirmPassword)
+                throw new BadRequestException("Lozinka se ne podudara");
+            if (user.Pin == model.Pin)
+            {
+                var result = await _userManager.ResetPasswordAsync(user, await _userManager.GeneratePasswordResetTokenAsync(user), model.Password);
+                if (user != null)
+                {
+                    if (result.Succeeded)
+                    {
+                        user.Pin = null;
+                        await _userManager.UpdateAsync(user);
+                        return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+
+                    }
+                    else
+                    {
+                        throw new BadRequestException("Pin za poništavanje je nevažeći ");
+                    }
+                }
+                else
+                {
+                    throw new BadRequestException("Ne postoji račun s ovom e-poštom.");
+
+                }
+            }
+            else
+            {
+                throw new BadRequestException("Pogrešan pin");
+            }
+        }
+
+       
     }
 }
