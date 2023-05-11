@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 
@@ -11,9 +12,11 @@ using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 namespace eTaxi.Persistence.Migrations
 {
     [DbContext(typeof(TaxiDatabaseContext))]
-    partial class TaxiDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230509151001_updateLocationAndOrder")]
+    partial class updateLocationAndOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,28 +189,6 @@ namespace eTaxi.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("eTaxi.Domain.Company", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Company");
-                });
-
             modelBuilder.Entity("eTaxi.Domain.Favorite", b =>
                 {
                     b.Property<int>("Id")
@@ -229,8 +210,6 @@ namespace eTaxi.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasIndex("UserId");
 
@@ -399,9 +378,6 @@ namespace eTaxi.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CancelReason")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
@@ -411,13 +387,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<int>("EndLocationId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsCanceled")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsSelfDrive")
@@ -510,9 +480,6 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -574,8 +541,6 @@ namespace eTaxi.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -591,7 +556,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1d6ac2aa-a224-4651-9c33-b59dd6c771f7",
+                            ConcurrencyStamp = "6f59bd05-e37f-4a2e-8ea9-65a030a5c1b0",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -599,7 +564,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKyzN53WJo5/Nh8pTP9u6Nrua0SPya2hXoExW5pdVt+SXxJh/YmkadqiqEy05LzjsQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJLQMH38UhDhMwCZ0Ij1nG3qVtwvJ2YmZh+g1seFocUg3h7+PMyZRGVRDWICO5bl0g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -609,7 +574,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4f7cdce2-d19f-40c6-9e31-fa12b667520a",
+                            ConcurrencyStamp = "b290b7de-1a4b-4253-be98-2e6b77154d58",
                             Email = "fazla@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Muhamed",
@@ -617,7 +582,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FAZLA@ADMIN.COM",
                             NormalizedUserName = "FAZLA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOkvcrO3FZeRL7TV5JOyeSwlatcnxAuC8yk5grIXUE4tPf03lWInCoDqst/uSM+KgA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDKaJrPWl5sBLqp9mfQF2W8RPoavNQPCddgYbJdMngXd+pfPg1v9C5Anm4lDVBKtxw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -627,7 +592,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "63bb5db3-2192-43ca-9974-a9878da8eef1",
+                            ConcurrencyStamp = "fc9b991a-b998-4e41-a8d9-49b668ee6a0c",
                             Email = "billy@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Bilal",
@@ -635,7 +600,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BILLY@ADMIN.COM",
                             NormalizedUserName = "BILLY",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIfApJMY2WsNsdSVltjPIIu6DYJUIr034NVpIG4tJa8YzdfEsJ5d1HT+Q/PUH4sRYw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJjt0HdBw4PwukC355M54jOymQ6RIQ6bLF4ZxMQkSbUVbVBdQ3ggeYMM1VQ1yAsxNQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -662,9 +627,6 @@ namespace eTaxi.Persistence.Migrations
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CurrentLocationId")
                         .HasColumnType("int");
@@ -706,8 +668,6 @@ namespace eTaxi.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasIndex("CurrentLocationId");
 
@@ -816,19 +776,11 @@ namespace eTaxi.Persistence.Migrations
 
             modelBuilder.Entity("eTaxi.Domain.Favorite", b =>
                 {
-                    b.HasOne("eTaxi.Domain.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("eTaxi.Domain.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Company");
 
                     b.Navigation("User");
                 });
@@ -956,21 +908,8 @@ namespace eTaxi.Persistence.Migrations
                     b.Navigation("UserDriver");
                 });
 
-            modelBuilder.Entity("eTaxi.Domain.User", b =>
-                {
-                    b.HasOne("eTaxi.Domain.Company", "Company")
-                        .WithMany("Drivers")
-                        .HasForeignKey("CompanyId");
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("eTaxi.Domain.Vehicle", b =>
                 {
-                    b.HasOne("eTaxi.Domain.Company", "Company")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("CompanyId");
-
                     b.HasOne("eTaxi.Domain.Location", "CurrentLocation")
                         .WithMany()
                         .HasForeignKey("CurrentLocationId")
@@ -987,20 +926,11 @@ namespace eTaxi.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserDriverId");
 
-                    b.Navigation("Company");
-
                     b.Navigation("CurrentLocation");
 
                     b.Navigation("Type");
 
                     b.Navigation("UserDriver");
-                });
-
-            modelBuilder.Entity("eTaxi.Domain.Company", b =>
-                {
-                    b.Navigation("Drivers");
-
-                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("eTaxi.Domain.Feedback", b =>

@@ -6,5 +6,6 @@
         public int? NumberOfSeats { get; set; }
         public string Brand { get; set; }
         public string FuelType { get; set; }
+        public int? CompanyId { get; set; }
     }
 }

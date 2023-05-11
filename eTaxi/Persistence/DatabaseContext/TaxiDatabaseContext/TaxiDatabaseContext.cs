@@ -23,6 +23,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
         public DbSet<HubStation> HubStation { get; set; }
         public DbSet<Domain.File> File { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
+        public DbSet<Company> Company { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

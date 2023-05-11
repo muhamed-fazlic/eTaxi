@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eTaxi.Application.DTOs.Favorite;
 using eTaxi.Application.Features.Favorite.Commands;
+using eTaxi.Domain;
 
 namespace eTaxi.Application.MappingProfiles
 {
@@ -8,9 +9,9 @@ namespace eTaxi.Application.MappingProfiles
     {
         public FavoriteProfile()
         {
-            CreateMap<FavoriteDto, FavoriteProfile>().ReverseMap();
-            CreateMap<CreateFavoriteCommand, FavoriteProfile>().ReverseMap();
-            CreateMap<UpdateFavoriteCommand, FavoriteProfile>().ReverseMap();
+            CreateMap<FavoriteDto, Favorite>().ReverseMap();
+            CreateMap<CreateFavoriteCommand, Favorite>().ReverseMap();
+            CreateMap<UpdateFavoriteCommand, Favorite>().ReverseMap();
         }
     }
 }

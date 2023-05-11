@@ -11,6 +11,8 @@ namespace eTaxi.Domain
         }
 
         public bool IsActive { get; set; }
+        public bool? IsCanceled { get; set; }
+        public string CancelReason { get; set; }
         public int UserDriverId { get; set; }
         public int? UserId { get; set; }
         public int StartLocationId { get; set; }
@@ -19,6 +21,8 @@ namespace eTaxi.Domain
         public bool IsSelfDrive { get; set; }
         public double Price { get; set; }
         public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public string PaymentMethod { get; set; }
 
 
         public virtual User UserDriver { get; set; }

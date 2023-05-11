@@ -1,6 +1,5 @@
-﻿using eTaxi.Application.DTOs.Order;
-using eTaxi.Application.Features.Order.Commands;
-using eTaxi.Application.Features.Order.Queries;
+﻿using eTaxi.Application.Features.Company.Commands;
+using eTaxi.Application.Features.Company.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,47 +7,42 @@ namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class OrderController : ControllerBase
+    public class CompanyController: ControllerBase
     {
         private readonly IMediator _mediator;
-        public OrderController(IMediator mediator)
+        public CompanyController(IMediator mediator)
         {
             _mediator = mediator;
         }
-
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]OrderSearchDto request)
+        public async Task<IActionResult> Get()
         {
-            var result = await _mediator.Send(new GetOrderListQuery() { Search=request});
+            var result = await _mediator.Send(new GetCompanyListQuery() );
             return Ok(result);
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var query = new GetOrderQuery(id);
+            var query = new GetCompanyQuery(id);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
-
         [HttpPost]
-        public async Task<IActionResult> Create(CreateOrderCommand command)
+        public async Task<IActionResult> Create(CreateCompanyCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-
-        [HttpPut]
-        public async Task<IActionResult> Update(UpdateOrderCommand command)
-        {
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
-
+        //[HttpPut]
+        //public async Task<IActionResult> Update(UpdateCompanyCommand command)
+        //{
+        //    var result = await _mediator.Send(command);
+        //    return Ok(result);
+        //}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var command = new DeleteOrderCommand(id);
+            var command = new DeleteCompanyCommand(id);
             var result = await _mediator.Send(command);
             return Ok(result);
         }

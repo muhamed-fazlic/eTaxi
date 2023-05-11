@@ -23,7 +23,9 @@ namespace eTaxi.Domain
         public int? UserDriverId { get; set; }
         public int TypeId { get; set; }
         public string ImageUrl { get; set; }
+        public int? CompanyId { get; set; }
 
+        public virtual Company Company { get; set; }
         public virtual VehicleType Type { get; set; }
         public virtual Location CurrentLocation { get; set; }
         public virtual User UserDriver { get; set; }

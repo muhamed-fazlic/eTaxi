@@ -12,8 +12,10 @@ namespace eTaxi.Domain
         public string LastName { get; set; } = string.Empty;
         public int? Pin { get; set; }
         public ICollection<File> Files { get; set; }
-
         public DateTime? DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
+        public int? CompanyId { get; set; }
+
+        public virtual Company Company { get; set; }
     }
 }

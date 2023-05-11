@@ -33,6 +33,10 @@ namespace eTaxi.Persistence.Repositories
                 {
                     vehicles = vehicles.Where(v => v.FuelType.Contains(search.FuelType));
                 }
+                if(search.CompanyId != null)
+                {
+                    vehicles = vehicles.Where(v => v.CompanyId == search.CompanyId);
+                }
             }
             return await vehicles.ToListAsync();
         }

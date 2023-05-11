@@ -30,6 +30,7 @@ namespace eTaxi.Persistence
             services.AddScoped<IHubStationRepository, HubStationRepository>();
             services.AddScoped<IFileRepository, FileRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<TaxiDatabaseContext>()
                 .AddDefaultTokenProviders();

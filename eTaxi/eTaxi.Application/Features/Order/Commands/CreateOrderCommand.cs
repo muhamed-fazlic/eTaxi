@@ -14,6 +14,10 @@ namespace eTaxi.Application.Features.Order.Commands
         public bool IsSelfDrive { get; set; }
         public DateTime? StartTime { get; set; }
         public double Price { get; set; }
+        public string PaymentMethod { get; set; }
+        public bool? IsCanceled { get; set; }
+        public string CancelReason { get; set; }
+        public DateTime? EndTime { get; set; }
 
     }
 
