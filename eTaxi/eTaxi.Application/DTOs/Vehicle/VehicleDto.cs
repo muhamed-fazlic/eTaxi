@@ -18,6 +18,8 @@
         public int? UserDriverId { get; set; }
         public string ImageUrl { get; set; }
         public Domain.VehicleType Type { get; set; }
+        public int? CompanyId { get; set; }
+        public string CompanyName { get; set;}
 
 
     }

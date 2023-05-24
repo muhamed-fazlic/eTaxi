@@ -1,4 +1,5 @@
-﻿using eTaxi.Application.DTOs.File;
+﻿using eTaxi.Application.DTOs.Favorite;
+using eTaxi.Application.DTOs.File;
 
 namespace eTaxi.Application.DTOs.User
 {
@@ -10,6 +11,8 @@ namespace eTaxi.Application.DTOs.User
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public int? Pin { get; set; }
+        public int? CompanyId { get; set; }
         public ICollection<FileDto> Files { get; set; }
+        public ICollection<FavoriteDto> Favorites { get; set; }
     }
 }

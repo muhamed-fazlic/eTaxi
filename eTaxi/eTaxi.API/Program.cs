@@ -3,6 +3,7 @@ using eTaxi.Application;
 using eTaxi.Identity;
 using eTaxi.Infrastructure;
 using eTaxi.Persistence;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 
@@ -61,6 +62,7 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -69,6 +71,18 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+var resourcesFolder = Path.Combine(builder.Environment.ContentRootPath, "Resources");
+if (!Directory.Exists(resourcesFolder))
+{
+    Directory.CreateDirectory(resourcesFolder);
+}
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(resourcesFolder),
+    RequestPath = "/Resources"
+});
 
 app.UseAuthentication();
 app.UseAuthorization();

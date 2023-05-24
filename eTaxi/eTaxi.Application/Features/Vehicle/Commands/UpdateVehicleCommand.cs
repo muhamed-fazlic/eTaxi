@@ -23,6 +23,7 @@ namespace eTaxi.Application.Features.Vehicle.Commands
         public int? UserDriverId { get; set; }
         public int TypeId { get; set; }
         public string ImageUrl { get; set; }
+        public int? CompanyId { get; set; }
 
     }
 

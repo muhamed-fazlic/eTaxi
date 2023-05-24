@@ -21,6 +21,7 @@ namespace eTaxi.Infrastructure.ImageService
         {
             if (file != null)
             {
+                
                 string uploadFolder = "Resources/";
                 var guid = Guid.NewGuid().ToString();
                 string uploadFileName = guid + "_" + file.FileName;

@@ -28,12 +28,13 @@ namespace eTaxi.Application.Features.File.Commands
         }
         public async Task<int> Handle(CreateFileCommand request, CancellationToken cancellationToken)
         {
+            var resourcesPath = Path.GetFullPath(@"Resources/");
             var file = new Domain.File();
-            PhotoResponse photo = _photoService.UploadPhoto<dynamic>(request.File, "test");
+            PhotoResponse photo = _photoService.UploadPhoto<dynamic>(request.File, resourcesPath);
             file = _mapper.Map<Domain.File>(photo);
             file.Type = request.Type;
             file.UserId = request.UserId;
-            file.FeedbackId=request.FeedbackId;
+            file.FeedbackId = request.FeedbackId;
             await _fileRepository.CreateAsync(file);
             return file.Id;
         }

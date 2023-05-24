@@ -14,14 +14,16 @@ namespace eTaxi.Application.Features.Vehicle.Queries
     {
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IVehicleTypeRepository _vehicleTypeRepository;
+        private readonly ICompanyRepository _companyRepository;
 
         private readonly IMapper _mapper;
 
-        public GetVehicleListQueryHandler(IVehicleRepository vehicleRepository,  IMapper mapper, IVehicleTypeRepository vehicleTypeRepository)
+        public GetVehicleListQueryHandler(IVehicleRepository vehicleRepository, IMapper mapper, IVehicleTypeRepository vehicleTypeRepository, ICompanyRepository companyRepository)
         {
             _vehicleRepository = vehicleRepository;
             _mapper = mapper;
             _vehicleTypeRepository = vehicleTypeRepository;
+            _companyRepository = companyRepository;
         }
 
         public async Task<List<VehicleDto>> Handle(GetVehicleListQuery request, CancellationToken cancellationToken)
@@ -31,6 +33,12 @@ namespace eTaxi.Application.Features.Vehicle.Queries
             {
                 var vehicleType = await _vehicleTypeRepository.GetByIdAsync(vehicle.TypeId);
                 vehicle.Type = vehicleType;
+                if (vehicle.CompanyId != null)
+                {
+                    var company = await _companyRepository.GetByIdAsync((int)vehicle.CompanyId);
+                    vehicle.Company = company;
+
+                }
 
             }
             return _mapper.Map<List<VehicleDto>>(vehicleList);

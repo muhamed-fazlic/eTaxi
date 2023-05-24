@@ -2,6 +2,7 @@
 {
     public class LocationDto
     {
+        public int Id { get; set; }
         public string StreetNumber { get; set; } = string.Empty;
         public string StreetName { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
