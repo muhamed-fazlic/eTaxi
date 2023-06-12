@@ -2,12 +2,14 @@
 using eTaxi.Application.Features.Order.Commands;
 using eTaxi.Application.Features.Order.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;

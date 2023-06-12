@@ -37,6 +37,10 @@ namespace eTaxi.Persistence.Repositories
                 {
                     vehicles = vehicles.Where(v => v.CompanyId == search.CompanyId);
                 }
+                if (!string.IsNullOrEmpty(search.CompanyName))
+                {
+                    vehicles = vehicles.Where(v => v.Company.Name.Contains(search.CompanyName));
+                }
             }
             return await vehicles.ToListAsync();
         }

@@ -11,6 +11,8 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
             var hasher = new PasswordHasher<User>();
             modelBuilder.Entity<IdentityRole<int>>().HasData(new IdentityRole<int> { Id = 1, Name = "Admin", NormalizedName = "ADMIN" });
             modelBuilder.Entity<IdentityRole<int>>().HasData(new IdentityRole<int> { Id = 2, Name = "User", NormalizedName = "USER" });
+            modelBuilder.Entity<IdentityRole<int>>().HasData(new IdentityRole<int> { Id = 3, Name = "CompanyAdmin", NormalizedName = "COMPANYADMIN" });
+
 
             modelBuilder.Entity<User>().HasData(new User
             {

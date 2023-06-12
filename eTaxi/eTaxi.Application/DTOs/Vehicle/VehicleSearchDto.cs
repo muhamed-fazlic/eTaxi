@@ -7,5 +7,6 @@
         public string Brand { get; set; }
         public string FuelType { get; set; }
         public int? CompanyId { get; set; }
+        public string CompanyName { get; set; }
     }
 }
