@@ -17,6 +17,11 @@ namespace eTaxi.Application.DTOs.Order
         public bool? IsSelfDrive { get; set; }
         public string PaymentMethod { get; set; }
         public bool? IsCanceled { get; set; }
+        public int? CompanyId { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+
+
 
     }
 }

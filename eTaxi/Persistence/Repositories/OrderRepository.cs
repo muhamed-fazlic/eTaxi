@@ -42,6 +42,18 @@ namespace eTaxi.Persistence.Repositories
                 {
                     orderList=orderList.Where(order=>order.IsCanceled==search.IsCanceled);
                 }
+                if (search.CompanyId != null)
+                {
+                    orderList=orderList.Where(order=>order.Vehicle.CompanyId==search.CompanyId);
+                }
+                if(search.StartTime != null)
+                {
+                    orderList=orderList.Where(order=>order.StartTime>=search.StartTime);
+                }
+                if(search.EndTime != null)
+                {
+                    orderList=orderList.Where(order=>order.EndTime<=search.EndTime);
+                }
 
             }
 
