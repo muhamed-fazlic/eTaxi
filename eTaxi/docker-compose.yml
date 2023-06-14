@@ -4,34 +4,27 @@ services:
   etaxi-sql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: etaxi-sql
-    restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=MojaSifra123!
-      - MSSQL_PID=Developer
     ports:
       - 1433:1433
     expose:
       - 1433
-    networks:
-      - etaxinet
+    
+    
 
   etaxi-api:
     restart: unless-stopped
     build:
       context: .
     environment:
-      - ConnectionStrings:DefaultConnection=Server=etaxi-sql,1433;Database=eTaxi;User=sa;Password=MojaSifra123!;ConnectRetryCount=0; TrustServerCertificate=True
+      - ConnectionStrings:eTaxiConnectionStringDocker=Server=etaxi-sql, 1433;Database=eTaxi;User=sa;Password=MojaSifra123!;ConnectRetryCount=0; TrustServerCertificate=True
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 7152:7152
-    networks:
-      - etaxinet
-    links:
-      - etaxi-sql
-    depends_on:
-      - etaxi-sql
+    
+   
+    
       
-networks:
-  etaxinet:
-    driver: bridge      
+     
