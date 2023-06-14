@@ -16,7 +16,7 @@ namespace eTaxi.Domain
         public bool AirBag { get; set; }
         public string FuelType { get; set; }
         public string Transmission { get; set; }
-        public int CurrentLocationId { get; set; }
+        public int? CurrentLocationId { get; set; }
         public string Color { get; set; }
         public string Brand { get; set; }
         public int PricePerKm { get; set; }
