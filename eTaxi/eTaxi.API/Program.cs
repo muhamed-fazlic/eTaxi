@@ -95,7 +95,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<TaxiDatabaseContext>();
     dataContext.Database.EnsureDeleted();
-    dataContext.Database.EnsureCreated();
+    //dataContext.Database.EnsureCreated();
 
     //dataContext.Database.EnsureCreated();
    // dataContext.Database.Migrate();

@@ -12,8 +12,8 @@ using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
 namespace eTaxi.Persistence.Migrations
 {
     [DbContext(typeof(TaxiDatabaseContext))]
-    [Migration("20230511072325_addedCompanyClass")]
-    partial class addedCompanyClass
+    [Migration("20230614214350_initialMigration")]
+    partial class initialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,6 +66,12 @@ namespace eTaxi.Persistence.Migrations
                             Id = 2,
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "CompanyAdmin",
+                            NormalizedName = "COMPANYADMIN"
                         });
                 });
 
@@ -161,11 +167,36 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             UserId = 2,
-                            RoleId = 2
+                            RoleId = 3
                         },
                         new
                         {
                             UserId = 3,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 6,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 7,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 8,
                             RoleId = 2
                         });
                 });
@@ -209,6 +240,20 @@ namespace eTaxi.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Company");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 49, 73, DateTimeKind.Local).AddTicks(5721),
+                            Name = "Sarajevo Taxi"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 49, 73, DateTimeKind.Local).AddTicks(5797),
+                            Name = "Mostar Taxi"
+                        });
                 });
 
             modelBuilder.Entity("eTaxi.Domain.Favorite", b =>
@@ -260,7 +305,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -346,6 +391,26 @@ namespace eTaxi.Persistence.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("HubStation");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            LocationId = 1,
+                            Name = "Sarajevo Hub"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            LocationId = 3,
+                            Name = "Mostar Hub"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            LocationId = 5,
+                            Name = "Tuzla Hub"
+                        });
                 });
 
             modelBuilder.Entity("eTaxi.Domain.Location", b =>
@@ -392,6 +457,86 @@ namespace eTaxi.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Location");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Marsala Tita 12, Centar, Sarajevo, 71000, Bosnia and Herzegovina",
+                            City = "Sarajevo",
+                            Country = "BiH",
+                            District = "Centar",
+                            Latitude = 43.856299999999997,
+                            Longitude = 18.4131,
+                            PostalCode = "71000",
+                            StreetName = "Marsala Tita",
+                            StreetNumber = "12"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Dzemala Bijedica St 185, Sarajevo 71000",
+                            City = "Sarajevo",
+                            Country = "BiH",
+                            District = "Sarajevo",
+                            Latitude = 43.844961099999999,
+                            Longitude = 18.337866200000001,
+                            PostalCode = "71000",
+                            StreetName = "Dzemala Bijedica",
+                            StreetNumber = "185"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Maršala Tita 8, Stari Grad, Mostar, 88000, Bosnia and Herzegovina",
+                            City = "Mostar",
+                            Country = "BiH",
+                            District = "Stari Grad",
+                            Latitude = 43.342399999999998,
+                            Longitude = 17.808900000000001,
+                            PostalCode = "88000",
+                            StreetName = "Maršala Tita",
+                            StreetNumber = "8"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "Aleja Bosne Srebrene 15, Novi Grad, Sarajevo, 71000, Bosnia and Herzegovina",
+                            City = "Sarajevo",
+                            Country = "BiH",
+                            District = "Novi Grad",
+                            Latitude = 43.870800000000003,
+                            Longitude = 18.4314,
+                            PostalCode = "71000",
+                            StreetName = "Aleja Bosne Srebrene",
+                            StreetNumber = "15"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "Titova 3, Centar, Tuzla, 75000, Bosnia and Herzegovina",
+                            City = "Tuzla",
+                            Country = "BiH",
+                            District = "Centar",
+                            Latitude = 44.534999999999997,
+                            Longitude = 18.671399999999998,
+                            PostalCode = "75000",
+                            StreetName = "Titova",
+                            StreetNumber = "3"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Address = "VCJ7+59H, Patriotske lige 58, Sarajevo 71000",
+                            City = "Sarajevo",
+                            Country = "BiH",
+                            District = "Centar",
+                            Latitude = 43.874206600000001,
+                            Longitude = 18.408753399999998,
+                            PostalCode = "71000",
+                            StreetName = "Patriotske lige",
+                            StreetNumber = "58"
+                        });
                 });
 
             modelBuilder.Entity("eTaxi.Domain.Order", b =>
@@ -411,7 +556,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EndLocationId")
+                    b.Property<int?>("EndLocationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("EndTime")
@@ -432,7 +577,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("StartLocationId")
+                    b.Property<int?>("StartLocationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("StartTime")
@@ -460,6 +605,144 @@ namespace eTaxi.Persistence.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Order");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9525),
+                            EndLocationId = 2,
+                            EndTime = new DateTime(2023, 6, 15, 1, 43, 50, 100, DateTimeKind.Local).AddTicks(9541),
+                            IsActive = true,
+                            IsCanceled = false,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Online",
+                            Price = 36.0,
+                            StartLocationId = 1,
+                            StartTime = new DateTime(2023, 6, 15, 0, 43, 50, 100, DateTimeKind.Local).AddTicks(9532),
+                            UserDriverId = 3,
+                            UserId = 8,
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9554),
+                            EndLocationId = 3,
+                            EndTime = new DateTime(2023, 6, 15, 3, 43, 50, 100, DateTimeKind.Local).AddTicks(9561),
+                            IsActive = true,
+                            IsCanceled = false,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Gotovina",
+                            Price = 357.0,
+                            StartLocationId = 2,
+                            StartTime = new DateTime(2023, 6, 15, 1, 43, 50, 100, DateTimeKind.Local).AddTicks(9559),
+                            UserDriverId = 4,
+                            UserId = 7,
+                            VehicleId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9565),
+                            EndLocationId = 6,
+                            EndTime = new DateTime(2023, 6, 14, 22, 43, 50, 100, DateTimeKind.Local).AddTicks(9571),
+                            IsActive = false,
+                            IsCanceled = false,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Gotovina",
+                            Price = 83.700000000000003,
+                            StartLocationId = 4,
+                            StartTime = new DateTime(2023, 6, 14, 21, 43, 50, 100, DateTimeKind.Local).AddTicks(9569),
+                            UserDriverId = 5,
+                            UserId = 8,
+                            VehicleId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9574),
+                            EndLocationId = 1,
+                            EndTime = new DateTime(2023, 6, 13, 21, 43, 50, 100, DateTimeKind.Local).AddTicks(9581),
+                            IsActive = false,
+                            IsCanceled = false,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Online",
+                            Price = 1210.0,
+                            StartLocationId = 5,
+                            StartTime = new DateTime(2023, 6, 13, 19, 43, 50, 100, DateTimeKind.Local).AddTicks(9577),
+                            UserDriverId = 6,
+                            UserId = 4,
+                            VehicleId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9583),
+                            EndLocationId = 1,
+                            EndTime = new DateTime(2023, 6, 11, 19, 43, 50, 100, DateTimeKind.Local).AddTicks(9589),
+                            IsActive = true,
+                            IsCanceled = false,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Gotovina",
+                            Price = 500.0,
+                            StartLocationId = 3,
+                            StartTime = new DateTime(2023, 6, 11, 17, 43, 50, 100, DateTimeKind.Local).AddTicks(9587),
+                            UserDriverId = 7,
+                            UserId = 8,
+                            VehicleId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9593),
+                            EndLocationId = 1,
+                            EndTime = new DateTime(2023, 6, 15, 0, 3, 50, 100, DateTimeKind.Local).AddTicks(9702),
+                            IsActive = true,
+                            IsCanceled = false,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Online",
+                            Price = 32.299999999999997,
+                            StartLocationId = 6,
+                            StartTime = new DateTime(2023, 6, 14, 23, 45, 50, 100, DateTimeKind.Local).AddTicks(9698),
+                            UserDriverId = 3,
+                            UserId = 6,
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CancelReason = "Pokvareno vozilo",
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9706),
+                            EndLocationId = 1,
+                            EndTime = new DateTime(2023, 6, 14, 14, 43, 50, 100, DateTimeKind.Local).AddTicks(9713),
+                            IsActive = false,
+                            IsCanceled = true,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Gotovina",
+                            Price = 36.0,
+                            StartLocationId = 2,
+                            StartTime = new DateTime(2023, 6, 14, 12, 43, 50, 100, DateTimeKind.Local).AddTicks(9711),
+                            UserDriverId = 3,
+                            UserId = 5,
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9716),
+                            EndLocationId = 4,
+                            EndTime = new DateTime(2023, 6, 13, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9721),
+                            IsActive = false,
+                            IsCanceled = false,
+                            IsSelfDrive = false,
+                            PaymentMethod = "Gotovina",
+                            Price = 78.0,
+                            StartLocationId = 1,
+                            StartTime = new DateTime(2023, 6, 13, 22, 43, 50, 100, DateTimeKind.Local).AddTicks(9719),
+                            UserDriverId = 6,
+                            VehicleId = 4
+                        });
                 });
 
             modelBuilder.Entity("eTaxi.Domain.Rating", b =>
@@ -482,13 +765,13 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserDriverId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -500,6 +783,38 @@ namespace eTaxi.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Rating");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Comment = "Odlična vožnja, vozač je bio veoma ljubazan i profesionalan.",
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9778),
+                            Grade = 5,
+                            OrderId = 6,
+                            UserDriverId = 3,
+                            UserId = 6
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Comment = "Sjajno iskustvo, vozač je bio veoma pristojan i vozilo je bilo čisto i udobno.",
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9795),
+                            Grade = 5,
+                            OrderId = 4,
+                            UserDriverId = 6,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Comment = "taxi nikad nije ni dosao. Navodno se pokvarilo vozilo",
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9798),
+                            Grade = 2,
+                            OrderId = 7,
+                            UserDriverId = 3,
+                            UserId = 5
+                        });
                 });
 
             modelBuilder.Entity("eTaxi.Domain.User", b =>
@@ -594,7 +909,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1d6ac2aa-a224-4651-9c33-b59dd6c771f7",
+                            ConcurrencyStamp = "775531be-b8d0-42aa-9847-5c8237054161",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -602,7 +917,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKyzN53WJo5/Nh8pTP9u6Nrua0SPya2hXoExW5pdVt+SXxJh/YmkadqiqEy05LzjsQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH1LP7SYcHyzFBt5pio9QesUb0ONSy92NmwNgfw0hF2rhBCVZ9bKFSsqdqnSlaHrLg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -612,37 +927,128 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4f7cdce2-d19f-40c6-9e31-fa12b667520a",
-                            Email = "fazla@admin.com",
+                            CompanyId = 1,
+                            ConcurrencyStamp = "2ea9926a-9d18-42c6-9634-dfebca8663fc",
+                            Email = "kompanija@admin.com",
                             EmailConfirmed = true,
-                            FirstName = "Muhamed",
-                            LastName = "Fazlic",
+                            FirstName = "Sarajevo",
+                            LastName = "Taxi",
                             LockoutEnabled = false,
-                            NormalizedEmail = "FAZLA@ADMIN.COM",
-                            NormalizedUserName = "FAZLA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOkvcrO3FZeRL7TV5JOyeSwlatcnxAuC8yk5grIXUE4tPf03lWInCoDqst/uSM+KgA==",
+                            NormalizedEmail = "KOMPANIJA@ADMIN.COM",
+                            NormalizedUserName = "KOMPANIJA SARAJEVO",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPmT95zRgxFQlorMTEFjcUi9Cl3s00abXKbWnswoYeI0S1m4zGzB0eit76nVLweCnQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UserName = "fazla"
+                            UserName = "kompanija Sarajevo"
                         },
                         new
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "63bb5db3-2192-43ca-9974-a9878da8eef1",
-                            Email = "billy@admin.com",
+                            ConcurrencyStamp = "6b7d0e08-81f6-4321-afa7-52acc888142e",
+                            Email = "user1@taxi.com",
                             EmailConfirmed = true,
-                            FirstName = "Bilal",
-                            LastName = "Hodzic",
+                            FirstName = "User",
+                            LastName = "br1",
                             LockoutEnabled = false,
-                            NormalizedEmail = "BILLY@ADMIN.COM",
-                            NormalizedUserName = "BILLY",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIfApJMY2WsNsdSVltjPIIu6DYJUIr034NVpIG4tJa8YzdfEsJ5d1HT+Q/PUH4sRYw==",
+                            NormalizedEmail = "USER1@TAXI.COM",
+                            NormalizedUserName = "USER BR1",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPNh4Nsj2+6w9plxGlfoZ0c5LjBmalLHqljL6NhgEryvOLcY6+gemgJFgLhn8LTItg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
-                            UserName = "billy"
+                            UserName = "user br1"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "af517832-f922-402c-be08-db07f81d4647",
+                            Email = "user2@taxi.com",
+                            EmailConfirmed = true,
+                            FirstName = "User",
+                            LastName = "br2",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER2@TAXI.COM",
+                            NormalizedUserName = "USER BR2",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEoFLIEsPiSu0D5Gm3FaCINTUc8mQ1Jhc/X+Bqa6IjnHWhzGAIkfnGfdmcC64vUI5Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user br2"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7f60017c-cd51-42e5-b072-57eb09f9a1b7",
+                            Email = "user3@taxi.com",
+                            EmailConfirmed = true,
+                            FirstName = "User",
+                            LastName = "br3",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER3@TAXI.COM",
+                            NormalizedUserName = "USER BR3",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMT6/A+Gj4xhePby4HADEG241XXlltiEPwNnYBpwAtXq3YOy7nPWYGXcYfsVQotoPA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user br3"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ce9413e3-8cf0-4774-bb84-e96fb073f091",
+                            Email = "user4@taxi.com",
+                            EmailConfirmed = true,
+                            FirstName = "User",
+                            LastName = "br4",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER4@TAXI.COM",
+                            NormalizedUserName = "USER BR4",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOULswAjxjXTTEi45XPdTh3LmvKJZV8b0LessaPAkfHcAfIGaQi2CGbkzISg1cA7zw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user br4"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7b130c48-cf24-4395-b2f6-2a6b5539d3a8",
+                            Email = "user5@taxi.com",
+                            EmailConfirmed = true,
+                            FirstName = "User",
+                            LastName = "br5",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER5@TAXI.COM",
+                            NormalizedUserName = "USER BR5",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFyTRpZubz9nQLH61/jlU0v1Isvlw131HOtU/tGD46r+VFg57y9PCJw9CvNXVW1v+w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user br5"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f5585649-78ea-493a-93ea-0a9208fee9ad",
+                            Email = "user6@taxi.com",
+                            EmailConfirmed = true,
+                            FirstName = "User",
+                            LastName = "br6",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER6@TAXI.COM",
+                            NormalizedUserName = "USER BR6",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOydW1pUBZh67a6GHNOaDSMjiiLW9ndX8AtGdyxkn8cStCL14TP1X7oAVr+aeLg0Lg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user br6"
                         });
                 });
 
@@ -669,7 +1075,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CurrentLocationId")
+                    b.Property<int?>("CurrentLocationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DateCreated")
@@ -719,6 +1125,107 @@ namespace eTaxi.Persistence.Migrations
                     b.HasIndex("UserDriverId");
 
                     b.ToTable("Vehicle");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AirBag = true,
+                            AirCondition = true,
+                            Brand = "Audi",
+                            Color = "Siva",
+                            CompanyId = 1,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9257),
+                            FuelType = "Benzin",
+                            ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656523883/rs2/audia8_gckbfh.png",
+                            KmTraveled = 50000.0,
+                            LicenceNumber = "ABC123",
+                            Name = "Audi A8",
+                            PricePerKm = 6,
+                            Transmission = "Automatic",
+                            TypeId = 2,
+                            UserDriverId = 3,
+                            Year = 2019
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AirBag = true,
+                            AirCondition = true,
+                            Brand = "Volkswagen",
+                            Color = "Siva",
+                            CompanyId = 1,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9321),
+                            FuelType = "Dizel",
+                            ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656523879/rs2/golf_7_didjje.jpg",
+                            KmTraveled = 80000.0,
+                            LicenceNumber = "XYZ789",
+                            Name = "Volkswagen Golf 7",
+                            PricePerKm = 3,
+                            Transmission = "Manual",
+                            TypeId = 1,
+                            UserDriverId = 4,
+                            Year = 2017
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AirBag = true,
+                            AirCondition = true,
+                            Brand = "BMW",
+                            Color = "Plava",
+                            CompanyId = 1,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9450),
+                            FuelType = "Dizel",
+                            ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686762738/bmw-x5_qbbvec.jpg",
+                            KmTraveled = 60000.0,
+                            LicenceNumber = "DEF456",
+                            Name = "BMW X5",
+                            PricePerKm = 9,
+                            Transmission = "Automatic",
+                            TypeId = 3,
+                            UserDriverId = 5,
+                            Year = 2020
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AirBag = true,
+                            AirCondition = true,
+                            Brand = "Mercedes",
+                            Color = "White",
+                            CompanyId = 2,
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9457),
+                            FuelType = "Benzin",
+                            ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686765411/benz-c-class_msuspq.jpg",
+                            KmTraveled = 40000.0,
+                            LicenceNumber = "GHI789",
+                            Name = "Mercedes-Benz C-Class",
+                            PricePerKm = 10,
+                            Transmission = "Automatic",
+                            TypeId = 2,
+                            UserDriverId = 6,
+                            Year = 2021
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AirBag = true,
+                            AirCondition = false,
+                            Brand = "Audi",
+                            Color = "Red",
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9461),
+                            FuelType = "Dizel",
+                            ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686765730/Audi_A3_snaxht.webp",
+                            KmTraveled = 55000.0,
+                            LicenceNumber = "JKL012",
+                            Name = "Audi A3",
+                            PricePerKm = 4,
+                            Transmission = "Automatic",
+                            TypeId = 1,
+                            UserDriverId = 7,
+                            Year = 2016
+                        });
                 });
 
             modelBuilder.Entity("eTaxi.Domain.VehicleType", b =>
@@ -748,14 +1255,14 @@ namespace eTaxi.Persistence.Migrations
                             Id = 1,
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656661697/rs2/car_l5aypi.png",
                             NumberOfSeats = 4,
-                            Type = "malo auto"
+                            Type = "Malo auto"
                         },
                         new
                         {
                             Id = 2,
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656661697/rs2/sedan_j0oo9s.png",
                             NumberOfSeats = 5,
-                            Type = "limuzina"
+                            Type = "Limuzina"
                         },
                         new
                         {
@@ -763,6 +1270,13 @@ namespace eTaxi.Persistence.Migrations
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656661697/rs2/SUV_hjqwbi.png",
                             NumberOfSeats = 5,
                             Type = "SUV"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656661697/rs2/Bus_ogtv6k.png",
+                            NumberOfSeats = 9,
+                            Type = "MiniVan"
                         });
                 });
 
@@ -826,7 +1340,7 @@ namespace eTaxi.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("eTaxi.Domain.User", "User")
-                        .WithMany()
+                        .WithMany("Favorites")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -840,9 +1354,7 @@ namespace eTaxi.Persistence.Migrations
                 {
                     b.HasOne("eTaxi.Domain.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("eTaxi.Domain.User", "User")
                         .WithMany()
@@ -895,15 +1407,11 @@ namespace eTaxi.Persistence.Migrations
                 {
                     b.HasOne("eTaxi.Domain.Location", "EndLocation")
                         .WithMany()
-                        .HasForeignKey("EndLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EndLocationId");
 
                     b.HasOne("eTaxi.Domain.Location", "StartLocation")
                         .WithMany()
-                        .HasForeignKey("StartLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StartLocationId");
 
                     b.HasOne("eTaxi.Domain.User", "UserDriver")
                         .WithMany()
@@ -936,9 +1444,7 @@ namespace eTaxi.Persistence.Migrations
                 {
                     b.HasOne("eTaxi.Domain.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("eTaxi.Domain.User", "UserDriver")
                         .WithMany()
@@ -948,9 +1454,7 @@ namespace eTaxi.Persistence.Migrations
 
                     b.HasOne("eTaxi.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Order");
 
@@ -976,9 +1480,7 @@ namespace eTaxi.Persistence.Migrations
 
                     b.HasOne("eTaxi.Domain.Location", "CurrentLocation")
                         .WithMany()
-                        .HasForeignKey("CurrentLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CurrentLocationId");
 
                     b.HasOne("eTaxi.Domain.VehicleType", "Type")
                         .WithMany()
@@ -1013,6 +1515,8 @@ namespace eTaxi.Persistence.Migrations
 
             modelBuilder.Entity("eTaxi.Domain.User", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("Files");
                 });
 #pragma warning restore 612, 618

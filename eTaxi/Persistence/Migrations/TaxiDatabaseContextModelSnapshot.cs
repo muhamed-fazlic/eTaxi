@@ -242,13 +242,13 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 56, 595, DateTimeKind.Local).AddTicks(6301),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 49, 73, DateTimeKind.Local).AddTicks(5721),
                             Name = "Sarajevo Taxi"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 56, 595, DateTimeKind.Local).AddTicks(6370),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 49, 73, DateTimeKind.Local).AddTicks(5797),
                             Name = "Mostar Taxi"
                         });
                 });
@@ -302,7 +302,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -553,7 +553,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<DateTime?>("DateModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EndLocationId")
+                    b.Property<int?>("EndLocationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("EndTime")
@@ -574,7 +574,7 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("StartLocationId")
+                    b.Property<int?>("StartLocationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("StartTime")
@@ -607,16 +607,16 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3884),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9525),
                             EndLocationId = 2,
-                            EndTime = new DateTime(2023, 6, 14, 23, 33, 57, 321, DateTimeKind.Local).AddTicks(3895),
+                            EndTime = new DateTime(2023, 6, 15, 1, 43, 50, 100, DateTimeKind.Local).AddTicks(9541),
                             IsActive = true,
                             IsCanceled = false,
                             IsSelfDrive = false,
                             PaymentMethod = "Online",
                             Price = 36.0,
                             StartLocationId = 1,
-                            StartTime = new DateTime(2023, 6, 14, 22, 33, 57, 321, DateTimeKind.Local).AddTicks(3888),
+                            StartTime = new DateTime(2023, 6, 15, 0, 43, 50, 100, DateTimeKind.Local).AddTicks(9532),
                             UserDriverId = 3,
                             UserId = 8,
                             VehicleId = 1
@@ -624,16 +624,16 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3902),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9554),
                             EndLocationId = 3,
-                            EndTime = new DateTime(2023, 6, 15, 1, 33, 57, 321, DateTimeKind.Local).AddTicks(3908),
+                            EndTime = new DateTime(2023, 6, 15, 3, 43, 50, 100, DateTimeKind.Local).AddTicks(9561),
                             IsActive = true,
                             IsCanceled = false,
                             IsSelfDrive = false,
                             PaymentMethod = "Gotovina",
                             Price = 357.0,
                             StartLocationId = 2,
-                            StartTime = new DateTime(2023, 6, 14, 23, 33, 57, 321, DateTimeKind.Local).AddTicks(3906),
+                            StartTime = new DateTime(2023, 6, 15, 1, 43, 50, 100, DateTimeKind.Local).AddTicks(9559),
                             UserDriverId = 4,
                             UserId = 7,
                             VehicleId = 2
@@ -641,16 +641,16 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3910),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9565),
                             EndLocationId = 6,
-                            EndTime = new DateTime(2023, 6, 14, 20, 33, 57, 321, DateTimeKind.Local).AddTicks(3915),
+                            EndTime = new DateTime(2023, 6, 14, 22, 43, 50, 100, DateTimeKind.Local).AddTicks(9571),
                             IsActive = false,
                             IsCanceled = false,
                             IsSelfDrive = false,
                             PaymentMethod = "Gotovina",
                             Price = 83.700000000000003,
                             StartLocationId = 4,
-                            StartTime = new DateTime(2023, 6, 14, 19, 33, 57, 321, DateTimeKind.Local).AddTicks(3913),
+                            StartTime = new DateTime(2023, 6, 14, 21, 43, 50, 100, DateTimeKind.Local).AddTicks(9569),
                             UserDriverId = 5,
                             UserId = 8,
                             VehicleId = 3
@@ -658,16 +658,16 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 4,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3917),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9574),
                             EndLocationId = 1,
-                            EndTime = new DateTime(2023, 6, 13, 19, 33, 57, 321, DateTimeKind.Local).AddTicks(3924),
+                            EndTime = new DateTime(2023, 6, 13, 21, 43, 50, 100, DateTimeKind.Local).AddTicks(9581),
                             IsActive = false,
                             IsCanceled = false,
                             IsSelfDrive = false,
                             PaymentMethod = "Online",
                             Price = 1210.0,
                             StartLocationId = 5,
-                            StartTime = new DateTime(2023, 6, 13, 17, 33, 57, 321, DateTimeKind.Local).AddTicks(3921),
+                            StartTime = new DateTime(2023, 6, 13, 19, 43, 50, 100, DateTimeKind.Local).AddTicks(9577),
                             UserDriverId = 6,
                             UserId = 4,
                             VehicleId = 4
@@ -675,16 +675,16 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 5,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3926),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9583),
                             EndLocationId = 1,
-                            EndTime = new DateTime(2023, 6, 11, 17, 33, 57, 321, DateTimeKind.Local).AddTicks(3931),
+                            EndTime = new DateTime(2023, 6, 11, 19, 43, 50, 100, DateTimeKind.Local).AddTicks(9589),
                             IsActive = true,
                             IsCanceled = false,
                             IsSelfDrive = false,
                             PaymentMethod = "Gotovina",
                             Price = 500.0,
                             StartLocationId = 3,
-                            StartTime = new DateTime(2023, 6, 11, 15, 33, 57, 321, DateTimeKind.Local).AddTicks(3929),
+                            StartTime = new DateTime(2023, 6, 11, 17, 43, 50, 100, DateTimeKind.Local).AddTicks(9587),
                             UserDriverId = 7,
                             UserId = 8,
                             VehicleId = 5
@@ -692,16 +692,16 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 6,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3934),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9593),
                             EndLocationId = 1,
-                            EndTime = new DateTime(2023, 6, 14, 21, 53, 57, 321, DateTimeKind.Local).AddTicks(3942),
+                            EndTime = new DateTime(2023, 6, 15, 0, 3, 50, 100, DateTimeKind.Local).AddTicks(9702),
                             IsActive = true,
                             IsCanceled = false,
                             IsSelfDrive = false,
                             PaymentMethod = "Online",
                             Price = 32.299999999999997,
                             StartLocationId = 6,
-                            StartTime = new DateTime(2023, 6, 14, 21, 35, 57, 321, DateTimeKind.Local).AddTicks(3939),
+                            StartTime = new DateTime(2023, 6, 14, 23, 45, 50, 100, DateTimeKind.Local).AddTicks(9698),
                             UserDriverId = 3,
                             UserId = 6,
                             VehicleId = 1
@@ -710,16 +710,16 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 7,
                             CancelReason = "Pokvareno vozilo",
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3944),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9706),
                             EndLocationId = 1,
-                            EndTime = new DateTime(2023, 6, 14, 12, 33, 57, 321, DateTimeKind.Local).AddTicks(3948),
+                            EndTime = new DateTime(2023, 6, 14, 14, 43, 50, 100, DateTimeKind.Local).AddTicks(9713),
                             IsActive = false,
                             IsCanceled = true,
                             IsSelfDrive = false,
                             PaymentMethod = "Gotovina",
                             Price = 36.0,
                             StartLocationId = 2,
-                            StartTime = new DateTime(2023, 6, 14, 10, 33, 57, 321, DateTimeKind.Local).AddTicks(3946),
+                            StartTime = new DateTime(2023, 6, 14, 12, 43, 50, 100, DateTimeKind.Local).AddTicks(9711),
                             UserDriverId = 3,
                             UserId = 5,
                             VehicleId = 1
@@ -727,16 +727,16 @@ namespace eTaxi.Persistence.Migrations
                         new
                         {
                             Id = 8,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3950),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9716),
                             EndLocationId = 4,
-                            EndTime = new DateTime(2023, 6, 13, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3954),
+                            EndTime = new DateTime(2023, 6, 13, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9721),
                             IsActive = false,
                             IsCanceled = false,
                             IsSelfDrive = false,
                             PaymentMethod = "Gotovina",
                             Price = 78.0,
                             StartLocationId = 1,
-                            StartTime = new DateTime(2023, 6, 13, 20, 33, 57, 321, DateTimeKind.Local).AddTicks(3953),
+                            StartTime = new DateTime(2023, 6, 13, 22, 43, 50, 100, DateTimeKind.Local).AddTicks(9719),
                             UserDriverId = 6,
                             VehicleId = 4
                         });
@@ -762,13 +762,13 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserDriverId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -786,7 +786,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 1,
                             Comment = "Odlična vožnja, vozač je bio veoma ljubazan i profesionalan.",
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(4089),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9778),
                             Grade = 5,
                             OrderId = 6,
                             UserDriverId = 3,
@@ -796,7 +796,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 2,
                             Comment = "Sjajno iskustvo, vozač je bio veoma pristojan i vozilo je bilo čisto i udobno.",
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(4098),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9795),
                             Grade = 5,
                             OrderId = 4,
                             UserDriverId = 6,
@@ -806,7 +806,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 3,
                             Comment = "taxi nikad nije ni dosao. Navodno se pokvarilo vozilo",
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(4101),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9798),
                             Grade = 2,
                             OrderId = 7,
                             UserDriverId = 3,
@@ -906,7 +906,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e01c1309-e7bd-4a94-89d6-3599df2ee919",
+                            ConcurrencyStamp = "775531be-b8d0-42aa-9847-5c8237054161",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -914,7 +914,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFm1llryNtRoGMAGz6unHbW72X14k0cHVmVzSjoMBtrNQG5VhOjEkMM7T8Juvrx+Dg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH1LP7SYcHyzFBt5pio9QesUb0ONSy92NmwNgfw0hF2rhBCVZ9bKFSsqdqnSlaHrLg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -925,7 +925,7 @@ namespace eTaxi.Persistence.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             CompanyId = 1,
-                            ConcurrencyStamp = "a30d8da3-d8ec-474d-b116-c3a0da5a3fd6",
+                            ConcurrencyStamp = "2ea9926a-9d18-42c6-9634-dfebca8663fc",
                             Email = "kompanija@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Sarajevo",
@@ -933,7 +933,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "KOMPANIJA@ADMIN.COM",
                             NormalizedUserName = "KOMPANIJA SARAJEVO",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPbN7+WL5Oj4SbOP6p7khPfozEun8GcHeGPyRV0UjOdWRQuuff7aQ15Vjh+KDw2S4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPmT95zRgxFQlorMTEFjcUi9Cl3s00abXKbWnswoYeI0S1m4zGzB0eit76nVLweCnQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -943,7 +943,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a0353b73-d344-4f8c-bf88-b57520937870",
+                            ConcurrencyStamp = "6b7d0e08-81f6-4321-afa7-52acc888142e",
                             Email = "user1@taxi.com",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -951,7 +951,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER1@TAXI.COM",
                             NormalizedUserName = "USER BR1",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJdzgp/b47fgZOAtfJoL2mZyS4U0JCIdn0+aWanei97K8LY6IsC/+a9jX6orm1eTlg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPNh4Nsj2+6w9plxGlfoZ0c5LjBmalLHqljL6NhgEryvOLcY6+gemgJFgLhn8LTItg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -961,7 +961,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba069794-d86b-492c-a79a-6ac520c8009f",
+                            ConcurrencyStamp = "af517832-f922-402c-be08-db07f81d4647",
                             Email = "user2@taxi.com",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -969,7 +969,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER2@TAXI.COM",
                             NormalizedUserName = "USER BR2",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAkyyXiBO86HXZjZJHDKZaf8RRaUeYB6K16UKvhU2A12WvPjIle/sJQ2O3l4MAUHKQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEoFLIEsPiSu0D5Gm3FaCINTUc8mQ1Jhc/X+Bqa6IjnHWhzGAIkfnGfdmcC64vUI5Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -979,7 +979,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b8c330a-8e1f-4096-82a4-010f71f25c7e",
+                            ConcurrencyStamp = "7f60017c-cd51-42e5-b072-57eb09f9a1b7",
                             Email = "user3@taxi.com",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -987,7 +987,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER3@TAXI.COM",
                             NormalizedUserName = "USER BR3",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKMdOiAklLtT/txSzXnJxnyrt8GdCe+cDinUKGNyIQxmhy9Suri9pcOs7GdG45iRMw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMT6/A+Gj4xhePby4HADEG241XXlltiEPwNnYBpwAtXq3YOy7nPWYGXcYfsVQotoPA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -997,7 +997,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8d473dc-d974-4923-affa-bf11f9057285",
+                            ConcurrencyStamp = "ce9413e3-8cf0-4774-bb84-e96fb073f091",
                             Email = "user4@taxi.com",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -1005,7 +1005,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER4@TAXI.COM",
                             NormalizedUserName = "USER BR4",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHQpiJy+9iWg0LJO8XZf/r6ohGEz5zOKmkqP58fBkjwkOiu4fhZfSiB1zdP/dYY3Bg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOULswAjxjXTTEi45XPdTh3LmvKJZV8b0LessaPAkfHcAfIGaQi2CGbkzISg1cA7zw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -1015,7 +1015,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65efeb98-9726-4de8-9067-2486eba401ac",
+                            ConcurrencyStamp = "7b130c48-cf24-4395-b2f6-2a6b5539d3a8",
                             Email = "user5@taxi.com",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -1023,7 +1023,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER5@TAXI.COM",
                             NormalizedUserName = "USER BR5",
-                            PasswordHash = "AQAAAAIAAYagAAAAENfv1pSkZala88ogUyLHIkmjIdgX4+ixKTMlKW/JtjHDKhOOb7W0XHo5IDqeg6ts5Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFyTRpZubz9nQLH61/jlU0v1Isvlw131HOtU/tGD46r+VFg57y9PCJw9CvNXVW1v+w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -1033,7 +1033,7 @@ namespace eTaxi.Persistence.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f042bdbc-34ca-49c3-bfa2-4b6e102684c2",
+                            ConcurrencyStamp = "f5585649-78ea-493a-93ea-0a9208fee9ad",
                             Email = "user6@taxi.com",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -1041,7 +1041,7 @@ namespace eTaxi.Persistence.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER6@TAXI.COM",
                             NormalizedUserName = "USER BR6",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMRhPVAt6OfuXILuglppjJAl6mvDnZ+fOSYfD5d8oG7BXwVhm4leiznkuNG711IrtA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOydW1pUBZh67a6GHNOaDSMjiiLW9ndX8AtGdyxkn8cStCL14TP1X7oAVr+aeLg0Lg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -1132,7 +1132,7 @@ namespace eTaxi.Persistence.Migrations
                             Brand = "Audi",
                             Color = "Siva",
                             CompanyId = 1,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3768),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9257),
                             FuelType = "Benzin",
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656523883/rs2/audia8_gckbfh.png",
                             KmTraveled = 50000.0,
@@ -1152,7 +1152,7 @@ namespace eTaxi.Persistence.Migrations
                             Brand = "Volkswagen",
                             Color = "Siva",
                             CompanyId = 1,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3824),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9321),
                             FuelType = "Dizel",
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656523879/rs2/golf_7_didjje.jpg",
                             KmTraveled = 80000.0,
@@ -1172,7 +1172,7 @@ namespace eTaxi.Persistence.Migrations
                             Brand = "BMW",
                             Color = "Plava",
                             CompanyId = 1,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3831),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9450),
                             FuelType = "Dizel",
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686762738/bmw-x5_qbbvec.jpg",
                             KmTraveled = 60000.0,
@@ -1192,7 +1192,7 @@ namespace eTaxi.Persistence.Migrations
                             Brand = "Mercedes",
                             Color = "White",
                             CompanyId = 2,
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3835),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9457),
                             FuelType = "Benzin",
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686765411/benz-c-class_msuspq.jpg",
                             KmTraveled = 40000.0,
@@ -1211,7 +1211,7 @@ namespace eTaxi.Persistence.Migrations
                             AirCondition = false,
                             Brand = "Audi",
                             Color = "Red",
-                            DateCreated = new DateTime(2023, 6, 14, 21, 33, 57, 321, DateTimeKind.Local).AddTicks(3838),
+                            DateCreated = new DateTime(2023, 6, 14, 23, 43, 50, 100, DateTimeKind.Local).AddTicks(9461),
                             FuelType = "Dizel",
                             ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686765730/Audi_A3_snaxht.webp",
                             KmTraveled = 55000.0,
@@ -1351,9 +1351,7 @@ namespace eTaxi.Persistence.Migrations
                 {
                     b.HasOne("eTaxi.Domain.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("eTaxi.Domain.User", "User")
                         .WithMany()
@@ -1406,15 +1404,11 @@ namespace eTaxi.Persistence.Migrations
                 {
                     b.HasOne("eTaxi.Domain.Location", "EndLocation")
                         .WithMany()
-                        .HasForeignKey("EndLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EndLocationId");
 
                     b.HasOne("eTaxi.Domain.Location", "StartLocation")
                         .WithMany()
-                        .HasForeignKey("StartLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StartLocationId");
 
                     b.HasOne("eTaxi.Domain.User", "UserDriver")
                         .WithMany()
@@ -1447,9 +1441,7 @@ namespace eTaxi.Persistence.Migrations
                 {
                     b.HasOne("eTaxi.Domain.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("eTaxi.Domain.User", "UserDriver")
                         .WithMany()
@@ -1459,9 +1451,7 @@ namespace eTaxi.Persistence.Migrations
 
                     b.HasOne("eTaxi.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Order");
 

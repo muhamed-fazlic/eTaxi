@@ -44,11 +44,21 @@ namespace eTaxi.Application.Features.Reports.Queries
 
             foreach (var order in orders)
             {
-                var startLocation = await _locationRepository.GetByIdAsync(order.StartLocationId);
-                order.StartLocation = startLocation;
 
-                var endLocation = await _locationRepository.GetByIdAsync(order.EndLocationId);
-                order.EndLocation = endLocation;
+                if (order.StartLocationId != null)
+                {
+
+                    var startLocation = await _locationRepository.GetByIdAsync((int)order.StartLocationId);
+                    order.StartLocation = startLocation;
+                }
+
+                if (order.EndLocationId != null)
+
+                {
+
+                    var endLocation = await _locationRepository.GetByIdAsync((int)order.EndLocationId);
+                    order.EndLocation = endLocation;
+                }
 
             }
 

@@ -15,8 +15,8 @@ namespace eTaxi.Domain
         public string CancelReason { get; set; }
         public int UserDriverId { get; set; }
         public int? UserId { get; set; }
-        public int StartLocationId { get; set; }
-        public int EndLocationId { get; set; }
+        public int? StartLocationId { get; set; }
+        public int? EndLocationId { get; set; }
         public int VehicleId { get; set; }
         public bool IsSelfDrive { get; set; }
         public double Price { get; set; }

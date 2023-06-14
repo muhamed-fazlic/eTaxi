@@ -33,11 +33,20 @@ namespace eTaxi.Application.Features.Order.Queries
 
             foreach (var order in orderList)
             {
-                var startLocation = await _locationRepository.GetByIdAsync(order.StartLocationId);
-                order.StartLocation = startLocation;
+                if (order.StartLocationId != null)
+                {
 
-                var endLocation = await _locationRepository.GetByIdAsync(order.EndLocationId);
-                order.EndLocation = endLocation;
+                    var startLocation = await _locationRepository.GetByIdAsync((int)order.StartLocationId);
+                    order.StartLocation = startLocation;
+                }
+
+                if (order.EndLocationId != null)
+                
+                {
+
+                    var endLocation = await _locationRepository.GetByIdAsync((int)order.EndLocationId);
+                    order.EndLocation = endLocation;
+                }
 
                 var vehicle = await _vehicleRepository.GetByIdAsync(order.VehicleId);
                 order.Vehicle = vehicle;
