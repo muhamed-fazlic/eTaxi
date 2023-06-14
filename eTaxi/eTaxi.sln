@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7B14D849-B1A6-4588-8FC3-500119B74407}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C2F8BF25-BF3C-4BB5-A210-B0067372770C}"
 EndProject
@@ -19,15 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Domain", "eTaxi.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Application", "eTaxi.Application\eTaxi.Application.csproj", "{000A3292-194B-4841-8FE8-6FC2DF283E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.Persistence", "Persistence\eTaxi.Persistence.csproj", "{0E5A0316-C4D7-4955-9B70-CFE9D991128B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Persistence", "Persistence\eTaxi.Persistence.csproj", "{0E5A0316-C4D7-4955-9B70-CFE9D991128B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.Infrastructure", "Infrastructure\eTaxi.Infrastructure.csproj", "{7FFB952D-E651-47E3-9F9F-45FB9964553A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Infrastructure", "Infrastructure\eTaxi.Infrastructure.csproj", "{7FFB952D-E651-47E3-9F9F-45FB9964553A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.API", "eTaxi.API\eTaxi.API.csproj", "{8A23D556-5E78-4DCE-890C-4D6DDA7BCE35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.API", "eTaxi.API\eTaxi.API.csproj", "{8A23D556-5E78-4DCE-890C-4D6DDA7BCE35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.Application.UnitTests", "eTaxi.Application.UnitTests\eTaxi.Application.UnitTests.csproj", "{2E202518-B084-4785-971E-C9C4EA736ACE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Application.UnitTests", "eTaxi.Application.UnitTests\eTaxi.Application.UnitTests.csproj", "{2E202518-B084-4785-971E-C9C4EA736ACE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.Identity", "eTaxi.Identity\eTaxi.Identity.csproj", "{8B0EAF5B-105B-4CB2-AC9F-EF38C58A379D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Identity", "eTaxi.Identity\eTaxi.Identity.csproj", "{8B0EAF5B-105B-4CB2-AC9F-EF38C58A379D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

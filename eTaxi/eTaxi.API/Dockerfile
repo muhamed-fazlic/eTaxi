@@ -10,10 +10,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["eTaxi.API/eTaxi.API.csproj", "eTaxi.API/"]
-RUN dotnet restore "eTaxi.API/eTaxi.API.csproj"
+COPY ["eTaxi.API.csproj", "."]
+RUN dotnet restore "./eTaxi.API.csproj"
 COPY . .
-WORKDIR "/src/eTaxi.API"
+WORKDIR "/src/."
 RUN dotnet build "eTaxi.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

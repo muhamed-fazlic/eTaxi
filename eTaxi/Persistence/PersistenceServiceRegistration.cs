@@ -16,10 +16,10 @@ namespace eTaxi.Persistence
         {
             services.AddDbContext<TaxiDatabaseContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("eTaxiConnectionString"));
+                options.UseSqlServer(configuration.GetConnectionString("eTaxiConnectionStringDocker"));
             });
 
-          //  services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            //  services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();

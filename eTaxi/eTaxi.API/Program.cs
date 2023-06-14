@@ -3,6 +3,8 @@ using eTaxi.Application;
 using eTaxi.Identity;
 using eTaxi.Infrastructure;
 using eTaxi.Persistence;
+using eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
@@ -88,5 +90,16 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<TaxiDatabaseContext>();
+    dataContext.Database.EnsureCreated();
+
+    //dataContext.Database.EnsureCreated();
+   // dataContext.Database.Migrate();
+
+    dataContext.Database.Migrate();
+}
 
 app.Run();
