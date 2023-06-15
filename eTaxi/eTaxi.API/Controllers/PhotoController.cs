@@ -1,12 +1,14 @@
 ﻿using eTaxi.Application.Features.File.Commands;
 using eTaxi.Application.Features.File.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class FileController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,6 +19,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(int id)
         {
             var files = await _mediator.Send(new GetFileQuery(id));

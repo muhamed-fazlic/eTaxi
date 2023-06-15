@@ -2,12 +2,14 @@
 using eTaxi.Application.Features.Vehicle.Commands;
 using eTaxi.Application.Features.Vehicle.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class VehicleController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,6 +20,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get([FromQuery] VehicleSearchDto Search)
         {
             var result = await _mediator.Send(new GetVehicleListQuery() { Search = Search });
@@ -25,6 +28,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(int id)
         {
             var query = new GetVehicleQuery(id);
@@ -47,6 +51,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,CompanyAdmin")]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteVehicleCommand(id);

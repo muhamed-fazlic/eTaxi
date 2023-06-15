@@ -1,12 +1,14 @@
 ﻿using eTaxi.Application.Features.Feedback.Commands;
 using eTaxi.Application.Features.Feedback.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class FeedbackController : ControllerBase
     {
         private readonly IMediator _mediator;

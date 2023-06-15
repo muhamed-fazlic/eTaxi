@@ -1,10 +1,12 @@
 ﻿using eTaxi.Application.Contracts.Stripe;
 using eTaxi.Application.Models.Stripe;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class StripeController : Controller
     {
         private readonly IStripeAppService _stripeService;

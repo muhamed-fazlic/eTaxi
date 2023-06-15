@@ -1,13 +1,14 @@
 ﻿using eTaxi.Application.Features.Company.Commands;
 using eTaxi.Application.Features.Company.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CompanyController: ControllerBase
+    public class CompanyController : ControllerBase
     {
         private readonly IMediator _mediator;
         public CompanyController(IMediator mediator)
@@ -17,7 +18,7 @@ namespace eTaxi.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var result = await _mediator.Send(new GetCompanyListQuery() );
+            var result = await _mediator.Send(new GetCompanyListQuery());
             return Ok(result);
         }
         [HttpGet("{id}")]
@@ -27,6 +28,8 @@ namespace eTaxi.API.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateCompanyCommand command)
         {
@@ -39,6 +42,7 @@ namespace eTaxi.API.Controllers
         //    var result = await _mediator.Send(command);
         //    return Ok(result);
         //}
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -60,13 +60,13 @@ namespace eTaxi.Identity.Services
         {
             var userClaims = await _userManager.GetClaimsAsync(user);
             var roles = await _userManager.GetRolesAsync(user);
-            var roleClaims = roles.Select(x => new Claim(ClaimTypes.Role, x)).ToList();
+            var roleClaims = roles.Select(x => new Claim("role", x)).ToList();
 
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName??"null"),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email??"null"),
-                new Claim("uid", user.Id.ToString())
+                new Claim("uid", user.Id.ToString()),
             }
             .Union(userClaims)
             .Union(roleClaims);

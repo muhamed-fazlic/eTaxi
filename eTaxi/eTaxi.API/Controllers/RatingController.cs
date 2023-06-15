@@ -2,12 +2,14 @@
 using eTaxi.Application.Features.Rating.Commands;
 using eTaxi.Application.Features.Rating.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class RatingController : ControllerBase
     {
 
@@ -19,6 +21,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get([FromQuery] RatingSearchDto Search)
         {
             var result = await _mediator.Send(new GetRatingListQuery() { Search = Search });

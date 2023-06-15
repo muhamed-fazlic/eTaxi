@@ -1,12 +1,14 @@
 ﻿using eTaxi.Application.Features.HubStation.Commands;
 using eTaxi.Application.Features.HubStation.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class HubStationController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,6 +19,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             var result = await _mediator.Send(new GetHubStationListQuery());
@@ -36,7 +39,9 @@ namespace eTaxi.API.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(DeleteHubStationCommand command)
         {
             var result = await _mediator.Send(command);

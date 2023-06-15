@@ -55,6 +55,15 @@ namespace eTaxi.Persistence.Repositories
                     orderList=orderList.Where(order=>order.EndTime<=search.EndTime);
                 }
 
+                if (search.OrderBy == OrderBy.ASC)
+                {
+                    orderList = orderList.OrderBy(order => order.StartTime);
+                }
+                else
+                {
+                    orderList = orderList.OrderByDescending(order => order.StartTime);
+                }
+
             }
 
             return await orderList.ToListAsync();

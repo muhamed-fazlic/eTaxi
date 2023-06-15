@@ -35,15 +35,12 @@ namespace eTaxi.Application.Features.Order.Queries
             {
                 if (order.StartLocationId != null)
                 {
-
                     var startLocation = await _locationRepository.GetByIdAsync((int)order.StartLocationId);
                     order.StartLocation = startLocation;
                 }
 
                 if (order.EndLocationId != null)
-                
                 {
-
                     var endLocation = await _locationRepository.GetByIdAsync((int)order.EndLocationId);
                     order.EndLocation = endLocation;
                 }
@@ -53,7 +50,6 @@ namespace eTaxi.Application.Features.Order.Queries
 
                 if (order.UserId != null)
                 {
-
                     var user = await _userRepository.GetByIdAsync((int)order.UserId);
                     order.User = user;
                 }

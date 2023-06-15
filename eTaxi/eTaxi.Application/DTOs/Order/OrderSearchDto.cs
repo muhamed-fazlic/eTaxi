@@ -1,15 +1,12 @@
-﻿using eTaxi.Application.DTOs.Location;
-using eTaxi.Application.DTOs.User;
-using eTaxi.Application.DTOs.Vehicle;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using System.ComponentModel;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace eTaxi.Application.DTOs.Order
 {
-    public  class OrderSearchDto
+    public class OrderSearchDto
     {
         public bool? IsActive { get; set; }
         public int? UserDriverId { get; set; }
@@ -20,8 +17,15 @@ namespace eTaxi.Application.DTOs.Order
         public int? CompanyId { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-
-
+        public string OrderBy { get; set; }
 
     }
+
+    public class OrderBy
+    {
+        public const string ASC = "ASC";
+        public const string DESC = "DESC";
+
+    }
+
 }

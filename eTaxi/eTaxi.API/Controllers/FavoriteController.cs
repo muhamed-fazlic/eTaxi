@@ -1,12 +1,14 @@
 ﻿using eTaxi.Application.Features.Favorite.Commands;
 using eTaxi.Application.Features.Favorite.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class FavoriteController : ControllerBase
     {
         private readonly IMediator _mediator;

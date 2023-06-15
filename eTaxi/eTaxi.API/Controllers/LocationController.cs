@@ -1,12 +1,14 @@
 ﻿using eTaxi.Application.Features.Location.Commands;
 using eTaxi.Application.Features.Location.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class LocationController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,6 +19,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(int id)
         {
             var query = new GetLocationQuery(id);
@@ -39,6 +42,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteLocationCommand(id);

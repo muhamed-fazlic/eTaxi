@@ -9,7 +9,7 @@ namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,6 +19,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get([FromQuery]OrderSearchDto request)
         {
             var result = await _mediator.Send(new GetOrderListQuery() { Search=request});
@@ -47,7 +48,15 @@ namespace eTaxi.API.Controllers
             return Ok(result);
         }
 
+        [HttpPut("/setOrderStatus")]
+        public async Task<IActionResult> SetOrderStatus([FromQuery] OrderStatusDto status)
+        {
+            var result = await _mediator.Send(new SetOrderStatusCommand() { status=status});
+            return Ok(result);
+        }
+
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,CompanyAdmin")]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteOrderCommand(id);

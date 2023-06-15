@@ -3,6 +3,7 @@ using eTaxi.Application.Features.User.Commands.CreateUser;
 using eTaxi.Application.Features.User.Commands.DeleteUser;
 using eTaxi.Application.Features.User.Commands.UpdateUser;
 using eTaxi.Application.Features.User.Queries.GetById;
+using eTaxi.Application.Features.User.Queries.GetUserList;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace eTaxi.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         public IMediator _mediator { get; }
@@ -21,16 +23,22 @@ namespace eTaxi.API.Controllers
         {
             _mediator = mediator;
         }
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get()
+        {
+            var response = await _mediator.Send(new GetUserListQuery());
+            return Ok(response);
+        }
 
-        // GET api/<UserController>/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<UserDto> Get(int id)
         {
             var user = await _mediator.Send(new GetUserDetailsQuery(id));
             return user;
         }
 
-        // POST api/<UserController>
         [HttpPost]
         public async Task<ActionResult> Post(CreateUserCommand user)
         {
@@ -38,7 +46,6 @@ namespace eTaxi.API.Controllers
             return Ok(user);
         }
 
-        // PUT api/<UserController>/5
         [HttpPut]
         public async Task<ActionResult> Put(UpdateUserCommand user)
         {
@@ -46,8 +53,8 @@ namespace eTaxi.API.Controllers
             return NoContent();
         }
 
-        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
+
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteUserCommand { Id = id };

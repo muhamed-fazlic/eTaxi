@@ -1,11 +1,13 @@
 ﻿using eTaxi.Application.Contracts.Identity;
 using eTaxi.Application.Models.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;

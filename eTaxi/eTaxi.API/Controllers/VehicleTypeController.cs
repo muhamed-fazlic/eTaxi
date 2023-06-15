@@ -1,11 +1,13 @@
 ﻿using eTaxi.Application.Features.VehicleType.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTaxi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles ="Admin,CompanyAdmin")]
     public class VehicleTypeController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -16,6 +18,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
             var result = await _mediator.Send(new GetVehicleTypeList());
@@ -23,6 +26,7 @@ namespace eTaxi.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get(int id)
         {
             var query = new GetVehicleTypeQuery(id);
