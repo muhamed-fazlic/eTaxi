@@ -47,4 +47,7 @@ To start the desktop(admin) app, from the root folder navigate to UI -> etaxi_ad
 
 To be able to run the app your AVD needs to have Google Play Services because the project is using Google Maps and other Google services. 
 
+### UI
+The original UI repo is here: https://github.com/bilalhodzic/eTaxi_mobile. Moved here for easier use with backend 
+
 
