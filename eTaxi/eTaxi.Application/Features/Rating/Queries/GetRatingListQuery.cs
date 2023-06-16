@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Rating;
+using eTaxi.Domain;
 using MediatR;
 
 namespace eTaxi.Application.Features.Rating.Queries

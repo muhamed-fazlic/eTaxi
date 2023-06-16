@@ -45,6 +45,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "test12345"),
                 SecurityStamp = string.Empty,
+               
             });
 
             modelBuilder.Entity<User>().HasData(new User

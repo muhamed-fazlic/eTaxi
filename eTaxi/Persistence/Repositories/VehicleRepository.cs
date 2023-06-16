@@ -23,7 +23,7 @@ namespace eTaxi.Persistence.Repositories
                 }
                 if (search.NumberOfSeats != null)
                 {
-                    vehicles = vehicles.Where(v => v.Type.NumberOfSeats == search.NumberOfSeats);
+                    vehicles = vehicles.Where(v => v.Type.NumberOfSeats <= search.NumberOfSeats);
                 }
                 if (!string.IsNullOrEmpty(search.Brand))
                 {

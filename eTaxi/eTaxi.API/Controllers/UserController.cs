@@ -25,9 +25,9 @@ namespace eTaxi.API.Controllers
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] UserSearchDto search)
         {
-            var response = await _mediator.Send(new GetUserListQuery());
+            var response = await _mediator.Send(new GetUserListQuery() { Search=search});
             return Ok(response);
         }
 

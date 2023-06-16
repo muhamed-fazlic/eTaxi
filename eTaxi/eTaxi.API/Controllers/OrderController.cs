@@ -48,8 +48,9 @@ namespace eTaxi.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("/setOrderStatus")]
-        public async Task<IActionResult> SetOrderStatus([FromQuery] OrderStatusDto status)
+        [HttpPut]
+        [Route("setOrderStatus", Name="SetOrderStatus")]
+        public async Task<IActionResult> SetOrderStatus( OrderStatusDto status)
         {
             var result = await _mediator.Send(new SetOrderStatusCommand() { status=status});
             return Ok(result);

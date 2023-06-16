@@ -59,9 +59,16 @@ namespace eTaxi.Application.Features.Reports.Queries
                     var endLocation = await _locationRepository.GetByIdAsync((int)order.EndLocationId);
                     order.EndLocation = endLocation;
                 }
+                var vehicle = await _vehicleRepository.GetByIdAsync(order.VehicleId);
+                order.Vehicle = vehicle;
+
+                if (order.UserId != null)
+                {
+                    var user = await _userRepository.GetByIdAsync((int)order.UserId);
+                    order.User = user;
+                }
 
             }
-
 
             //
             var userWithMostOrders = orders.GroupBy(order => order.UserId)
@@ -76,6 +83,7 @@ namespace eTaxi.Application.Features.Reports.Queries
             List<UserOrderCount> userOrderCounts = orders.GroupBy(order => order.UserId)
                                                  .Select(group => new UserOrderCount
                                                  {
+                                                     UserName = group.First().User?.FirstName+ " "+ group.First().User?.LastName,
                                                      UserId = group.Key,
                                                      OrderCount = group.Count()
                                                  }).OrderByDescending(group => group.OrderCount)
@@ -85,6 +93,7 @@ namespace eTaxi.Application.Features.Reports.Queries
             List<VehicleOrderCount> vehicleOrderCounts = orders.GroupBy(order => order.VehicleId)
                                            .Select(group => new VehicleOrderCount
                                            {
+                                               VehicleName = group.First().Vehicle.Name,
                                                VehicleId = group.Key,
                                                OrderCount = group.Count()
                                            }).OrderByDescending(group => group.OrderCount)
@@ -92,14 +101,36 @@ namespace eTaxi.Application.Features.Reports.Queries
 
             // Group orders by start time and count the occurrences
 
-            var frequentHourRanges = orders.GroupBy(order =>
+            //var frequentHourRanges = orders.GroupBy(order =>
+            //{
+            //    TimeSpan hourRange = TimeSpan.FromHours(1);
+            //    TimeSpan roundedStart = TimeSpan.FromTicks((long)(order.StartTime?.Ticks + (hourRange.Ticks / 2)) / hourRange.Ticks * hourRange.Ticks);
+            //    return roundedStart;
+            //})
+            //.Select(group => new { HourRange = group.Key.Hours, Count = group.Count() })
+            //.OrderByDescending(group => group.Count);
+
+            var frequentHourRanges = orders
+            .SelectMany(order =>
             {
-                TimeSpan hourRange = TimeSpan.FromHours(1);
-                TimeSpan roundedStart = TimeSpan.FromTicks((long)(order.StartTime?.Ticks + (hourRange.Ticks / 2)) / hourRange.Ticks * hourRange.Ticks);
-                return roundedStart;
+                List<string> hourRanges = new List<string>();
+
+                DateTime currentHour = (DateTime)order.StartTime;
+                DateTime endHour = order.EndTime?? (DateTime)order.StartTime;
+
+                while (currentHour <= endHour)
+                {
+                    string hourRange = $"{currentHour.ToString("h tt")} - {currentHour.AddHours(1).ToString("h tt")}";
+                    hourRanges.Add(hourRange);
+                    currentHour = currentHour.AddHours(1);
+                }
+
+                return hourRanges;
             })
- .Select(group => new { HourRange = group.Key, Count = group.Count() })
- .OrderByDescending(group => group.Count);
+            .GroupBy(hourRange => hourRange)
+            .Select(group => new { HourRange = group.Key, Count = group.Count() })
+            .OrderByDescending(group => group.Count);
+
 
             // Group orders by rounded route (start location to end location) and count the occurrences
             var frequentRoutes = orders.GroupBy(order =>
@@ -137,4 +168,6 @@ namespace eTaxi.Application.Features.Reports.Queries
 
         }
     }
+
 }
+

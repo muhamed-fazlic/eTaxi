@@ -1,4 +1,5 @@
 ﻿using eTaxi.Application.DTOs.Location;
+using eTaxi.Application.DTOs.Rating;
 using eTaxi.Application.DTOs.User;
 using eTaxi.Application.DTOs.Vehicle;
 
@@ -21,5 +22,6 @@ namespace eTaxi.Application.DTOs.Order
         public LocationDto EndLocation { get; set; }
         public VehicleDto Vehicle { get; set; }
         public UserDto User { get; set; }
+        public RatingDto Rating { get; set; }
     }
 }

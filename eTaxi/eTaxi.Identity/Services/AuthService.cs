@@ -34,13 +34,13 @@ namespace eTaxi.Identity.Services
             var user = await _userManager.FindByEmailAsync(request.Email);
 
             if (user == null)
-                throw new NotFoundException($"User with {request.Email} not found", request.Email);
+                throw new NotFoundException($"Korisnik sa {request.Email} nije pronadjen", request.Email);
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 
             if (!result.Succeeded)
             {
-                throw new BadRequestException($"Credentials for '{request.Email}' aren't valid.");
+                throw new BadRequestException($"Lozinka ili email su pogresni");
             }
 
             JwtSecurityToken token = await GenerateToken(user);
@@ -111,7 +111,7 @@ namespace eTaxi.Identity.Services
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
-                throw new NotFoundException($"User with {request.Email} not found", request.Email);
+                throw new NotFoundException($"Korisnik sa {request.Email} nije pronadjen", request.Email);
 
             Random rnd = new Random();
             int pin = rnd.Next(1000, 9999);
@@ -143,7 +143,7 @@ namespace eTaxi.Identity.Services
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
-                throw new NotFoundException($"User with {model.Email} not found", model.Email);
+                throw new NotFoundException($"Korisnik sa {model.Email} nije pronadjen", model.Email);
 
             if (model.Password != model.ConfirmPassword)
                 throw new BadRequestException("Lozinka se ne podudara");

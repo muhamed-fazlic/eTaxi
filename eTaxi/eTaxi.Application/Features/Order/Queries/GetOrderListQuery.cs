@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Order;
+using eTaxi.Application.DTOs.Rating;
 using MediatR;
 
 namespace eTaxi.Application.Features.Order.Queries
@@ -16,15 +17,17 @@ namespace eTaxi.Application.Features.Order.Queries
         private readonly ILocationRepository _locationRepository;
         private readonly IVehicleRepository _vehicleRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IRatingRepository _ratingRepository;
         private readonly IMapper _mapper;
 
-        public GetOrderListQueryHandler(IOrderRepository orderRepository, IMapper mapper, ILocationRepository locationRepository, IVehicleRepository vehicleRepository, IUserRepository userRepository)
+        public GetOrderListQueryHandler(IOrderRepository orderRepository, IMapper mapper, ILocationRepository locationRepository, IVehicleRepository vehicleRepository, IUserRepository userRepository, IRatingRepository ratingRepository)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _locationRepository = locationRepository;
             _vehicleRepository = vehicleRepository;
             _userRepository = userRepository;
+            _ratingRepository = ratingRepository;
         }
 
         public async Task<List<OrderDto>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
@@ -54,7 +57,20 @@ namespace eTaxi.Application.Features.Order.Queries
                     order.User = user;
                 }
             }
-            return _mapper.Map<List<OrderDto>>(orderList);
+
+            var orderDtoList = _mapper.Map<List<OrderDto>>(orderList);
+
+            foreach (var order in orderDtoList)
+            {
+                var rating = await _ratingRepository.GetAsync(new DTOs.Rating.RatingSearchDto { OrderId = order.Id });
+
+                if (rating != null)
+                {
+                    order.Rating= _mapper.Map<RatingDto>(rating.FirstOrDefault());
+                }
+            }
+
+            return orderDtoList;
         }
     }
 }

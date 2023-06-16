@@ -1,5 +1,6 @@
 ﻿using eTaxi.Application.DTOs.Favorite;
 using eTaxi.Application.DTOs.File;
+using Microsoft.AspNetCore.Identity;
 
 namespace eTaxi.Application.DTOs.User
 {
@@ -14,5 +15,7 @@ namespace eTaxi.Application.DTOs.User
         public int? CompanyId { get; set; }
         public ICollection<FileDto> Files { get; set; }
         public ICollection<FavoriteDto> Favorites { get; set; }
+        public dynamic RatingGrade { get; set; }
+        public string UserType { get; set; }
     }
 }

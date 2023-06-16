@@ -28,6 +28,10 @@ namespace eTaxi.Persistence.Repositories
             {
                 entity = entity.Where(rating => rating.Grade == search.Grade);
             }
+            if (search.OrderId != null)
+            {
+                entity = entity.Where(rating => rating.OrderId == search.OrderId);
+            }
 
             return await entity.ToListAsync();
 
