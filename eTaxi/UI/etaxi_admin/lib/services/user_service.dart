@@ -6,6 +6,7 @@ import 'package:etaxi_admin/models/user_model.dart';
 import 'package:etaxi_admin/models/vehicle_model.dart';
 import 'package:etaxi_admin/providers/auth_provider.dart';
 import 'package:etaxi_admin/providers/main_provider.dart';
+import 'package:etaxi_admin/providers/order_provider.dart';
 import 'package:http/http.dart';
 import 'package:jwt_decode/jwt_decode.dart';
 
@@ -19,18 +20,39 @@ class UserServices {
       var decoded = jsonDecode(res.body);
       var token = decoded['token'];
       var parsedToken = Jwt.parseJwt(token);
-      if (!(parsedToken['role'] == UserType.Admin.name ||
-          parsedToken['role'] == UserType.CompanyAdmin.name)) {
+      var userType = getUserType(parsedToken['role']);
+      if (!(userType == UserType.Admin || userType == UserType.CompanyAdmin)) {
         throw "Zabranjen pristup";
       }
+
+      AuthProvider.instance.setUserType(userType);
       AuthProvider.instance.setToken(token);
       var userDecoded = await getUser(decoded['id']);
-      AuthProvider.instance.setUser(Userinfo.fromJson(userDecoded));
+      var user = Userinfo.fromJson(userDecoded);
+      AuthProvider.instance.setUser(user);
+
+      //set companyId as order filter as soon as the user logs in
+      //so we can fetch orders correctly
+      if (user.companyId != null) {
+        Map<String, dynamic> filters = {};
+        filters['CompanyId'] = user.companyId.toString();
+        OrderProvider.instance.setOrderFilters(filters);
+      }
     } else {
       throw jsonDecode(res.body)["title"];
     }
 
     return res;
+  }
+
+  static getUserType(String role) {
+    if (role == UserType.Admin.name) {
+      return UserType.Admin;
+    } else if (role == UserType.CompanyAdmin.name) {
+      return UserType.CompanyAdmin;
+    } else {
+      return UserType.User;
+    }
   }
 
   static Future registerService(data) async {

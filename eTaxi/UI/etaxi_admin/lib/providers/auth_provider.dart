@@ -1,4 +1,5 @@
 import 'package:etaxi_admin/models/user_model.dart';
+import 'package:etaxi_admin/services/user_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -18,6 +19,7 @@ class AuthProvider extends ChangeNotifier {
   bool resetState = false;
 
   String? token;
+  UserType? userType;
   String? loginError;
   String? registerError;
   Userinfo? _user;
@@ -42,6 +44,11 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  setUserType(userTyp) {
+    userType = userTyp;
+    notifyListeners();
+  }
+
   void resetStateFunction() {
     resetState = !resetState;
     notifyListeners();
@@ -52,5 +59,6 @@ class AuthProvider extends ChangeNotifier {
     token = null;
     loginError = null;
     registerError = null;
+    userType = null;
   }
 }

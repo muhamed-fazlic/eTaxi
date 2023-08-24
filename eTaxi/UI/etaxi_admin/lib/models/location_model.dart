@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
+import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 
 class Location {
   int? id;
@@ -44,12 +44,12 @@ class Location {
     return Location(
       latitude: data.latLong.latitude,
       longitude: data.latLong.longitude,
-      address: data.address,
-      city: data.addressData['city'],
-      country: data.addressData['country'],
-      postalCode: data.addressData['postcode'],
-      streetName: data.addressData['road'],
-      streetNumber: data.addressData['house_number'],
+      address: data.addressName,
+      city: data.address['city'],
+      country: data.address['country'],
+      postalCode: data.address['postcode'],
+      streetName: data.address['road'],
+      streetNumber: data.address['house_number'],
     );
   }
 }

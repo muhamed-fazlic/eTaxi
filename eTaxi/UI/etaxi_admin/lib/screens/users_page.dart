@@ -39,7 +39,7 @@ class UsersPage extends StatelessWidget {
           ),
           sh(20),
           Consumer<AuthProvider>(
-            builder: (context, value, child) {
+            builder: (context, authProvider, child) {
               return FutureBuilder<List<Userinfo>>(
                   future: UserServices.getAllUser(),
                   builder: (builder, snapshot) {
@@ -70,49 +70,54 @@ class UsersPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              IconButton(
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => UserDialog(
-                                            user: user,
-                                          ));
-                                },
-                                icon: Icon(Icons.edit),
-                              ),
-                              IconButton(
-                                onPressed: () async {
-                                  showDialog(
-                                      context: context,
-                                      builder: (builder) => AlertDialog(
-                                            title: Text('Brisanje korisnika'),
-                                            content: Text(
-                                                'Da li ste sigurni da zelite da obrisete korisnika?'),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text('Ne')),
-                                              TextButton(
-                                                  onPressed: () async {
-                                                    try {
-                                                      await UserServices
-                                                          .deleteUser(user.id!);
-                                                      AuthProvider.instance
-                                                          .resetStateFunction();
-                                                    } catch (e) {
-                                                      log("ERROR DELETING USER: $e");
-                                                    }
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text('Da')),
-                                            ],
-                                          ));
-                                  //value.deleteUser(user.id);
-                                },
-                                icon: Icon(Icons.delete),
-                              ),
+                              if (user.userType != 'Admin' ||
+                                  authProvider.userType == UserType.Admin)
+                                IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => UserDialog(
+                                              user: user,
+                                            ));
+                                  },
+                                  icon: Icon(Icons.edit),
+                                ),
+                              if (user.userType != 'Admin' ||
+                                  authProvider.userType == UserType.Admin)
+                                IconButton(
+                                  onPressed: () async {
+                                    showDialog(
+                                        context: context,
+                                        builder: (builder) => AlertDialog(
+                                              title: Text('Brisanje korisnika'),
+                                              content: Text(
+                                                  'Da li ste sigurni da zelite da obrisete korisnika?'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('Ne')),
+                                                TextButton(
+                                                    onPressed: () async {
+                                                      try {
+                                                        await UserServices
+                                                            .deleteUser(
+                                                                user.id!);
+                                                        AuthProvider.instance
+                                                            .resetStateFunction();
+                                                      } catch (e) {
+                                                        log("ERROR DELETING USER: $e");
+                                                      }
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('Da')),
+                                              ],
+                                            ));
+                                    //value.deleteUser(user.id);
+                                  },
+                                  icon: Icon(Icons.delete),
+                                ),
                             ]),
                             decoration: BoxDecoration(
                                 border: Border.all(

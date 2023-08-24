@@ -77,7 +77,12 @@ class PickupWidget extends StatelessWidget {
                 minWidth: double.infinity,
                 color: Colors.black,
                 onPressed: () {
-                  if (OrderProvider.instance.destinationLocationData == null) {
+                  if (OrderProvider.instance.currentLocationData == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        duration: Duration(seconds: 1),
+                        content: Text('Unesite pocetnu lokaciju')));
+                  } else if (OrderProvider.instance.destinationLocationData ==
+                      null) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         duration: Duration(seconds: 1),
                         content: Text('Unesite odredisnu lokaciju')));

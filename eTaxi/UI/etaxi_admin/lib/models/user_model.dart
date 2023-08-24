@@ -59,7 +59,7 @@ class Userinfo {
         : null;
     companyId = json['companyId'] ?? null;
     phoneNumber = json['phoneNumber'] ?? null;
-    //userType = json['UserType'];
+    userType = json['userType'];
     //isActive = json['IsActive'];
     //userCreatedTime = DateTime.parse(json['UserCreatedTime']);
     // verifiedAccount = json['VerifiedAccount'] ?? 0;

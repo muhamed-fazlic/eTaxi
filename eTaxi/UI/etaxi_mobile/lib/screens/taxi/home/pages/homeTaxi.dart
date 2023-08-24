@@ -123,11 +123,18 @@ class _HomeTaxiState extends State<HomeTaxi> {
                                 MaterialPageRoute(
                                   builder: (context) => PlacePicker(
                                     googleApiKey,
-                                    defaultLocation: LatLng(
-                                        OrderProvider.instance
-                                            .currentLocationData!.latitude!,
-                                        OrderProvider.instance
-                                            .currentLocationData!.longitude!),
+                                    defaultLocation:
+                                        value.currentLocationData != null
+                                            ? LatLng(
+                                                OrderProvider
+                                                    .instance
+                                                    .currentLocationData!
+                                                    .latitude!,
+                                                OrderProvider
+                                                    .instance
+                                                    .currentLocationData!
+                                                    .longitude!)
+                                            : LatLng(43.8562, 18.4130),
                                   ),
                                 ),
                               );

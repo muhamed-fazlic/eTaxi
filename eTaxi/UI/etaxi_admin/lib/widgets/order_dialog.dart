@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:etaxi_admin/models/vehicle_model.dart';
 import 'package:etaxi_admin/providers/auth_provider.dart';
@@ -15,6 +17,7 @@ import 'package:etaxi_admin/widgets/place_picker_widget.dart';
 import 'package:etaxi_admin/widgets/searchBar.dart' as sb;
 import 'package:etaxi_admin/widgets/vehicle_viewBox.dart';
 import 'package:flutter/material.dart';
+import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 import 'package:provider/provider.dart';
 
 import '../models/location_model.dart';
@@ -44,7 +47,15 @@ class _OrderDialogState extends State<OrderDialog> {
                         context,
                         MaterialPageRoute(
                             builder: ((context) => PlacePickerWidget(
+                                  center: notifier.currentLocationData != null
+                                      ? LatLong(
+                                          notifier
+                                              .currentLocationData!.latitude!,
+                                          notifier
+                                              .currentLocationData!.longitude!)
+                                      : LatLong(43.8460522, 18.3916678),
                                   onPicked: (pickedData) {
+                                    inspect(pickedData);
                                     OrderProvider.instance.setCurrentLoc(
                                         Location.fromPickedData(pickedData));
                                     Navigator.pop(context);
@@ -64,6 +75,14 @@ class _OrderDialogState extends State<OrderDialog> {
                         context,
                         MaterialPageRoute(
                             builder: ((context) => PlacePickerWidget(
+                                  center:
+                                      notifier.destinationLocationData != null
+                                          ? LatLong(
+                                              notifier.destinationLocationData!
+                                                  .latitude!,
+                                              notifier.destinationLocationData!
+                                                  .longitude!)
+                                          : LatLong(43.8460522, 18.3916678),
                                   onPicked: (pickedData) {
                                     OrderProvider.instance.setDestinationLoc(
                                         Location.fromPickedData(pickedData));
