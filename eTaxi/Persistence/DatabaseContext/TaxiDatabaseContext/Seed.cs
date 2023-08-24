@@ -258,6 +258,18 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     Longitude = 18.4087534,
                     Address = "VCJ7+59H, Patriotske lige 58, Sarajevo 71000"
                 },
+                 new Location
+                {
+                    Id=7,
+                    StreetNumber = "30",
+                    StreetName = "Hasan Brkica",
+                    District = "Centar",
+                    City = "Sarajevo",
+                    PostalCode = "71000",
+                    Latitude = 43.8510649,
+                    Longitude = 18.3907597,
+                    Address = "Hasana Brkića 30, Sarajevo 71000"
+                },
             };
             modelBuilder.Entity<Location>().HasData(locations);
 
@@ -505,6 +517,24 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     Price = 78.00,
                     StartTime = DateTime.Now.AddDays(-1).AddHours(-1),
                     EndTime = DateTime.Now.AddDays(-1),
+                    PaymentMethod = "Gotovina"
+                },
+
+                new Order
+                {
+                    Id = 9,
+                    IsActive = true,
+                    IsCanceled = false,
+                    CancelReason = null,
+                    UserDriverId = 6,
+                    UserId = 5,
+                    StartLocationId = 7,
+                    EndLocationId = 1,
+                    VehicleId = 4,
+                    IsSelfDrive = false,
+                    Price = 25.00,
+                    StartTime = DateTime.Now.AddDays(+1).AddHours(-1),
+                    EndTime = DateTime.Now.AddDays(+1),
                     PaymentMethod = "Gotovina"
                 },
             };
