@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using eTaxi.Application.Contracts.Message;
 using eTaxi.Application.Contracts.Persistence;
 using eTaxi.Application.DTOs.Order;
 using MediatR;
@@ -26,16 +27,21 @@ namespace eTaxi.Application.Features.Order.Commands
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
-        public CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper)
+        private readonly IMessageSender _messageSender;
+        public CreateOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, IMessageSender messageSender)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
+            _messageSender = messageSender;
         }
         public async Task<OrderDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var orderToCreate = _mapper.Map<Domain.Order>(request);
             await _orderRepository.CreateAsync(orderToCreate);
-            return _mapper.Map<OrderDto>( orderToCreate);
+            //_messageSender.SendingMessage("New order created");
+           var orderDTO= _mapper.Map<OrderDto>( orderToCreate);
+            _messageSender.SendingObject(orderDTO);
+            return orderDTO;
         }
     }
 

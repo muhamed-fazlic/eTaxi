@@ -12,6 +12,7 @@
     <PackageReference Include="FluentValidation" Version="11.5.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
   </ItemGroup>
 
   <ItemGroup>
