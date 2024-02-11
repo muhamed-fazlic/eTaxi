@@ -20,7 +20,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.4 <3.0.0"
+  sdk: ">=2.18.4 <=3.3.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -37,7 +37,7 @@ dependencies:
   singleton: ^0.0.2
   flutter_svg: ^1.1.0
   intl: ^0.17.0
-  cached_network_image: ^3.2.1
+  cached_network_image: ^3.3.1
   place_picker: ^0.10.0
   photo_view: ^0.14.0
   dropdown_below: ^1.0.3

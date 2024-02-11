@@ -20,7 +20,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.4 <3.0.0"
+  sdk: ">=2.18.4 <3.3.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,7 +36,7 @@ dependencies:
   jwt_decode: ^0.3.1
   google_static_maps_controller: ^1.0.0
   open_street_map_search_and_pick: ^0.1.0
-  cached_network_image: ^3.2.1
+  cached_network_image: ^3.3.1
   flutter_svg: ^1.1.0
   date_time_picker: ^2.1.0
   intl:
