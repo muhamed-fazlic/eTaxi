@@ -3,8 +3,6 @@ using eTaxi.Application.Contracts.Logging;
 using eTaxi.Application.Contracts.Message;
 using eTaxi.Application.Contracts.Stripe;
 using eTaxi.Application.Models.Email;
-using eTaxi.Application.Models.RabbitMq;
-using eTaxi.Infrastructure.BackgroundServices;
 using eTaxi.Infrastructure.EmailService;
 using eTaxi.Infrastructure.Logging;
 using eTaxi.Infrastructure.MessageService;
@@ -23,8 +21,6 @@ namespace eTaxi.Infrastructure
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddHostedService<RabbitMQConsumer>();
-            //services.Configure<RabbitMQSettings>(configuration.GetSection("RabbitMQSettings"));
             services.AddScoped<IMessageSender, MessageSender>();
 
 

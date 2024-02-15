@@ -33,6 +33,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Application.UnitTests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eTaxi.Identity", "eTaxi.Identity\eTaxi.Identity.csproj", "{8B0EAF5B-105B-4CB2-AC9F-EF38C58A379D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NotificationService", "NotificationService", "{39EA7398-E7E0-4B57-8048-45EA6830D2A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTaxi.NotificationService", "eTaxi.NotificationService\eTaxi.NotificationService.csproj", "{074F42FB-9943-4CA2-A27A-56CA8E599C5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,10 @@ Global
 		{8B0EAF5B-105B-4CB2-AC9F-EF38C58A379D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B0EAF5B-105B-4CB2-AC9F-EF38C58A379D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B0EAF5B-105B-4CB2-AC9F-EF38C58A379D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074F42FB-9943-4CA2-A27A-56CA8E599C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074F42FB-9943-4CA2-A27A-56CA8E599C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074F42FB-9943-4CA2-A27A-56CA8E599C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074F42FB-9943-4CA2-A27A-56CA8E599C5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +91,8 @@ Global
 		{8A23D556-5E78-4DCE-890C-4D6DDA7BCE35} = {CB30D9FE-C654-4675-AF69-B15CD557A6CF}
 		{2E202518-B084-4785-971E-C9C4EA736ACE} = {C2F8BF25-BF3C-4BB5-A210-B0067372770C}
 		{8B0EAF5B-105B-4CB2-AC9F-EF38C58A379D} = {ED850116-63A7-466B-89AF-55DEE64D26E0}
+		{39EA7398-E7E0-4B57-8048-45EA6830D2A7} = {7B14D849-B1A6-4588-8FC3-500119B74407}
+		{074F42FB-9943-4CA2-A27A-56CA8E599C5F} = {39EA7398-E7E0-4B57-8048-45EA6830D2A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {473F0E6E-ECCE-4BF6-9015-CA1085C3126E}

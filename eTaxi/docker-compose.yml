@@ -25,7 +25,22 @@ services:
       - 1433:1433
     expose:
       - 1433
-    
+  
+  notification-service:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile.notificationService
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+      - RABBITMQ_VIRTUALHOST=/
+    depends_on:
+      - rabbitmq
+    ports:
+      - 7153:80
     
 
   etaxi-api:

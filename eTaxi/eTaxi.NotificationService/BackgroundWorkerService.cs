@@ -1,16 +1,11 @@
-﻿using eTaxi.Application.Contracts.Email;
-using eTaxi.Application.Models.Email;
-using eTaxi.Application.Models.RabbitMq;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using eTaxi.NotificationService.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
-
-namespace eTaxi.Infrastructure.BackgroundServices
+namespace eTaxi.NotificationService
 {
-    public class RabbitMQConsumer: BackgroundService
+    public class RabbitMQConsumer : BackgroundService
     {
 
         private IConnection _connection;
@@ -25,14 +20,15 @@ namespace eTaxi.Infrastructure.BackgroundServices
 
         public RabbitMQConsumer(ILogger<RabbitMQConsumer> logger, IEmailSender emailSender)
         {
-            var factory = new ConnectionFactory {
+            var factory = new ConnectionFactory
+            {
                 HostName = _host,
                 UserName = _username,
                 Password = _password
             };
 
             _logger = logger;
-            _emailSender=emailSender;
+            _emailSender = emailSender;
 
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -52,7 +48,7 @@ namespace eTaxi.Infrastructure.BackgroundServices
         {
             stoppingToken.ThrowIfCancellationRequested();
 
-           
+
 
             var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += (model, ea) =>
