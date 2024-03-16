@@ -99,7 +99,6 @@ class _OrderStatusDialogState extends State<OrderStatusDialog> {
                 data['isCanceled'] = isCanceled;
                 data['cancelReason'] = cancelReasonController.text;
               }
-
               try {
                 await OrderService.setOrderStatus(data);
                 OrderProvider.instance.resetStateFunction();

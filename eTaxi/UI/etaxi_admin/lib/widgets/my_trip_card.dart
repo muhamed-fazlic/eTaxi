@@ -295,16 +295,17 @@ class MyTripCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: [
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: ((context) => OrderStatusDialog(
-                                order: order,
-                              )));
-                    },
-                    icon: Icon(Icons.edit_note_sharp)),
-                Text("Promijeni status narudzbe"),
+                if (order.isCanceled != true)
+                  IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: ((context) => OrderStatusDialog(
+                                  order: order,
+                                )));
+                      },
+                      icon: Icon(Icons.edit_note_sharp)),
+                if (order.isCanceled != true) Text("Promijeni status narudzbe"),
                 Spacer(),
                 IconButton(
                     onPressed: () {

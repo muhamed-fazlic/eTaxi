@@ -29,11 +29,13 @@ namespace eTaxi.Application.Features.Order.Commands
             if (request.status.IsActive != null)
             {
                 order.IsActive = (bool)request.status.IsActive;
+
             }
             if(request.status.IsCanceled!= null)
             {
                 order.IsCanceled = request.status.IsCanceled;
                 order.CancelReason = request.status.CancelReason;
+                order.IsActive = false;
             }
             
             await _orderRepository.UpdateAsync(order);
