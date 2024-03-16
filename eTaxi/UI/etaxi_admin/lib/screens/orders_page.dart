@@ -22,6 +22,17 @@ class _OrdersPageState extends State<OrdersPage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const Padding(
+          padding: EdgeInsets.only(bottom: 35.0),
+          child: Center(
+            child: Text(
+              'Narudzbe',
+              style: TextStyle(
+                fontSize: 36,
+              ),
+            ),
+          ),
+        ),
         sh(16),
         Row(
           children: [

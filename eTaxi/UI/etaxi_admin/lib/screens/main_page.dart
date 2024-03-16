@@ -1,11 +1,15 @@
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:etaxi_admin/models/user_model.dart';
 import 'package:etaxi_admin/providers/auth_provider.dart';
 import 'package:etaxi_admin/services/main_service.dart';
+import 'package:etaxi_admin/widgets/custom_button.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 // ignore: must_be_immutable
 class MainPageAdmin extends StatefulWidget {
@@ -17,27 +21,221 @@ class MainPageAdmin extends StatefulWidget {
 
 class _MainPageAdminState extends State<MainPageAdmin> {
   DateTime? fromDate;
-
   DateTime? toDate;
+  Map<String, dynamic>? reportData;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  void fetchData() async {
+    try {
+      var data = await MainServices.getReport(
+          fromDate, toDate, AuthProvider.instance.user!.companyId);
+      inspect(data);
+
+      if (data['mostFrequentRoute'] != null) {
+        var startLocation = await MainServices.getLocationFromLatLng(
+            data['mostFrequentRoute'][0]['route']['startLocation']['latitude'],
+            data['mostFrequentRoute'][0]['route']['startLocation']
+                ['longitude']);
+        var endLocation = await MainServices.getLocationFromLatLng(
+            data['mostFrequentRoute'][0]['route']['endLocation']['latitude'],
+            data['mostFrequentRoute'][0]['route']['endLocation']['longitude']);
+        data['mostFrequentRouteStart'] = startLocation;
+        data['mostFrequentRouteEnd'] = endLocation;
+      }
+
+      setState(() {
+        reportData = data;
+      });
+    } catch (e) {
+      inspect(e);
+    }
+  }
+
+  Future<void> captureAndExportToPdf() async {
+    final pdf = pw.Document();
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        margin: pw.EdgeInsets.all(32),
+        build: (pw.Context context) {
+          return [
+            pw.Text('Opci pregled',
+                style:
+                    pw.TextStyle(fontSize: 36, fontWeight: pw.FontWeight.bold)),
+            pw.SizedBox(height: 20),
+            if (fromDate != null && toDate != null)
+              pw.Padding(
+                  padding: pw.EdgeInsets.only(bottom: 10),
+                  child: pw.Text(
+                      'Od: ${DateFormat('dd.MM.yyyy').format(fromDate!)} - Do: ${DateFormat('dd.MM.yyyy').format(toDate!)}',
+                      style: pw.TextStyle(fontSize: 16))),
+            // Further content will be added here
+            pw.Column(
+              children: [
+                createStatisticItemForPdf(
+                    'Ukupan broj narudzbi',
+                    pw.Text(reportData!['totalOrders'].toString(),
+                        style: const pw.TextStyle(fontSize: 16))),
+                createStatisticItemForPdf(
+                    'Ukupno zaradeno',
+                    pw.Text('${reportData!['totalEarnedMoney']} KM',
+                        style: const pw.TextStyle(fontSize: 16))),
+                createStatisticItemForPdf(
+                    'Otkazane narudzbe',
+                    pw.Text(reportData!['totalCanceledOrders'].toString(),
+                        style: const pw.TextStyle(fontSize: 16))),
+                createStatisticItemForPdf(
+                  'Zaposlenik sa najvise narudzbi',
+                  pw.Text(
+                      Userinfo.fromJson(reportData?['driverWithMostOrders'])
+                          .fullName(),
+                      style: const pw.TextStyle(fontSize: 16)),
+                ),
+                createStatisticItemForPdf(
+                    'Korisnik sa najvise narudzbi',
+                    pw.Text(
+                        Userinfo.fromJson(reportData?['userWithMostOrders'])
+                            .fullName(),
+                        style: const pw.TextStyle(fontSize: 16))),
+                createStatisticItemForPdf(
+                  "Najkoristenija ruta taksi vozila",
+                  pw.Column(
+                    children: [
+                      pw.Text(
+                        'Polazak - ${reportData?['mostFrequentRouteStart'] ?? ''}',
+                        style: pw.TextStyle(fontSize: 16),
+                      ),
+                      pw.SizedBox(
+                        height: 12,
+                      ),
+                      pw.Text(
+                        'Destinacija - ${reportData?['mostFrequentRouteEnd'] ?? ''}',
+                        style: pw.TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                  withDivider: true,
+                  isColumn: true,
+                ),
+                createStatisticItemForPdf(
+                    "Narudzbe po korisniku",
+                    pw.Column(
+                      children: List<Map<String, dynamic>>.from(
+                              reportData?['userOrderCount'])
+                          .map((e) {
+                        return pw.Text(
+                          e['userId'] == null
+                              ? 'Narudzbe: ${e['orderCount']} - Nepoznat'
+                              : 'Narudzbe: ${e['orderCount']} - ${e['userName']}',
+                          style: const pw.TextStyle(fontSize: 16),
+                        );
+                      }).toList(),
+                    ),
+                    withDivider: true,
+                    isColumn: true),
+                createStatisticItemForPdf(
+                    "Narudzbe po vozilu",
+                    pw.Column(
+                      children: List<Map<String, dynamic>>.from(
+                              reportData?['vehicleOrderCount'])
+                          .map((e) {
+                        return pw.Text(
+                          'Narudzbe: ${e['orderCount']} - ${e['vehicleName']}',
+                          style: const pw.TextStyle(fontSize: 16),
+                        );
+                      }).toList(),
+                    ),
+                    withDivider: true,
+                    isColumn: true),
+                createStatisticItemForPdf(
+                    "Najprometnije vrijeme za voznju",
+                    pw.Column(
+                      children: List<Map<String, dynamic>>.from(
+                              reportData?['mostFrequentTime'])
+                          .map((e) {
+                        return pw.Text(
+                          'Narudzbe: ${e["count"]} - ${e["hourRange"]}',
+                          style: const pw.TextStyle(fontSize: 16),
+                        );
+                      }).toList(),
+                    ),
+                    withDivider: true,
+                    isColumn: true),
+                // Add more items based on your data
+              ],
+            ),
+          ];
+        },
+      ),
+    );
+
+    //let the user pick where to save the file
+    final savePath = await FilePicker.platform.saveFile(
+      dialogTitle: 'Odaberite mjesto i naziv fajla:',
+      fileName: 'eTaxi-Pregled.pdf',
+    );
+    if (savePath != null) {
+      final saveFile = File(savePath);
+      await saveFile.writeAsBytes(await pdf.save());
+      print("PDF saved to user-selected path");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Column(
           children: [
+            const Padding(
+              padding: EdgeInsets.only(bottom: 35.0),
+              child: Text(
+                'Opći pregled',
+                style: TextStyle(
+                  fontSize: 36,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 30.0),
+              child: Row(
+                children: [
+                  const Text(
+                    'Preuzmi izvjestaj u PDF formatu: ',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  CustomButton(
+                    label: "preuzmi pdf",
+                    width: 150,
+                    height: 40,
+                    fontSize: 11,
+                    vertPad: 5,
+                    onPressed: reportData?["totalOrders"] == 0
+                        ? null
+                        : () async {
+                            captureAndExportToPdf();
+                          },
+                  ),
+                ],
+              ),
+            ),
             Row(
               children: [
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Od datuma:',
                         style: TextStyle(fontSize: 16),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: DateTimePicker(
                           initialValue: '',
@@ -53,16 +251,16 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                     ],
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Do datuma:',
                         style: TextStyle(fontSize: 16),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: DateTimePicker(
                           initialValue: '',
@@ -78,7 +276,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 SizedBox(
@@ -86,10 +284,11 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                   width: 120,
                   child: MaterialButton(
                     onPressed: () {
-                      setState(() {});
+                      //setState(() {});
+                      fetchData();
                     },
                     color: Colors.black,
-                    child: Text(
+                    child: const Text(
                       'Primjeni',
                       style: TextStyle(color: Colors.white),
                     ),
@@ -97,163 +296,154 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            FutureBuilder<Map<String, dynamic>>(
-                future: MainServices.getReport(
-                    fromDate, toDate, AuthProvider.instance.user!.companyId),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    var data = snapshot.data!;
-                    return Wrap(
-                      spacing: 20,
-                      runSpacing: 20,
-                      children: [
-                        _buildStatisticTile(
-                          'Ukupan broj narudžbi',
-                          Text(
-                            data['totalOrders'].toString(),
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
-                        _buildStatisticTile(
-                          'Ukupno zarađeno',
-                          Text(
-                            data['totalEarnedMoney'].toString() + ' KM',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
-                        _buildStatisticTile(
-                          'Otkazane narudžbe',
-                          Text(
-                            data['totalCanceledOrders'].toString(),
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
-                        _buildStatisticTile(
-                          'Zaposlenik sa najviše narudžbi',
-                          Text(
-                            Userinfo.fromJson(data['driverWithMostOrders'])
-                                .fullName(),
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
-                        _buildStatisticTile(
-                          'Korisnik sa najviše narudžbi',
-                          Text(
-                            Userinfo.fromJson(data['userWithMostOrders'])
-                                .fullName(),
-                            style: TextStyle(fontSize: 24),
-                          ),
-                        ),
-                        _buildStatisticTile(
-                          'Najkorištenija ruta taksi vozila',
-                          Column(
-                            children: [
-                              FutureBuilder(
-                                  future: MainServices.getLocationFromLatLng(
-                                      data['mostFrequentRoute'][0]['route']
-                                          ['startLocation']['latitude'],
-                                      data['mostFrequentRoute'][0]['route']
-                                          ['startLocation']['longitude']),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData)
-                                      return Text(
-                                        'Polazak - ${snapshot.data}',
-                                        style: TextStyle(fontSize: 24),
-                                      );
-                                    return CircularProgressIndicator();
-                                  }),
-                              SizedBox(
-                                height: 12,
-                              ),
-                              FutureBuilder(
-                                  future: MainServices.getLocationFromLatLng(
-                                      data['mostFrequentRoute'][0]['route']
-                                          ['endLocation']['latitude'],
-                                      data['mostFrequentRoute'][0]['route']
-                                          ['endLocation']['longitude']),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData)
-                                      return Text(
-                                        'Destinacija - ${snapshot.data}',
-                                        style: TextStyle(fontSize: 24),
-                                      );
-                                    return CircularProgressIndicator();
-                                  }),
-                            ],
-                          ),
-                        ),
-                        _buildStatisticTile(
-                          'Narudžbe po korisniku',
-                          Column(
-                            children: List<Map<String, dynamic>>.from(
-                                    data['userOrderCount'])
-                                .map((e) {
-                              return Text(
-                                e['userId'] == null
-                                    ? 'Narudzbe: ${e['orderCount']} - Nepoznat'
-                                    : 'Narudzbe: ${e['orderCount']} - ${e['userName']}',
-                                style: TextStyle(fontSize: 24),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        _buildStatisticTile(
-                            'Narudžbe po vozilu',
-                            Column(
-                              children: List<Map<String, dynamic>>.from(
-                                      data['vehicleOrderCount'])
-                                  .map((e) {
-                                return Text(
-                                  'Narudzbe: ${e['orderCount']} - ${e['vehicleName']}',
-                                  style: TextStyle(fontSize: 24),
-                                );
-                              }).toList(),
-                            )),
-                        _buildStatisticTile(
-                            'Najprometnije vrijeme za vožnju',
-                            Column(
-                              children: List<Map<String, dynamic>>.from(
-                                      data['mostFrequentTime'])
-                                  .map((e) {
-                                return Text(
-                                  'Narudzbe: ${e["count"]} - ${e["hourRange"]}',
-                                  style: TextStyle(fontSize: 24),
-                                );
-                              }).toList(),
-                            )),
-                      ],
-                    );
-                  }
-
-                  if (snapshot.connectionState == ConnectionState.waiting)
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 28.0),
-                    child: Center(
-                      child: Text('Nema podataka za izabrani vremenski period'),
+            const SizedBox(height: 20),
+            if (reportData == null)
+              const CircularProgressIndicator()
+            else if (reportData?["totalOrders"] == 0)
+              const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text("Nema podataka za izabrani period",
+                      style: TextStyle(fontSize: 24)))
+            else
+              Wrap(
+                spacing: 20,
+                runSpacing: 20,
+                children: [
+                  _buildStatisticTile(
+                    'Ukupan broj narudžbi',
+                    Text(
+                      reportData?['totalOrders'].toString() ?? '',
+                      style: const TextStyle(fontSize: 24),
                     ),
-                  );
-                }),
+                  ),
+                  _buildStatisticTile(
+                    'Ukupno zarađeno',
+                    Text(
+                      reportData?['totalEarnedMoney'].toString() ?? '' + ' KM',
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  _buildStatisticTile(
+                    'Otkazane narudžbe',
+                    Text(
+                      reportData?['totalCanceledOrders'].toString() ?? '',
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  _buildStatisticTile(
+                    'Zaposlenik sa najviše narudžbi',
+                    Text(
+                      Userinfo.fromJson(reportData?['driverWithMostOrders'])
+                          .fullName(),
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  _buildStatisticTile(
+                    'Korisnik sa najviše narudžbi',
+                    Text(
+                      Userinfo.fromJson(reportData?['userWithMostOrders'])
+                          .fullName(),
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                  ),
+                  _buildStatisticTile(
+                    'Najkorištenija ruta taksi vozila',
+                    Column(
+                      children: [
+                        Text(
+                          'Polazak - ${reportData?['mostFrequentRouteStart'] ?? ''}',
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          'Destinacija - ${reportData?['mostFrequentRouteEnd'] ?? ''}',
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                      ],
+                    ),
+                  ),
+                  _buildStatisticTile(
+                    'Narudžbe po korisniku',
+                    Column(
+                      children: List<Map<String, dynamic>>.from(
+                              reportData?['userOrderCount'])
+                          .map((e) {
+                        return Text(
+                          e['userId'] == null
+                              ? 'Narudzbe: ${e['orderCount']} - Nepoznat'
+                              : 'Narudzbe: ${e['orderCount']} - ${e['userName']}',
+                          style: const TextStyle(fontSize: 24),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  _buildStatisticTile(
+                      'Narudžbe po vozilu',
+                      Column(
+                        children: List<Map<String, dynamic>>.from(
+                                reportData?['vehicleOrderCount'])
+                            .map((e) {
+                          return Text(
+                            'Narudzbe: ${e['orderCount']} - ${e['vehicleName']}',
+                            style: const TextStyle(fontSize: 24),
+                          );
+                        }).toList(),
+                      )),
+                  _buildStatisticTile(
+                      'Najprometnije vrijeme za vožnju',
+                      Column(
+                        children: List<Map<String, dynamic>>.from(
+                                reportData?['mostFrequentTime'])
+                            .map((e) {
+                          return Text(
+                            'Narudzbe: ${e["count"]} - ${e["hourRange"]}',
+                            style: const TextStyle(fontSize: 24),
+                          );
+                        }).toList(),
+                      )),
+                ],
+              )
           ],
         ),
       ),
     );
   }
 
+  // Helper method to create a statistic item
+  pw.Widget createStatisticItemForPdf(String title, pw.Widget value,
+      {bool isColumn = false, bool withDivider = false}) {
+    return pw.Padding(
+        padding: const pw.EdgeInsets.only(bottom: 10),
+        child: isColumn
+            ? pw.Column(children: [
+                if (withDivider) pw.Divider(),
+                pw.Text(title, style: pw.TextStyle(fontSize: 16)),
+                pw.SizedBox(height: 10),
+                value
+              ])
+            : pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                children: [
+                  if (withDivider) pw.Divider(),
+                  pw.Text(title, style: pw.TextStyle(fontSize: 16)),
+                  value
+                ],
+              ));
+  }
+
   Widget _buildStatisticTile(String title, Widget value) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             value
           ],
         ),

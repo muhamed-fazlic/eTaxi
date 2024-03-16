@@ -74,7 +74,7 @@ class _UserDialogState extends State<UserDialog> {
               validator: (value) {
                 Pattern emailPattern =
                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                RegExp regex = new RegExp(emailPattern.toString());
+                RegExp regex = RegExp(emailPattern.toString());
                 if (value!.isEmpty) {
                   return 'Polje ne moze biti prazno!';
                 } else if ((!regex.hasMatch(value.trim()))) {
@@ -87,20 +87,21 @@ class _UserDialogState extends State<UserDialog> {
               label: 'Broj telefona',
               controller: _phoneController,
               maxLength: 10,
-              suffix: Text(
-                "+387",
+              suffix: const Text(
+                "+387 ",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               isVisibilty: null,
               inputType: TextInputType.number,
               validator: (val) {
-                if (_phoneController.text.trim() == "")
+                RegExp phoneRegex = RegExp(r'^\d{8,9}$');
+                if (val?.trim() == "")
                   return 'Polje ne smije biti prazno';
-                else if (_phoneController.text.length != 9)
-                  return "* Enter a valid number";
+                else if (!phoneRegex.hasMatch(val!))
+                  return "Broj nije validan. Treba da sadrzi 8 ili 9 cifara! ";
                 else
                   return null;
               },
@@ -111,6 +112,10 @@ class _UserDialogState extends State<UserDialog> {
       )),
       actions: [
         CustomButton(
+          vertPad: 5,
+          height: 45,
+          fontSize: 16,
+          width: 200,
           onPressed: () async {
             if (!_formKey.currentState!.validate()) {
               return null;

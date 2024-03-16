@@ -21,6 +21,17 @@ class VehiclesPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Padding(
+            padding: EdgeInsets.only(bottom: 35.0),
+            child: Center(
+              child: Text(
+                'Vozila',
+                style: TextStyle(
+                  fontSize: 36,
+                ),
+              ),
+            ),
+          ),
           Row(
             children: [
               IconButton(
@@ -66,13 +77,18 @@ class VehiclesPage extends StatelessWidget {
                     print(snapshot.error);
                   }
                   if (snapshot.hasData) {
-                    return ListView.builder(
+                    return ListView.separated(
                       padding: EdgeInsets.only(top: 5),
                       shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         return VehicleBox(
                           vehicle: snapshot.data![index],
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          color: Colors.grey,
                         );
                       },
                     );
@@ -96,9 +112,14 @@ class VehiclesPage extends StatelessWidget {
                   print(snapshot.error);
                 }
                 if (snapshot.hasData) {
-                  return ListView.builder(
+                  return ListView.separated(
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
+                    separatorBuilder: (context, index) {
+                      return Divider(
+                        color: Colors.grey,
+                      );
+                    },
                     itemBuilder: (context, index) {
                       var vehicleType = snapshot.data![index];
                       return Container(

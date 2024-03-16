@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:etaxi_admin/providers/auth_provider.dart';
 import 'package:http/http.dart' as http;
 
-const googleApiKey = 'AIzaSyBllt8BR5FXxa6kmBRODoh08Rg__uQ3sCA';
+const googleApiKey = 'AIzaSyCc4MW5r36acVY2XNC1EoqLqKbvHZ99KKA';
 const localhost = 'localhost:7152';
 
 class ApiModels {

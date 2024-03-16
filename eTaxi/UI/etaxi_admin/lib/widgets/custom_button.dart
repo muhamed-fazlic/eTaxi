@@ -7,11 +7,13 @@ class CustomButton extends StatelessWidget {
       this.width,
       @override this.onPressed,
       this.vertPad,
+      this.fontSize,
       this.height});
   final String? label;
   final double? width;
   final double? vertPad;
   final double? height;
+  final double? fontSize;
   final void Function()? onPressed;
 
   @override
@@ -39,7 +41,7 @@ class CustomButton extends StatelessWidget {
             color: Colors.white,
             fontWeight: FontWeight.w700,
             height: 1,
-            fontSize: b * 12,
+            fontSize: fontSize ?? b * 12,
           ),
         ),
       ),

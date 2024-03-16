@@ -4,6 +4,7 @@ using eTaxi.Application.Contracts.Reports;
 using eTaxi.Application.DTOs.Order;
 using eTaxi.Application.DTOs.Reports;
 using eTaxi.Application.DTOs.User;
+using eTaxi.Application.Exceptions;
 using eTaxi.Application.Models.Identity;
 using eTaxi.Domain;
 using MediatR;
@@ -41,6 +42,11 @@ namespace eTaxi.Application.Features.Reports.Queries
                 StartTime = request.Search.StartDate,
                 EndTime = request.Search.EndDate,
             });
+
+            if(orders == null || !orders.Any())
+            {
+                return new ReportDto();
+            }
 
             foreach (var order in orders)
             {

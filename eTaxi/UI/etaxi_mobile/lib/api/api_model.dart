@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 const realDeviceUri = '192.168.1.108:7152';
 const localUri = '10.0.2.2:7152';
-const googleApiKey = 'AIzaSyBllt8BR5FXxa6kmBRODoh08Rg__uQ3sCA';
+const googleApiKey = 'AIzaSyCc4MW5r36acVY2XNC1EoqLqKbvHZ99KKA';
 const ngRokUri = '9114-188-127-110-53.ngrok-free.app';
 
 class ApiModels {

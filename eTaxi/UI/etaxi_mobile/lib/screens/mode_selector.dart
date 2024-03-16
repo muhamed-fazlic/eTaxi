@@ -59,7 +59,8 @@ class _ModeSelectorScreenState extends State<ModeSelectorScreen> {
                 onTap: () {
                   return appSnackBar(
                       context: context,
-                      msg: "Ovaj dio nije uradjen",
+                      msg:
+                          "Ovaj dio nije uradjen. Seminarski je radjen u grupi",
                       isError: true);
                   setState(() {
                     isSelf = true;

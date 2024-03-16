@@ -18,6 +18,17 @@ class UsersPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Padding(
+            padding: EdgeInsets.only(bottom: 35.0),
+            child: Center(
+              child: Text(
+                'Korisnici',
+                style: TextStyle(
+                  fontSize: 36,
+                ),
+              ),
+            ),
+          ),
           Row(
             children: [
               IconButton(

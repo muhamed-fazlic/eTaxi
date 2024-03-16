@@ -213,6 +213,10 @@ class _OrderDialogState extends State<OrderDialog> {
             }),
             CustomButton(
               label: 'Naruci voznju',
+              vertPad: 5,
+              height: 45,
+              fontSize: 16,
+              width: 200,
               onPressed: () async {
                 if (OrderProvider.instance.currentLocationData == null ||
                     OrderProvider.instance.destinationLocationData == null) {

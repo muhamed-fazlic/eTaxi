@@ -65,6 +65,7 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -86,6 +87,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/Resources"
 });
 
+app.UseCors("all");
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -21,7 +21,7 @@ class MyTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 450,
+      height: 500,
       width: 350,
       margin: EdgeInsets.only(right: 15, bottom: 10, left: 15),
       decoration: BoxDecoration(

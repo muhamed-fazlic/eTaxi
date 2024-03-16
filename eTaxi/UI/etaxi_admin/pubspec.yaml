@@ -39,6 +39,8 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_svg: ^1.1.0
   date_time_picker: ^2.1.0
+  pdf: ^3.10.8
+  file_picker: ^6.2.0
   intl:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

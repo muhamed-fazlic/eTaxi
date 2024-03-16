@@ -136,6 +136,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       sh(20),
                       Center(
                           child: CustomButton(
+                        vertPad: 5,
+                        height: 45,
+                        fontSize: 16,
+                        width: 200,
                         label: 'Login',
                         onPressed: () async {
                           FocusScope.of(context).unfocus();
