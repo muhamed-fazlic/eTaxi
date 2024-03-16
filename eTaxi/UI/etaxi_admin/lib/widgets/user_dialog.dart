@@ -41,75 +41,78 @@ class _UserDialogState extends State<UserDialog> {
     return AlertDialog(
       title:
           Text('${widget.user != null ? "Izmjeni" : "Dodaj novog"} korisnika'),
-      content: SingleChildScrollView(
-          child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            CustomTextField(
-              label: "Ime",
-              controller: _nameController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Polje ne moze biti prazno!';
-                } else
-                  return null;
-              },
-            ),
-            sh(5),
-            CustomTextField(
-              label: "Prezime",
-              controller: _surnameController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Polje ne moze biti prazno!';
-                } else
-                  return null;
-              },
-            ),
-            sh(5),
-            CustomTextField(
-              label: "Email",
-              controller: _emailController,
-              validator: (value) {
-                Pattern emailPattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                RegExp regex = RegExp(emailPattern.toString());
-                if (value!.isEmpty) {
-                  return 'Polje ne moze biti prazno!';
-                } else if ((!regex.hasMatch(value.trim()))) {
-                  return 'Email nije validan!';
-                } else
-                  return null;
-              },
-            ),
-            CustomTextField(
-              label: 'Broj telefona',
-              controller: _phoneController,
-              maxLength: 10,
-              suffix: const Text(
-                "+387 ",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+      content: Container(
+        constraints: const BoxConstraints(minWidth: 500),
+        child: SingleChildScrollView(
+            child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              CustomTextField(
+                label: "Ime",
+                controller: _nameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Polje ne moze biti prazno!';
+                  } else
+                    return null;
+                },
               ),
-              isVisibilty: null,
-              inputType: TextInputType.number,
-              validator: (val) {
-                RegExp phoneRegex = RegExp(r'^\d{8,9}$');
-                if (val?.trim() == "")
-                  return 'Polje ne smije biti prazno';
-                else if (!phoneRegex.hasMatch(val!))
-                  return "Broj nije validan. Treba da sadrzi 8 ili 9 cifara! ";
-                else
-                  return null;
-              },
-            ),
-            sh(5),
-          ],
-        ),
-      )),
+              sh(5),
+              CustomTextField(
+                label: "Prezime",
+                controller: _surnameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Polje ne moze biti prazno!';
+                  } else
+                    return null;
+                },
+              ),
+              sh(5),
+              CustomTextField(
+                label: "Email",
+                controller: _emailController,
+                validator: (value) {
+                  Pattern emailPattern =
+                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                  RegExp regex = RegExp(emailPattern.toString());
+                  if (value!.isEmpty) {
+                    return 'Polje ne moze biti prazno!';
+                  } else if ((!regex.hasMatch(value.trim()))) {
+                    return 'Email nije validan!';
+                  } else
+                    return null;
+                },
+              ),
+              CustomTextField(
+                label: 'Broj telefona',
+                controller: _phoneController,
+                maxLength: 10,
+                suffix: const Text(
+                  "+387 ",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                isVisibilty: null,
+                inputType: TextInputType.number,
+                validator: (val) {
+                  RegExp phoneRegex = RegExp(r'^\d{8,9}$');
+                  if (val?.trim() == "")
+                    return 'Polje ne smije biti prazno';
+                  else if (!phoneRegex.hasMatch(val!))
+                    return "Broj nije validan. Treba da sadrzi 8 ili 9 cifara! ";
+                  else
+                    return null;
+                },
+              ),
+              sh(5),
+            ],
+          ),
+        )),
+      ),
       actions: [
         CustomButton(
           vertPad: 5,

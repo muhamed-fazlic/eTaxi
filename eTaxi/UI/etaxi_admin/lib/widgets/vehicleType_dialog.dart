@@ -35,12 +35,11 @@ class _VehicleTypeDialogState extends State<VehicleTypeDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minWidth: 500),
-      child: AlertDialog(
-          title: Text('Tip vozila'),
-          contentPadding: EdgeInsets.all(50),
-          content: Form(
+    return AlertDialog(
+        title: Text('Tip vozila'),
+        content: Container(
+          constraints: const BoxConstraints(minWidth: 500),
+          child: Form(
             key: formKey,
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               CustomTextField(
@@ -80,42 +79,42 @@ class _VehicleTypeDialogState extends State<VehicleTypeDialog> {
               ),
             ]),
           ),
-          actions: [
-            Center(
-              child: CustomButton(
-                  vertPad: 5,
-                  height: 45,
-                  fontSize: 16,
-                  width: 200,
-                  onPressed: () async {
-                    if (!formKey.currentState!.validate()) return;
-                    var data = {
-                      'type': type.text,
-                      'numberOfSeats': numberOfSeats.text,
-                      'imageUrl': imageUrl.text,
-                    };
-                    try {
-                      if (widget.vehicleType != null) {
-                        data['id'] = widget.vehicleType!.id.toString();
+        ),
+        actions: [
+          Center(
+            child: CustomButton(
+                vertPad: 5,
+                height: 45,
+                fontSize: 16,
+                width: 200,
+                onPressed: () async {
+                  if (!formKey.currentState!.validate()) return;
+                  var data = {
+                    'type': type.text,
+                    'numberOfSeats': numberOfSeats.text,
+                    'imageUrl': imageUrl.text,
+                  };
+                  try {
+                    if (widget.vehicleType != null) {
+                      data['id'] = widget.vehicleType!.id.toString();
 
-                        await MainServices.editVehicleType(
-                          data: data,
-                          id: widget.vehicleType!.id!,
-                        );
-                      } else {
-                        await mainServices.addVehicleType(
-                          data: data,
-                        );
-                      }
-                      AuthProvider.instance.resetStateFunction();
-                    } catch (e) {
-                      log("ERROR ADDING VEHICLE TYPE: $e");
+                      await MainServices.editVehicleType(
+                        data: data,
+                        id: widget.vehicleType!.id!,
+                      );
+                    } else {
+                      await mainServices.addVehicleType(
+                        data: data,
+                      );
                     }
-                    Navigator.pop(context);
-                  },
-                  label: widget.vehicleType != null ? "Izmjeni" : 'Dodaj'),
-            )
-          ]),
-    );
+                    AuthProvider.instance.resetStateFunction();
+                  } catch (e) {
+                    log("ERROR ADDING VEHICLE TYPE: $e");
+                  }
+                  Navigator.pop(context);
+                },
+                label: widget.vehicleType != null ? "Izmjeni" : 'Dodaj'),
+          )
+        ]);
   }
 }

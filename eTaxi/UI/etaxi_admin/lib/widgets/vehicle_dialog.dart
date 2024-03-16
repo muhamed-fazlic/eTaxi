@@ -72,12 +72,12 @@ class _VehicleDialogState extends State<VehicleDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(minWidth: 500),
-      child: AlertDialog(
-        contentPadding: EdgeInsets.all(50),
-        title: Text(widget.isEdit ? "Izmjeni vozilo" : 'Dodaj novo vozilo'),
-        content: SingleChildScrollView(
+    return AlertDialog(
+      contentPadding: EdgeInsets.all(50),
+      title: Text(widget.isEdit ? "Izmjeni vozilo" : 'Dodaj novo vozilo'),
+      content: Container(
+        constraints: BoxConstraints(minWidth: 500),
+        child: SingleChildScrollView(
           child: Form(
             key: formKey,
             child: Column(
@@ -364,67 +364,67 @@ class _VehicleDialogState extends State<VehicleDialog> {
             ),
           ),
         ),
-        actions: [
-          Center(
-            child: CustomButton(
-              vertPad: 5,
-              height: 45,
-              fontSize: 16,
-              width: 200,
-              onPressed: () async {
-                if (!formKey.currentState!.validate()) {
-                  return;
-                }
-                //Send data to server
-                var data = {
-                  "name": name.text,
-                  "kmTraveled": kmTraveled.text,
-                  "licenceNumber": licenceNumber.text,
-                  "year": year.text,
-                  "airCondition": airCondition,
-                  "airBag": airBag,
-                  "fuelType": selectedFuelType,
-                  "transmission": selectedTransmission,
-                  "currentLocationId": null,
-                  "color": color.text,
-                  "brand": brand.text,
-                  "pricePerKm": pricePerKm.text,
-                  "userDriverId": selectedDrivedId,
-                  "typeId": selectedVehicleType!,
-                  "imageUrl": imageUrl.text,
-                  "companyId": selectedCompanyId,
-                };
-                if (widget.isEdit) {
-                  data["id"] = widget.vehicle!.vehicleId;
-                }
-                try {
-                  if (widget.isEdit) {
-                    await mainServices.editVehicle(
-                        data: data, id: widget.vehicle!.vehicleId!);
-                  } else {
-                    await mainServices.addVehicle(
-                      data: data,
-                    );
-                  }
-                  AuthProvider.instance.resetStateFunction();
-                  appSnackBar(
-                      context: context,
-                      msg: "Uspjeno izvrsenja radnja",
-                      isError: false);
-                  Navigator.pop(context);
-                } catch (e) {
-                  showDialog(
-                      context: context,
-                      builder: (context) => ErrorDialog(
-                            message: e.toString(),
-                          ));
-                }
-              },
-              label: widget.isEdit ? "Izmjeni" : 'Dodaj',
-            ),
-          ),
-        ],
       ),
+      actions: [
+        Center(
+          child: CustomButton(
+            vertPad: 5,
+            height: 45,
+            fontSize: 16,
+            width: 200,
+            onPressed: () async {
+              if (!formKey.currentState!.validate()) {
+                return;
+              }
+              //Send data to server
+              var data = {
+                "name": name.text,
+                "kmTraveled": kmTraveled.text,
+                "licenceNumber": licenceNumber.text,
+                "year": year.text,
+                "airCondition": airCondition,
+                "airBag": airBag,
+                "fuelType": selectedFuelType,
+                "transmission": selectedTransmission,
+                "currentLocationId": null,
+                "color": color.text,
+                "brand": brand.text,
+                "pricePerKm": pricePerKm.text,
+                "userDriverId": selectedDrivedId,
+                "typeId": selectedVehicleType!,
+                "imageUrl": imageUrl.text,
+                "companyId": selectedCompanyId,
+              };
+              if (widget.isEdit) {
+                data["id"] = widget.vehicle!.vehicleId;
+              }
+              try {
+                if (widget.isEdit) {
+                  await mainServices.editVehicle(
+                      data: data, id: widget.vehicle!.vehicleId!);
+                } else {
+                  await mainServices.addVehicle(
+                    data: data,
+                  );
+                }
+                AuthProvider.instance.resetStateFunction();
+                appSnackBar(
+                    context: context,
+                    msg: "Uspjeno izvrsenja radnja",
+                    isError: false);
+                Navigator.pop(context);
+              } catch (e) {
+                showDialog(
+                    context: context,
+                    builder: (context) => ErrorDialog(
+                          message: e.toString(),
+                        ));
+              }
+            },
+            label: widget.isEdit ? "Izmjeni" : 'Dodaj',
+          ),
+        ),
+      ],
     );
   }
 }
