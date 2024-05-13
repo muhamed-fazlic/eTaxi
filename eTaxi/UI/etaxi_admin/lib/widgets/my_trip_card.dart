@@ -146,7 +146,8 @@ class MyTripCard extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            DateFormat('dd.MM.yyyy').format(order.startTime!),
+                            DateFormat('dd.MM.yyyy HH:mm')
+                                .format(order.startTime!),
                             style: TextStyle(
                               fontSize: 10,
                               letterSpacing: 0.6,
@@ -295,7 +296,7 @@ class MyTripCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: [
-                if (order.isCanceled != true)
+                if (order.isActive == true)
                   IconButton(
                       onPressed: () {
                         showDialog(
@@ -305,7 +306,7 @@ class MyTripCard extends StatelessWidget {
                                 )));
                       },
                       icon: Icon(Icons.edit_note_sharp)),
-                if (order.isCanceled != true) Text("Promijeni status narudzbe"),
+                if (order.isActive == true) Text("Promijeni status narudzbe"),
                 Spacer(),
                 IconButton(
                     onPressed: () {

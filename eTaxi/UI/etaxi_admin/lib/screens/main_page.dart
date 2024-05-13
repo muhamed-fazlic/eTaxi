@@ -23,6 +23,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
   DateTime? fromDate;
   DateTime? toDate;
   Map<String, dynamic>? reportData;
+  String? errorMsg;
 
   @override
   void initState() {
@@ -50,9 +51,13 @@ class _MainPageAdminState extends State<MainPageAdmin> {
 
       setState(() {
         reportData = data;
+        errorMsg = null;
       });
     } catch (e) {
       inspect(e);
+      setState(() {
+        errorMsg = 'Desila se greska prilikom dohvatanja podataka';
+      });
     }
   }
 
@@ -297,7 +302,9 @@ class _MainPageAdminState extends State<MainPageAdmin> {
               ],
             ),
             const SizedBox(height: 20),
-            if (reportData == null)
+            if (errorMsg != null)
+              Text(errorMsg!)
+            else if (reportData == null)
               const CircularProgressIndicator()
             else if (reportData?["totalOrders"] == 0)
               const Padding(
@@ -341,8 +348,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                   _buildStatisticTile(
                     'Korisnik sa najviše narudžbi',
                     Text(
-                      Userinfo.fromJson(reportData?['userWithMostOrders'])
-                          .fullName(),
+                      reportData?["userWithMostOrders"] != null
+                          ? Userinfo.fromJson(reportData?['userWithMostOrders'])
+                              .fullName()
+                          : "Nepoznat",
                       style: const TextStyle(fontSize: 24),
                     ),
                   ),

@@ -6,6 +6,7 @@ import 'package:etaxi_admin/screens/main_page.dart';
 import 'package:etaxi_admin/screens/orders_page.dart';
 import 'package:etaxi_admin/screens/users_page.dart';
 import 'package:etaxi_admin/screens/vehicles_page.dart';
+import 'package:etaxi_admin/services/user_service.dart';
 import 'package:etaxi_admin/utils/colors.dart';
 import 'package:etaxi_admin/utils/sizeConfig.dart';
 import 'package:flutter/material.dart';
@@ -20,15 +21,26 @@ class LayoutPageAdmin extends StatefulWidget {
 class _LayoutPageAdminState extends State<LayoutPageAdmin> {
   int _currentIndex = 0;
 
-  final sidebarItems = ['Pregled', 'Narudzbe', 'Vozila', "Korisnici"];
+  final sidebarItems = [
+    'Pregled',
+    'Narudzbe',
+    'Vozila',
+  ];
 
   final sidebarScreens = [
     MainPageAdmin(),
     OrdersPage(),
     VehiclesPage(),
-    UsersPage()
   ];
   @override
+  void initState() {
+    if (AuthProvider.instance.userType == UserType.Admin) {
+      sidebarItems.add("Korisnici");
+      sidebarScreens.add(UsersPage());
+    }
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(

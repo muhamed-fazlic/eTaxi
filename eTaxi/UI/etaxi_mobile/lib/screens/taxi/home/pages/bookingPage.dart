@@ -14,6 +14,7 @@ import 'package:etaxi_mobile/utils/utilFunctions.dart';
 import 'package:etaxi_mobile/widgets/app_snack_bar.dart';
 import 'package:etaxi_mobile/widgets/custom_button.dart';
 import 'package:etaxi_mobile/widgets/custom_text_field.dart';
+import 'package:etaxi_mobile/widgets/date_time_picker.dart';
 import 'package:etaxi_mobile/widgets/line.dart';
 import 'package:flutter/material.dart';
 
@@ -29,20 +30,8 @@ class BookingPage extends StatefulWidget {
 
 class _BookingPageState extends State<BookingPage> {
   TextEditingController _promoCodeController = TextEditingController();
-  TextEditingController _startTimeController = TextEditingController();
 
   bool isVehicleFilterOpen = false;
-
-  @override
-  void initState() {
-    if (OrderProvider.instance.selectedOrder != null) {
-      _startTimeController.text =
-          OrderProvider.instance.selectedOrder!.startTime.toString();
-    } else {
-      _startTimeController.text = DateTime.now().toString();
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -219,20 +208,16 @@ class _BookingPageState extends State<BookingPage> {
                     ),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: DateTimePicker(
-                          controller: _startTimeController,
-                          dateMask: "dd.MM.yyyy HH:mm",
-                          type: DateTimePickerType.dateTime,
-                          initialDate: OrderProvider.instance.startTime ??
-                              DateTime.now(),
+                        child: CustomMaterialDateTimePicker(
+                          initialDate: OrderProvider.instance.selectedOrder !=
+                                  null
+                              ? OrderProvider.instance.selectedOrder!.startTime!
+                              : OrderProvider.instance.startTime ??
+                                  DateTime.now(),
                           firstDate: DateTime.now(),
                           lastDate: DateTime.now().add(Duration(days: 5)),
                           onChanged: (newValue) {
-                            setState(() {
-                              _startTimeController.text = newValue;
-                            });
-                            OrderProvider.instance
-                                .setStartTime(DateTime.parse(newValue));
+                            OrderProvider.instance.setStartTime(newValue);
                           },
                         )),
                     if (OrderProvider.instance.selectedVehicle != null)

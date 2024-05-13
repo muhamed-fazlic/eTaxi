@@ -77,13 +77,17 @@ namespace eTaxi.Application.Features.Reports.Queries
             }
 
             //
-            var userWithMostOrders = orders.GroupBy(order => order.UserId)
-                                       .OrderByDescending(group => group.Count())
-                                       .FirstOrDefault().Key;
+            var userWithMostOrders = orders
+                .GroupBy(order => order.UserId)
+                .OrderByDescending(group => group.Count())
+                .Select(group => (int?)group.Key)  // Cast Key as nullable int
+                .FirstOrDefault();
 
-            var userDriverWithMostOrders = orders.GroupBy(order => order.UserDriverId)
-                                   .OrderByDescending(group => group.Count())
-                                   .FirstOrDefault().Key;
+            var userDriverWithMostOrders = orders
+                .GroupBy(order => order.UserDriverId)
+                .OrderByDescending(group => group.Count())
+                .Select(group => (int?)group.Key)  // Cast Key as nullable int
+                .FirstOrDefault();
 
             //Create list of orders by user and order by most orders
             List<UserOrderCount> userOrderCounts = orders.GroupBy(order => order.UserId)
@@ -122,7 +126,7 @@ namespace eTaxi.Application.Features.Reports.Queries
                 List<string> hourRanges = new List<string>();
 
                 DateTime currentHour = (DateTime)order.StartTime;
-                DateTime endHour = order.EndTime?? (DateTime)order.StartTime;
+                DateTime? endHour = order.EndTime ?? order.StartTime;
 
                 while (currentHour <= endHour)
                 {
@@ -159,8 +163,8 @@ namespace eTaxi.Application.Features.Reports.Queries
                 TotalOrders = orders.Count,
                 TotalCanceledOrders = orders.Where(order => order.IsCanceled == true).Count(),
                 TotalEarnedMoney = orders.Aggregate(0.0, (sum, order) => sum + order.Price),
-                UserWithMostOrders = _mapper.Map<UserDto>(await _userRepository.GetByIdAsync((int)userWithMostOrders)),
-                DriverWithMostOrders = _mapper.Map<UserDto>(await _userRepository.GetByIdAsync((int)userDriverWithMostOrders)),
+                UserWithMostOrders = userWithMostOrders.HasValue ? _mapper.Map<UserDto>(await _userRepository.GetByIdAsync(userWithMostOrders.Value)) : null,
+                DriverWithMostOrders = userDriverWithMostOrders.HasValue ? _mapper.Map<UserDto>(await _userRepository.GetByIdAsync(userDriverWithMostOrders.Value)) : null,
                 UserOrderCount = userOrderCounts,
                 VehicleOrderCount = vehicleOrderCounts,
                 MostFrequentTime = frequentHourRanges,

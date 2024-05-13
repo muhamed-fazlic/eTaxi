@@ -177,7 +177,7 @@ class OrderProvider extends ChangeNotifier {
     paymentMethod = PaymentMethod.CASH;
     selectedVehicle = null;
     orderPrice = null;
-    DateTime? startTime = null;
+    startTime = null;
     isEditOrder = false;
     creditCardModel = null;
     orderId = null;
@@ -187,5 +187,4 @@ class OrderProvider extends ChangeNotifier {
   }
 
   //Taxi order part END
-
 }

@@ -96,8 +96,10 @@ class OrderProvider extends ChangeNotifier {
     if (totalDistance != null) {
       total = totalDistance! * selectedVehicle!.price!;
     }
-    setOrderPrice(total, notify: false);
-    return total.toStringAsFixed(2) + " BAM";
+
+    var totalString = total.toStringAsFixed(2);
+    setOrderPrice(double.parse(totalString), notify: false);
+    return "$totalString BAM";
   }
 
   void setStartTime(DateTime? time) {

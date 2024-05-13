@@ -67,7 +67,11 @@ class ApiModels {
         "Authorization": "Bearer ${AuthProvider.instance.token}"
       },
     );
-    return response;
+    if (response.statusCode == 200) {
+      return response;
+    } else {
+      throw jsonDecode(response.body)['title'];
+    }
   }
 
   Future addFile(String filePath, int userId,

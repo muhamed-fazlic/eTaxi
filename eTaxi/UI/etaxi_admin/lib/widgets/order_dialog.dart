@@ -11,6 +11,7 @@ import 'package:etaxi_admin/utils/sizeConfig.dart';
 import 'package:etaxi_admin/utils/utilFunctions.dart';
 import 'package:etaxi_admin/widgets/app_snack_bar.dart';
 import 'package:etaxi_admin/widgets/custom_button.dart';
+import 'package:etaxi_admin/widgets/date_time_picker.dart';
 import 'package:etaxi_admin/widgets/error_dialog.dart';
 import 'package:etaxi_admin/widgets/line.dart';
 import 'package:etaxi_admin/widgets/place_picker_widget.dart';
@@ -149,18 +150,13 @@ class _OrderDialogState extends State<OrderDialog> {
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: DateTimePicker(
-                  initialValue: dateFormat(
-                      OrderProvider.instance.startTime ?? DateTime.now()),
-                  dateMask: "dd.MM.yyyy HH:mm",
-                  type: DateTimePickerType.dateTime,
+                child: CustomMaterialDateTimePicker(
                   initialDate:
                       OrderProvider.instance.startTime ?? DateTime.now(),
                   firstDate: DateTime.now(),
                   lastDate: DateTime.now().add(Duration(days: 5)),
                   onChanged: (newValue) {
-                    OrderProvider.instance
-                        .setStartTime(DateTime.parse(newValue));
+                    OrderProvider.instance.setStartTime(newValue);
                   },
                 )),
             sh(20),

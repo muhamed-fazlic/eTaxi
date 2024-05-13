@@ -52,7 +52,7 @@ namespace eTaxi.Persistence.Repositories
                 }
                 if(search.EndTime != null)
                 {
-                    orderList=orderList.Where(order=>order.EndTime<=search.EndTime);
+                    orderList = orderList.Where(order => order.EndTime == null || order.EndTime <= search.EndTime);
                 }
 
                 if (search.OrderBy == OrderBy.ASC)
