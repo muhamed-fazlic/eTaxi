@@ -14,7 +14,7 @@ WORKDIR /src
 COPY . .
 
 FROM build AS publish
-RUN dotnet publish "eTaxi.API/eTaxi.API.csproj" -c Release -o /app
+RUN dotnet publish "eTaxi.API/eTaxi.API.csproj" -c Debug -o /app
 
 FROM base AS final
 WORKDIR /app
