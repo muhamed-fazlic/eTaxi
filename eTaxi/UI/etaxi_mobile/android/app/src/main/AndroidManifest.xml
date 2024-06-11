@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
             <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBllt8BR5FXxa6kmBRODoh08Rg__uQ3sCA"/>
+               android:value="AIzaSyCc4MW5r36acVY2XNC1EoqLqKbvHZ99KKA"/>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

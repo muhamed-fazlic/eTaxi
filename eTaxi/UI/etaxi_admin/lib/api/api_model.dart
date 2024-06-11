@@ -7,7 +7,8 @@ const googleApiKey = 'AIzaSyCc4MW5r36acVY2XNC1EoqLqKbvHZ99KKA';
 const localhost = 'localhost:7152';
 
 class ApiModels {
-  String apiUrl = localhost;
+  String apiUrl =
+      const String.fromEnvironment("baseUrl", defaultValue: localhost);
 
   checkToken() {
     if (AuthProvider.instance.token == null) {
