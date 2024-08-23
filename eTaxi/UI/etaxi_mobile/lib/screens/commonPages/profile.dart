@@ -44,6 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
     _nameController.text = user.firstName!;
     _surnameController.text = user.lastName!;
     _emailController.text = user.email!;
+    _phoneController.text = user.phoneNumber ?? '';
 
     //check any files from user
     var userFiles = user.files;
@@ -183,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             "id": AuthProvider.instance.user!.id,
                             "firstName": _nameController.text,
                             "lastName": _surnameController.text,
-                            "phone": _phoneController.text,
+                            "phoneNumber": _phoneController.text,
                             // "email": _emailController.text,
                           };
 

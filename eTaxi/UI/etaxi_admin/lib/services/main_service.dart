@@ -40,9 +40,11 @@ class MainServices {
 
       if (res.statusCode == 200) {
         var data = json.decode(res.body);
+        inspect(data);
         data.forEach((element) {
           vehicles.add(VehicleModel.fromJson(element));
         });
+        inspect(vehicles);
         MainProvider.instance.setAvailableModels(vehicles);
       }
     } catch (e) {

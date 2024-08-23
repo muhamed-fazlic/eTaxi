@@ -1099,8 +1099,8 @@ namespace eTaxi.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PricePerKm")
-                        .HasColumnType("int");
+                    b.Property<double>("PricePerKm")
+                        .HasColumnType("float");
 
                     b.Property<string>("Transmission")
                         .HasColumnType("nvarchar(max)");

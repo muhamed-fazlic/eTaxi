@@ -17,7 +17,7 @@ namespace eTaxi.Application.Features.Vehicle.Commands
         public int? CurrentLocationId { get; set; }
         public string Color { get; set; }
         public string Brand { get; set; }
-        public int PricePerKm { get; set; }
+        public double PricePerKm { get; set; }
         public int? UserDriverId { get; set; }
         public int TypeId { get; set; }
         public string ImageUrl { get; set; }

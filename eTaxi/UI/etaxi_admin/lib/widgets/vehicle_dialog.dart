@@ -196,7 +196,7 @@ class _VehicleDialogState extends State<VehicleDialog> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Polje ne moze biti prazno!';
-                    } else if (int.tryParse(value) == null) {
+                    } else if (double.tryParse(value) == null) {
                       return "Polje mora bit cijeli broj!";
                     } else
                       return null;

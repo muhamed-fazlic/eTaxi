@@ -24,6 +24,7 @@ class _MainPageAdminState extends State<MainPageAdmin> {
   DateTime? toDate;
   Map<String, dynamic>? reportData;
   String? errorMsg;
+  bool loadingPDf = false;
 
   @override
   void initState() {
@@ -63,6 +64,9 @@ class _MainPageAdminState extends State<MainPageAdmin> {
 
   Future<void> captureAndExportToPdf() async {
     final pdf = pw.Document();
+    setState(() {
+      loadingPDf = true;
+    });
     pdf.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
@@ -189,6 +193,10 @@ class _MainPageAdminState extends State<MainPageAdmin> {
       await saveFile.writeAsBytes(await pdf.save());
       print("PDF saved to user-selected path");
     }
+
+    setState(() {
+      loadingPDf = false;
+    });
   }
 
   @override
@@ -216,16 +224,18 @@ class _MainPageAdminState extends State<MainPageAdmin> {
                     style: TextStyle(fontSize: 20),
                   ),
                   CustomButton(
-                    label: "preuzmi pdf",
+                    label: loadingPDf ? "Preuzimanje.." : "preuzmi pdf",
                     width: 150,
                     height: 40,
                     fontSize: 11,
                     vertPad: 5,
-                    onPressed: reportData?["totalOrders"] == 0
+                    onPressed: loadingPDf
                         ? null
-                        : () async {
-                            captureAndExportToPdf();
-                          },
+                        : reportData?["totalOrders"] == 0
+                            ? null
+                            : () async {
+                                captureAndExportToPdf();
+                              },
                   ),
                 ],
               ),
