@@ -49,6 +49,7 @@ class TaxiInfoListTile extends StatelessWidget {
                     ? ListView.builder(
                         padding: EdgeInsets.only(top: 5),
                         shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
                           var vehicle = snapshot.data![index];

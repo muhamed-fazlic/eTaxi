@@ -6,7 +6,7 @@ class VehicleModel {
   int? typeId;
   String? photo;
   String? vehicleName;
-  int? price;
+  double? price;
   int? seater;
   String? fuelType;
   String? transmission;
@@ -49,7 +49,7 @@ class VehicleModel {
     typeId = json['type']["typeId"] ?? 0;
     photo = json['imageUrl'] ?? '';
     vehicleName = json['name'] ?? 'Vozilo';
-    price = json['pricePerKm'] ?? 100;
+    price = double.tryParse(json['pricePerKm'].toString()) ?? 100;
     seater = json['type']["numberOfSeats"] ?? 5;
     fuelType = json['fuelType'] ?? 'Dizel';
     transmission = json['transmission'] ?? 'Manual';

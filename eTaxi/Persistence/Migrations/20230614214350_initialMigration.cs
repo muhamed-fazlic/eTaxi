@@ -291,7 +291,7 @@ namespace eTaxi.Persistence.Migrations
                     CurrentLocationId = table.Column<int>(type: "int", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PricePerKm = table.Column<int>(type: "int", nullable: false),
+                    PricePerKm = table.Column<double>(type: "float", nullable: false),
                     UserDriverId = table.Column<int>(type: "int", nullable: true),
                     TypeId = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
