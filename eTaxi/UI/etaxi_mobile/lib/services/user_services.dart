@@ -68,6 +68,22 @@ class UserServices {
     }
   }
 
+  static Future<List<Userinfo>> getAllUser() async {
+    List<Userinfo> users = [];
+    try {
+      Response res = await ApiModels().getRequest(url: 'api/User/');
+      if (res.statusCode == 200) {
+        var data = json.decode(res.body);
+        data.forEach((element) {
+          users.add(Userinfo.fromJson(element));
+        });
+      }
+    } catch (e) {
+      throw e;
+    }
+    return users;
+  }
+
   static Future updateUser(data) async {
     try {
       Response res = await ApiModels().putRequest(url: 'api/User', data: data);

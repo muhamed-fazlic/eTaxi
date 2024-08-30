@@ -3,9 +3,22 @@ using eTaxi.Domain.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
 {
+
+    public class TaxiContextFactory : IDesignTimeDbContextFactory<TaxiDatabaseContext>
+    {
+        public TaxiDatabaseContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<TaxiDatabaseContext>();
+            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=eTaxi;User=sa;Password=MojaSifra123!;ConnectRetryCount=0; TrustServerCertificate=True");
+
+            return new TaxiDatabaseContext(optionsBuilder.Options);
+        }
+    }
+
     public class TaxiDatabaseContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public TaxiDatabaseContext(DbContextOptions<TaxiDatabaseContext> options) : base(options)

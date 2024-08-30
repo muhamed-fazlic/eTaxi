@@ -45,7 +45,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "test12345"),
                 SecurityStamp = string.Empty,
-               
+
             });
 
             modelBuilder.Entity<User>().HasData(new User
@@ -60,7 +60,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "test12345"),
                 SecurityStamp = string.Empty,
-                CompanyId=1
+                CompanyId = 1
             });
 
             modelBuilder.Entity<User>().HasData(new User
@@ -290,7 +290,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     CurrentLocationId = null,
                     Color = "Siva",
                     Brand = "Audi",
-                    PricePerKm = 6,
+                    PricePerKm = 6.0,
                     UserDriverId = 3,
                     TypeId = 2,
                     ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656523883/rs2/audia8_gckbfh.png",
@@ -310,7 +310,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     CurrentLocationId = null,
                     Color = "Siva",
                     Brand = "Volkswagen",
-                    PricePerKm = 3,
+                    PricePerKm = 3.0,
                     UserDriverId = 4,
                     TypeId = 1,
                     ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1656523879/rs2/golf_7_didjje.jpg",
@@ -330,7 +330,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     CurrentLocationId = null,
                     Color = "Plava",
                     Brand = "BMW",
-                    PricePerKm = 9,
+                    PricePerKm = 9.0,
                     UserDriverId = 5,
                     TypeId = 3,
                     ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686762738/bmw-x5_qbbvec.jpg",
@@ -350,7 +350,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     CurrentLocationId = null,
                     Color = "White",
                     Brand = "Mercedes",
-                    PricePerKm = 10,
+                    PricePerKm = 10.0,
                     UserDriverId = 6,
                     TypeId = 2,
                     ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686765411/benz-c-class_msuspq.jpg",
@@ -370,7 +370,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     CurrentLocationId = null,
                     Color = "Red",
                     Brand = "Audi",
-                    PricePerKm = 4,
+                    PricePerKm = 4.0,
                     UserDriverId = 7,
                     TypeId = 1,
                     ImageUrl = "https://res.cloudinary.com/doswamdah/image/upload/v1686765730/Audi_A3_snaxht.webp",
@@ -399,7 +399,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     EndTime = DateTime.Now.AddHours(2),
                     PaymentMethod = "Online"
                 },
-             
+
                 new Order
                 {
                     Id=2,
@@ -571,7 +571,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     Comment = "taxi nikad nije ni dosao. Navodno se pokvarilo vozilo"
                 },
             };
-            modelBuilder.Entity<Rating>().HasData(ratings);
+            modelBuilder.Entity<Rating>().HasData(ratings);        
 
             //HubStation Seed Data
             var hubStations = new List<HubStation>
@@ -580,19 +580,19 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                 {
                     Id = 1,
                     Name = "Sarajevo Hub",
-                    LocationId = 1 
+                    LocationId = 1
                 },
                 new HubStation
                 {
                     Id=2,
                     Name = "Mostar Hub",
-                    LocationId = 3 
+                    LocationId = 3
                 },
                 new HubStation
                 {
                     Id=3,
                     Name = "Tuzla Hub",
-                    LocationId = 5 
+                    LocationId = 5
                 }
             };
             modelBuilder.Entity<HubStation>().HasData(hubStations);
