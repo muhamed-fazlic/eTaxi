@@ -571,7 +571,46 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                     Comment = "taxi nikad nije ni dosao. Navodno se pokvarilo vozilo"
                 },
             };
-            modelBuilder.Entity<Rating>().HasData(ratings);        
+            modelBuilder.Entity<Rating>().HasData(ratings);   
+
+             //FITPASOS Seeed Data
+            var pasosList = new List<FITPasos>
+            {
+                new FITPasos
+                {
+                    Id = 1,
+                     DatumIzdavanja=new DateTime(2024, 8, 30),
+                    DatumVazenja =new DateTime(2034, 8, 30),
+                    IsValid =true,
+                    UserId =3
+                },
+                 new FITPasos
+                {
+                     Id = 2,
+                     DatumIzdavanja=new DateTime(2024, 6, 20),
+                    DatumVazenja =new DateTime(2034, 6, 20),
+                    IsValid =true,
+                    UserId =4
+                },
+                   new FITPasos
+                {
+                       Id = 3,
+                     DatumIzdavanja=new DateTime(2020, 4, 10),
+                    DatumVazenja =new DateTime(2024, 6, 20),
+                    IsValid =false,
+                    UserId =5
+                },
+                         new FITPasos
+                {
+                             Id = 4,
+                     DatumIzdavanja=new DateTime(2022, 1, 10),
+                    DatumVazenja =new DateTime(2028, 1, 10),
+                    IsValid =true,
+                    UserId =6
+                },
+
+            };
+            modelBuilder.Entity<FITPasos>().HasData(pasosList);     
 
             //HubStation Seed Data
             var hubStations = new List<HubStation>

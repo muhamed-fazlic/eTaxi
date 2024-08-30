@@ -1,8 +1,10 @@
 import 'package:etaxi_mobile/providers/order_provider.dart';
+import 'package:etaxi_mobile/screens/FITPasos/pasos.dart';
 import 'package:etaxi_mobile/screens/self%20drive/bottomNavSelfDrive.dart';
 import 'package:etaxi_mobile/screens/taxi/home/pages/homeMainTaxi.dart';
 import 'package:etaxi_mobile/utils/sizeConfig.dart';
 import 'package:etaxi_mobile/widgets/app_snack_bar.dart';
+import 'package:etaxi_mobile/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/colors.dart';
@@ -53,6 +55,18 @@ class _ModeSelectorScreenState extends State<ModeSelectorScreen> {
                 ),
               ),
               sh(31),
+              CustomButton(
+                label: "Pregled FIT pasosa",
+                width: 200,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => PasosPage(),
+                    ),
+                  );
+                },
+              ),
+              sh(20),
               InkWell(
                 highlightColor: Colors.transparent,
                 splashColor: Colors.transparent,
