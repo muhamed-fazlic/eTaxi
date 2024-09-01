@@ -19,7 +19,7 @@ namespace eTaxi.Persistence.Repositories
 
         public override async Task<IReadOnlyList<FITPasos>> GetAsync(FITPasosSearchDto search = null)
         {
-            var pasosList = _context.FitPasos.AsQueryable();
+            var pasosList = _context.FitPasos.Include(pasos=>pasos.User).AsQueryable();
 
             if (search != null)
             {

@@ -27,13 +27,7 @@ namespace eTaxi.Application.Features.FITPasos.Queries
         {
             var pasosList = await _fitPasosRepository.GetAsync(request.Search);
 
-            foreach (var pasos in pasosList)
-            {
-               
-                    var user = await _userRepository.GetByIdAsync((int)pasos.UserId);
-                    pasos.User = user;
-                
-            }
+         
 
             var pasosDtoList = _mapper.Map<List<FITPasosDto>>(pasosList);
 
