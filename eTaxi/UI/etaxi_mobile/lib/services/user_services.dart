@@ -27,6 +27,40 @@ class UserServices {
     return res;
   }
 
+  static Future postMaliciousUser(data) async {
+    Response res =
+        await ApiModels().postRequest(url: 'api/MaliciousUser', data: data);
+    if (res.statusCode == 200) {
+      return res;
+    } else {
+      throw jsonDecode(res.body)["title"];
+    }
+  }
+
+  static Future removeMaliciousUser(data) async {
+    Response res =
+        await ApiModels().putRequest(url: 'api/MaliciousUser', data: data);
+    if (res.statusCode == 200) {
+      return res;
+    } else {
+      throw jsonDecode(res.body)["title"];
+    }
+  }
+
+  static Future getMaliciousUser(
+      {Map<String, dynamic>? queryParams = const {}}) async {
+    Response res = await ApiModels()
+        .getRequest(url: 'api/MaliciousUser', queryParams: queryParams);
+    if (res.statusCode == 200) {
+      var decoded = jsonDecode(res.body);
+      inspect(res);
+
+      return decoded;
+    } else {
+      throw jsonDecode(res.body)["title"];
+    }
+  }
+
   static Future registerService(data) async {
     Response res =
         await ApiModels().postRequest(url: 'api/Auth/register', data: data);

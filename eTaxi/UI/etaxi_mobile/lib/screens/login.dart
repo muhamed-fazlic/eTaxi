@@ -28,6 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
   String passwordError = '';
   bool isError = false;
 
+  int loginTryCount = 0;
+
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -45,6 +47,15 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       await UserServices.loginService(dataToSend);
 
+      if (AuthProvider.instance.user != null) {
+        var maliciousUserData = {
+          "userId": AuthProvider.instance.user!.id,
+          "IsSuspicious": loginTryCount < 2 ? false : true
+        };
+
+        await UserServices.postMaliciousUser(maliciousUserData);
+      }
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) => ModeSelectorScreen(),
@@ -52,6 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     } catch (e) {
       print(e.toString());
+      setState(() {
+        loginTryCount++;
+      });
       AuthProvider.instance.setError(e.toString(), 'login');
     } finally {
       setState(() {
