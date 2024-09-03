@@ -597,6 +597,57 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
             };
             modelBuilder.Entity<HubStation>().HasData(hubStations);
 
+            //Membership Seed Data
+            var membership = new List<Membership>
+            {
+                new Membership
+                {
+                    Id = 1,
+                    Tier = "Basic",
+                    UserId= 1,
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddDays(+5),
+                    IsActive = true,
+                },
+               new Membership
+                {
+                    Id = 2,
+                    Tier = "Basic",
+                    UserId= 3,
+                    StartTime = DateTime.Now,
+                    EndTime = DateTime.Now.AddDays(+9),
+                    IsActive = true,
+                },
+             new Membership
+                {
+                    Id = 3,
+                    Tier = "Premium",
+                    UserId= 4,
+                    StartTime = DateTime.Now.AddDays(-9),
+                    EndTime = DateTime.Now.AddDays(+5),
+                    IsActive = true,
+                },
+              new Membership
+                {
+                    Id = 4,
+                    Tier = "VIP",
+                    UserId= 3,
+                    StartTime = DateTime.Now.AddDays(-21),
+                    EndTime = DateTime.Now.AddDays(-3),
+                    IsActive = false,
+                },
+               new Membership
+                {
+                    Id = 5,
+                    Tier = "Basic",
+                    UserId= 1,
+                    StartTime = DateTime.Now.AddMonths(-1),
+                    EndTime = DateTime.Now.AddDays(-5),
+                    IsActive = false,
+                },
+            };
+            modelBuilder.Entity<Membership>().HasData(membership);
+
 
 
 
