@@ -37,6 +37,8 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
         public DbSet<Domain.File> File { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<ToDo4924> ToDo { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

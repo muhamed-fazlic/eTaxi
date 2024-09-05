@@ -573,7 +573,7 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
             };
             modelBuilder.Entity<Rating>().HasData(ratings);        
 
-            //HubStation Seed Data
+            //ToDo Seed Data
             var hubStations = new List<HubStation>
             {
                 new HubStation
@@ -596,6 +596,57 @@ namespace eTaxi.Persistence.DatabaseContext.TaxiDatabaseContext
                 }
             };
             modelBuilder.Entity<HubStation>().HasData(hubStations);
+
+            //HubStation Seed Data
+            var toDoList = new List<ToDo4924>
+            {
+                new ToDo4924
+                {
+                    Id = 1,
+                    Naziv = "Polozit rs2",
+                   Opis="Izac na ispit i polozit",
+                   UserId = 1,
+                   Status="U toku",
+                   KrajnjiRok=DateTime.Now.AddDays(+1),
+                },
+                new ToDo4924
+                {
+                    Id = 2,
+                    Naziv = "Zavrsit fax",
+                   Opis="Zavrsiti sve ispite",
+                   UserId = 3,
+                   Status="U toku",
+                   KrajnjiRok=DateTime.Now.AddDays(+21),
+                },
+               new ToDo4924
+                {
+                    Id = 3,
+                    Naziv = "Stici na voz",
+                   Opis="Stici na voz u 5",
+                   UserId = 2,
+                   Status="U toku",
+                   KrajnjiRok=DateTime.Now.AddDays(+2),
+                },
+                  new ToDo4924
+                {
+                    Id = 4,
+                    Naziv = "Zavrsiti seminarski iz rs2",
+                   Opis="Da seminarski bude prihvacen",
+                   UserId = 4,
+                   Status="Realizovana",
+                   KrajnjiRok=DateTime.Now.AddDays(-4),
+                },
+                     new ToDo4924
+                {
+                    Id = 5,
+                    Naziv = "Zavrsiti fax u roku",
+                   Opis="Ne cekati puno i zavrisit fax na vrijeme",
+                   UserId = 1,
+                   Status="Istekla",
+                   KrajnjiRok=DateTime.Now.AddMonths(-6),
+                },
+            };
+            modelBuilder.Entity<ToDo4924>().HasData(toDoList);
 
 
 
